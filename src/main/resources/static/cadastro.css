@@ -1,0 +1,35 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&display=swap');
+
+.background{
+     /*background-color: rgb(214, 68, 0)*/
+     /* background-image: url(wallpaper-personal-trainer.jpeg); */
+    background-image: url(wallpaper-personal-trainer-02.jpg); 
+    background-size: cover;
+}
+
+.fonte-branca{
+    color: white;
+}
+
+.background-card{
+    background-color: rgb(255, 255, 255)!important;
+}
+.fonte{
+    font-family: 'Open Sans', sans-serif; 
+}
+.larguraFormulario{
+    min-width: 25rem!important;
+}
+
+.botao-login{
+    background-color: rgb(214, 68, 0)!important;
+    color: white!important;
+    border-color: black!important;
+}
+.cor-botao{
+    background-color: rgb(214, 68, 0)!important;
+    color: white!important;
+}
+.cor-borda{
+    border-color: white!important;
+}
