@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<meta charset="UTF-8">
+
+<head th:replace="~{base::head(Aulas)}"></head>
+
+
+<body class="background">
+
+    <nav th:replace="~{base::navbar}"></nav>
+
+    <article class="d-flex align-items-stretch">
+
+        <div th:replace="~{base::sidebar}"></div>
+
+        <div class="p-3">
+            <div class="card mb-3">
+                <div class="card-body" style="max-width: 720px;"> <!-- flex-column -->
+                    <div class="ratio ratio-16x9">
+                        <iframe src="https://www.youtube-nocookie.com/embed/3RbSxtIkpd4?rel=0" title="YouTube video"
+                            allowfullscreen></iframe>
+                    </div>
+                    <div class="card-body ">
+                        <article class="cor-borda mt-1 background-card">
+                            <div>
+                                <h2>Titulo da Aula</h2>
+                                <!-- <h5 class="card-title" th:text="${aula.titulo}">Titulo da Aula</h5> -->
+                                <p>Descrição da Aula Lorem ipsum dolor sit amet, consectetur adipisicing
+                                    elit,
+                                    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+                                    minim
+                                    veniam.</p>
+                                <!-- <p class="card-text" th:text="${aula.descrição}">Descrição da Aula</p>  -->
+                                <a class="btn cor-botao">Baixe o material</a>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--   <object width="600" height="780" data="http://www.subsecmilitar.rj.gov.br/sites/default/files/2020-03/TREINO%20FUNCIONAL%20PARA%20FAZER%20EM%20CASA.pdf" type="application/pdf">
+            <p>Seu navegador não tem um plugin pra PDF</p>
+        </object> -->
+        <!--      <iframe class="d-flex justify-content-center"
+            src="http://www.subsecmilitar.rj.gov.br/sites/default/files/2020-03/TREINO%20FUNCIONAL%20PARA%20FAZER%20EM%20CASA.pdf"
+            width="70%" height="780" style="border: none;"></iframe>
+        -->
+
+    </article>
+
+    <footer th:replace="~{base::footer}"></footer>
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

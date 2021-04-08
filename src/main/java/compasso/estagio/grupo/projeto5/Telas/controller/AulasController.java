@@ -7,11 +7,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 
-@RequestMapping("dashboard")
-public class DashboardController {
+@RequestMapping("aulas")
+public class AulasController {
     
     @GetMapping
-    public String aluno(){
-        return "dashboard_aluno";
+    public String aulas(){
+        return "aulas";
     }
 }
