@@ -3,7 +3,7 @@
 .background{
      /*background-color: rgb(214, 68, 0)*/
      /* background-image: url(wallpaper-personal-trainer.jpeg); */
-    background-image: url(wallpaper-personal-trainer-02.jpg); 
+    background-image: url(wallpaper-personal-trainer-02.jpeg); 
     background-size: cover;
 }
 
@@ -13,6 +13,10 @@
 
 .background-card{
     background-color: rgb(255, 255, 255)!important;
+}
+
+.background-card2{
+	 background-color: rgba(255, 255, 255, 0.5)!important;
 }
 .fonte{
     font-family: 'Open Sans', sans-serif; 
@@ -25,6 +29,7 @@
     background-color: rgb(214, 68, 0)!important;
     color: white!important;
     border-color: black!important;
+    width: 8rem;
 }
 .cor-botao{
     background-color: rgb(214, 68, 0)!important;

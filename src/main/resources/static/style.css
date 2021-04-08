@@ -1,0 +1,15 @@
+@charset "UTF-8";
+
+.background-navbar{
+	background-color: rgba(236, 100, 75, 1);
+}
+
+.background-footer{
+	background-color: rgba(217, 30, 24, 0.7);
+}
+
+.imagem-carrosel{
+	object-fit: cover;
+	height: 400px;
+	object-position: 0 10%;
+}
