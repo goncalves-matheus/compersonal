@@ -12,7 +12,7 @@ import compasso.estagio.grupo.projeto5.Telas.dto.UsuarioDto;
 
 @Controller
 @RequestMapping("cadastro")
-public class cadastroController {
+public class CadastroController {
     @GetMapping
     public String novoCadastro(UsuarioDto usuarioDto) {
         return "cadastro";
