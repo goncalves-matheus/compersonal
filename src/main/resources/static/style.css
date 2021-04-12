@@ -1,15 +1,59 @@
 @charset "UTF-8";
 
-.background-navbar{
+.background-navbar {
 	background-color: rgba(236, 100, 75, 1);
 }
 
-.background-footer{
+.background-footer {
 	background-color: rgba(217, 30, 24, 0.7);
 }
 
-.imagem-carrosel{
+.imagem-carrosel {
 	object-fit: cover;
 	height: 400px;
 	object-position: 0 10%;
+}
+
+.bd-placeholder-img {
+	font-size: 1.125rem;
+	text-anchor: middle;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	user-select: none;
+}
+
+@media ( min-width : 768px) {
+	.bd-placeholder-img-lg {
+		font-size: 3.5rem;
+	}
+}
+
+.cor-borda-pagamento{
+    border-color: rgb(214, 68, 0)!important;
+}
+
+.cor-background-card-header{
+	    background-color: rgb(214, 68, 0)!important; 
+}
+
+html, body {height:100%;}
+
+.geral {
+    min-height:100%;
+    position:relative;
+}
+
+.footer {
+    position:absolute;
+    bottom:0;
+    width:100%;
+}
+
+#botao-test:hover {
+	background-color: rgb(214, 68, 0)!important; 
+	color: white;
+}
+
+.borda-botao{
+	border-color:  rgb(214, 68, 0)!important; 
 }

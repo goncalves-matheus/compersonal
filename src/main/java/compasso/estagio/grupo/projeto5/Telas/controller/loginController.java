@@ -11,10 +11,15 @@ public class LoginController {
 	public String login() {
 		return "login";
 	}
-	
+
 	@RequestMapping("/recuperar")
 	public String recupera() {
 		return "recuperacao";
 	}
-	
+
+	@RequestMapping("/pagamento")
+	public String pagamento() {
+		return "pagar";
+	}
+
 }
