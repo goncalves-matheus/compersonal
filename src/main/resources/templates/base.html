@@ -1,70 +1,81 @@
 <html>
 
+<!-- Código base -->
+
 <head th:fragment="head(titulo)">
-	<meta charset="UTF-8">
-	<title th:text="${titulo}"></title>
-	<link rel="stylesheet" type="text/css" href="/cadastro.css">
-	<link rel="stylesheet" type="text/css" href="/style.css">
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
-		integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+<meta charset="UTF-8">
+<title th:text="${titulo}"></title>
+<link rel="stylesheet" type="text/css" href="/cadastro.css">
+<link rel="stylesheet" type="text/css" href="/style.css">
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+	crossorigin="anonymous">
 
 </head>
 
 <body>
-	<nav th:fragment="navbar" class="navbar navbar-expand-lg navbar-light p-1 background-navbar sticky-top">
+	<nav th:fragment="navbar"
+		class="navbar navbar-expand-lg navbar-light p-1 background-navbar sticky-top">
 		<div class="container-fluid">
 			<a class="navbar-brand text-light" href="#">Título</a>
-			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-				aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+			<button class="navbar-toggler" type="button"
+				data-bs-toggle="collapse" data-bs-target="#navbarNav"
+				aria-controls="navbarNav" aria-expanded="false"
+				aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
-			<div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+			<div class="collapse navbar-collapse justify-content-end"
+				id="navbarNav">
 				<ul class="navbar-nav">
-					<li class="nav-item"><a class="nav-link active text-light" aria-current="page" href="/">Home</a>
-					</li>
-					<li class="nav-item"><a class="nav-link text-light" href="/dashboard">Dashboard</a>
-					</li>
-					<li class="nav-item"><a class="nav-link text-light" href="/planos">Planos</a>
-					</li>
-					<li class="nav-item"><a class="nav-link text-light" href="/cadastro">Criar conta</a></li>
-					<li class="nav-item"><a onclick="document.querySelector('#form-login').submit()"
-							class="nav-link btn bg-light" sec:authorize="isAuthenticated()" href="#">Logout</a>
-						<!-- Descomentar depois de implementar o logout -->
+					<li class="nav-item"><a class="nav-link active text-light"
+						aria-current="page" href="/">Home</a></li>
+					<li class="nav-item"><a class="nav-link text-light"
+						href="/dashboard">Dashboard</a></li>
+					<li class="nav-item"><a class="nav-link text-light"
+						href="/planos">Planos</a></li>
+					<li class="nav-item"><a class="nav-link text-light"
+						href="/cadastro">Criar conta</a></li>
+					<li class="nav-item"><a
+						onclick="document.querySelector('#form-login').submit()"
+						class="nav-link btn bg-light" sec:authorize="isAuthenticated()"
+						href="#">Logout</a> <!-- Descomentar depois de implementar o logout -->
 						<!-- <form id="form-login" th:action="@{/logout}" method="POST"></form> -->
 					</li>
-					<li class="nav-item"><a class="nav-link btn bg-light" sec:authorize="!isAuthenticated()"
-							href="/login">Login</a></li>
+					<li class="nav-item"><a class="nav-link btn bg-light"
+						sec:authorize="!isAuthenticated()" href="/login">Login</a></li>
 				</ul>
 			</div>
 		</div>
 	</nav>
 
-	<div th:fragment="sidebar" class="d-flex flex-column p-3 text-white bg-dark"
+	<div th:fragment="sidebar"
+		class="d-flex flex-column p-3 text-white bg-dark"
 		style="min-width: 250px; height: 100vh;">
-		<a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+		<a href="/"
+			class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
 			<svg class="bi me-2" width="40" height="32">
 				<use xlink:href="#bootstrap" />
-			</svg>
-			<span class="fs-4">DashBoard</span>
+			</svg> <span class="fs-4">DashBoard</span>
 		</a>
 		<hr>
 		<ul class="nav nav-pills flex-column mb-auto sidebar">
-			<li>
-				<a href="#" class="nav-link text-white"><svg class="bi me-2" width="16" height="16"></svg>Agendar
-					Aula</a>
-			</li>
-			<li>
-				<a href="#" class="nav-link text-white"><svg class="bi me-2" width="16" height="16"></svg>Calendário</a>
-			</li>
-			<li>
-				<a href="#" class="nav-link text-white"><svg class="bi me-2" width="16" height="16"></svg>Meu Plano</a>
-			</li>
+			<li><a href="#" class="nav-link text-white"><svg
+						class="bi me-2" width="16" height="16"></svg>Agendar Aula</a></li>
+			<li><a href="#" class="nav-link text-white"><svg
+						class="bi me-2" width="16" height="16"></svg>Calendário</a></li>
+			<li><a href="#" class="nav-link text-white"><svg
+						class="bi me-2" width="16" height="16"></svg>Meu Plano</a></li>
 			<hr>
 			<li>
 				<div class="dropdown bi me-2  text-white" width="16" height="16">
-					<a href="#" class="d-flex btn align-items-center text-white text-decoration-none dropdown-toggle"
-						id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">Minhas Aulas</a>
-					<ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
+					<a href="#"
+						class="d-flex btn align-items-center text-white text-decoration-none dropdown-toggle"
+						id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">Minhas
+						Aulas</a>
+					<ul class="dropdown-menu dropdown-menu-dark text-small shadow"
+						aria-labelledby="dropdownUser1">
 						<li><a class="dropdown-item" href="#">Aula 01</a></li>
 						<li><a class="dropdown-item" href="#">Aula 02</a></li>
 						<li><a class="dropdown-item" href="#">Aula 03</a></li>
@@ -74,7 +85,7 @@
 			</li>
 		</ul>
 	</div>
-	
+
 	<footer th:fragment="footer" class="footer background-footer ">
 		<div class="m-1">
 			<div class="container text-center">
