@@ -10,8 +10,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 @RequestMapping("dashboard")
 public class DashboardController {
     
-    @GetMapping
+    @GetMapping("/aluno")
     public String aluno(){
         return "dashboard_aluno";
     }
+    
+    @GetMapping("/personal")
+    public String personal(){
+        return "dashboard_personal";
+    }
+    
 }
