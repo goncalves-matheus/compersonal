@@ -10,45 +10,12 @@
 
     <article class="d-flex align-items-stretch">
 
-        <div th:fragment="sidebar" class="d-flex flex-column p-3 text-white bg-dark"
-            style="min-width: 250px; height: 100vh;">
-            <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-                <svg class="bi me-2" width="40" height="32">
-                    <use xlink:href="#bootstrap" />
-                </svg>
-                <span class="fs-4">DashBoard</span>
-            </a>
-            <hr>
-            <ul class="nav nav-pills flex-column mb-auto sidebar">
-                <li>
-                    <a href="#" class="nav-link text-white"><svg class="bi me-2" width="16" height="16"></svg>Agendar Aula</a>
-                </li>
-                <li>
-                    <a href="#" class="nav-link text-white"><svg class="bi me-2" width="16" height="16"></svg>Calendário</a>
-                </li>
-                <li>
-                    <a href="#" class="nav-link text-white"><svg class="bi me-2" width="16" height="16"></svg>Meu Plano</a>
-                </li>
-                <hr>
-                <li>
-                    <div class="dropdown bi me-2  text-white" width="16" height="16">
-                        <a href="#"
-                            class="d-flex btn align-items-center text-white text-decoration-none dropdown-toggle"
-                            id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">Minhas Aulas</a>
-                        <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
-                            <li><a class="dropdown-item" href="#">Aula 01</a></li>
-                            <li><a class="dropdown-item" href="#">Aula 02</a></li>
-                            <li><a class="dropdown-item" href="#">Aula 03</a></li>
-                            <li><a class="dropdown-item" href="#">Aula 04</a></li>
-                        </ul>
-                    </div>
-                </li>
-            </ul>
-        </div>
+        <div th:replace="~{base::sidebar}"></div>
 
         <div class="p-5">
-            <div class="card mb-3">
-                <!-- <div class="card mb-3"th:each="aula : ${aulas}"> -->
+            <!-- descomentar quando implementar aulas -->
+            <!-- <div class="card mb-3"th:each="aula : ${aulas}"> -->
+            <div class="card mb-3">  
                 <div class="row g-0">
                     <div class="col-md-3">
                         <a href="#"><img class="img-thumbnail"
