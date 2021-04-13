@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 
-<!--Sem T�pico -->
-
+<!--Sem Tópico -->
+<meta charset="UTF-8">
 <head th:replace="~{base::head(Index)}"></head>
 
 <body class="bg-light">
@@ -12,14 +12,14 @@
 		</header>
 
 		<div class="container-fluid mt-3">
-			<div id="carouselExampleSlidesOnly" class="carousel slide"
+			<div id="carouselExampleCaptions" class="carousel slide"
 				data-bs-interval="4000" data-bs-ride="carousel">
 				<div class="carousel-indicators">
 					<button type="button" data-bs-target="#carouselExampleCaptions"
-						data-bs-slide-to="1" class="active" aria-current="true"
+						data-bs-slide-to="0" class="active" aria-current="true"
 						aria-label="Slide 1"></button>
 					<button type="button" data-bs-target="#carouselExampleCaptions"
-						data-bs-slide-to="2" aria-label="Slide 2"></button>
+						data-bs-slide-to="1" aria-label="Slide 2"></button>
 				</div>
 				<div class="carousel-inner">
 					<div class="carousel-item active">
@@ -51,8 +51,117 @@
 				</button>
 			</div>
 		</div>
+
+		<div class="container mt-3 p-5">
+
+			<div class="row text-center">
+				<div class="col-lg-4">
+					<img class="rounded-circle " width="140"
+						style="background-image: url(https://2.bp.blogspot.com/-qia01HubKOg/W9xb1jqB2QI/AAAAAAAAnSI/EpR8_KKqCnkjR130fTtMhDQuRq5eYVu5wCLcBGAs/s1600/72.jpg); background-size: cover; background-position: 55% 0%;"
+						height="140">
+
+					<h2>Aprenda</h2>
+					<p>Com o nosso time, você irá aprender a ficar em forma, com a
+						praticidade de estar em casa e a ajuda de um personal que irá te
+						instruir.</p>
+					<p>
+						<a class="btn cor-botao" href="#">Saiba mais &raquo;</a>
+					</p>
+				</div>
+				<!-- /.col-lg-4 -->
+				<div class="col-lg-4">
+					<img class="rounded-circle " width="140"
+						style="background-image: url(https://www.tokiomarine.com.br/vidasaudavel/wp-content/uploads/sites/6/2019/09/GettyImages-1047643090.jpg); background-size: cover; background-position: 55% 0%;"
+						height="140">
+
+					<h2>Treine</h2>
+					<p>Tenha em mão treinos diários para realizar onde quiser e
+						ainda um treino semanal com nosso personal.</p>
+					<p>
+						<a class="btn cor-botao" href="#">Saiba mais &raquo;</a>
+					</p>
+				</div>
+				<!-- /.col-lg-4 -->
+				<div class="col-lg-4">
+					<img class="rounded-circle " width="140"
+						style="background-image: url(https://horadotreino.com.br/wp-content/uploads/2019/07/controle-financeiro-personal-trainer.jpg); background-size: cover; background-position: 100% 0%;"
+						height="140">
+
+					<h2>Suporte</h2>
+					<p>Temos diversos materiais de suporte ao aluno, vídeo aulas,
+						materiais pdf para download, chat direto com nosso perosnal e
+						muito mais...</p>
+					<p>
+						<a class="btn cor-botao" href="#">Saiba mais &raquo;</a>
+					</p>
+				</div>
+			</div>
+
+			<div class="row featurette">
+				<div class="col-md-7">
+					<h2 class="featurette-heading">
+						First featurette heading. <span class="text-muted">It’ll
+							blow your mind.</span>
+					</h2>
+					<p class="lead">Some great placeholder content for the first
+						featurette here. Imagine some exciting prose here.</p>
+				</div>
+				<div class="col-md-5">
+					<img
+						class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto"
+						width="500" height="500"
+						style="background-image: url(https://www.physicus.com.br/pub/noticias/050116150745.jpg); background-size: cover;background-position: 50% 0%;">
+
+
+				</div>
+			</div>
+
+			<hr class="featurette-divider">
+
+			<div class="row featurette">
+				<div class="col-md-7 order-md-2">
+					<h2 class="featurette-heading">
+						Oh yeah, it’s that good. <span class="text-muted">See for
+							yourself.</span>
+					</h2>
+					<p class="lead">Another featurette? Of course. More placeholder
+						content here to give you an idea of how this layout would work
+						with some actual real-world content in place.</p>
+				</div>
+				<div class="col-md-5 order-md-1">
+					<img
+						class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto"
+						width="500" height="500"
+						style="background-image: url(https://marcelogomespersonal.com/wp-content/uploads/2019/08/personal-trainer-carousel.jpg); background-size: cover; background-position: 80% 0%;">
+
+				</div>
+			</div>
+
+			<hr class="featurette-divider">
+
+			<div class="row featurette">
+				<div class="col-md-7">
+					<h2 class="featurette-heading">
+						And lastly, this one. <span class="text-muted">Checkmate.</span>
+					</h2>
+					<p class="lead">And yes, this is the last block of
+						representative placeholder content. Again, not really intended to
+						be actually read, simply here to give you a better view of what
+						this would look like with some actual content. Your content.</p>
+				</div>
+				<div class="col-md-5">
+					<img
+						class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto"
+						width="500" height="500"
+						style="background-image: url(https://sistemasca.blob.core.windows.net/arquivos/blog/c-136m3p.jpg); background-size: cover;">
+
+				</div>
+			</div>
+		</div>
+
 		<footer th:replace="~{base::footer}"></footer>
 		<script th:replace="~{base::script}"></script>
+
 	</div>
 </body>
 
