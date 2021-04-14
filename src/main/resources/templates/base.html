@@ -38,7 +38,7 @@
 					<li class="nav-item"><a class="nav-link text-light"
 						href="/planos">Planos</a></li>
 					<li class="nav-item"><a class="nav-link text-light"
-							href="/perfil">Meu Perfil</a></li>
+						href="/perfil">Meu Perfil</a></li>
 					<li class="nav-item"><a class="nav-link text-light"
 						href="/cadastro">Criar conta</a></li>
 					<li class="nav-item"><a
@@ -84,6 +84,8 @@
 								class="bi me-2" width="16" height="16"></svg>Calendário</a></li>
 					<li><a href="#" class="nav-link text-white"><svg
 								class="bi me-2" width="16" height="16"></svg>Meu Plano</a></li>
+					<li><a href="/inseriraula" class="nav-link text-white"><svg
+								class="bi me-2" width="16" height="16"></svg>Criar Aula</a></li>
 					<hr>
 					<li>
 						<div class="dropdown bi me-2  text-white" width="16" height="16">
@@ -115,7 +117,12 @@
 								style="position: absolute; inset: auto auto 0px 0px; margin: 0px; transform: translate(0px, -34px);"
 								data-popper-placement="top-start">
 								<li><a class="dropdown-item" href="#">Meu perfil</a></li>
-								<li><a class="dropdown-item" href="#">Sair</a></li>
+								<li><a class="dropdown-item" href="#"
+									onclick="document.querySelector('#form-login').submit()"
+									sec:authorize="isAuthenticated()">Sair</a>
+								<!-- Descomentar depois de implementar o logout --> 
+								<!-- <form id="form-login" th:action="@{/logout}" method="POST"></form> -->
+								</li>
 							</ul>
 						</div>
 					</li>
