@@ -1,40 +1,47 @@
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&display=swap');
+@import
+	url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&display=swap')
+	;
 
-.background{
-     /*background-color: rgb(214, 68, 0)*/
-     /* background-image: url(wallpaper-personal-trainer.jpeg); */
-    background-image: url(wallpaper-personal-trainer-02.jpeg); 
-    background-size: cover;
-}
-
-.fonte-branca{
-    color: white;
-}
-
-.background-card{
-    background-color: rgb(255, 255, 255)!important;
+.background {
+	background-image:
+		url(https://i.pinimg.com/originals/72/dc/f2/72dcf2d1fcbb8e5a0425ca0adf11ae4e.jpg);
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: 0% -10%;
 }
 
-.background-card2{
-	 background-color: rgba(255, 255, 255, 0.5)!important;
-}
-.fonte{
-    font-family: 'Open Sans', sans-serif; 
-}
-.larguraFormulario{
-    min-width: 25rem!important;
+.fonte-branca {
+	color: white;
 }
 
-.botao-login{
-    background-color: rgb(214, 68, 0)!important;
-    color: white!important;
-    border-color: black!important;
-    width: 8rem;
+.background-card {
+	background-color: rgb(255, 255, 255) !important;
 }
-.cor-botao{
-    background-color: rgb(214, 68, 0)!important;
-    color: white!important;
+
+.background-card2 {
+	background-color: rgba(255, 255, 255, 0.5) !important;
 }
-.cor-borda{
-    border-color: white!important;
+
+.fonte {
+	font-family: 'Open Sans', sans-serif;
+}
+
+.larguraFormulario {
+	min-width: 25rem !important;
+}
+
+.botao-login {
+	background-color: rgb(214, 68, 0) !important;
+	color: white !important;
+	border-color: black !important;
+	width: 8rem;
+}
+
+.cor-botao {
+	background-color: rgb(214, 68, 0) !important;
+	color: white !important;
+}
+
+.cor-borda {
+	border-color: white !important;
 }
