@@ -3,6 +3,7 @@
 <meta charset="UTF-8">
 
 <head th:replace="~{base::head(Controle)}"></head>
+
 <body class="background">
 	<div class="geral">
 		<nav th:replace="~{base::navbar}"></nav>
@@ -11,8 +12,8 @@
 
 			<div th:replace="~{base::sidebar}"></div>
 			<div class="container">
-				<div class="card mx-auto mb-5 mt-2 " style="width: 55rem">
-					<form class="mb-4 mt-3 mx-auto" style="width: 50rem">
+				<div class="card col-auto mx-auto mb-5 mt-2 ">
+					<form class=" col-10 mb-4 mt-3 mx-auto">
 						<div class="mb-2">
 							<label for="exampleFormControlInput1" class="form-label">Título</label>
 							<input type="text" class="form-control"
@@ -58,7 +59,6 @@
 		</article>
 
 		<footer th:replace="~{base::footer}"></footer>
-		<!-- JavaScript Bundle with Popper -->
 		<script th:replace="~{base:: script}"></script>
 	</div>
 </body>
