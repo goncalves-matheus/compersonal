@@ -10,6 +10,7 @@ import compasso.estagio.grupo.projeto5.Telas.model.Perfil;
 @Repository
 @Transactional
 public interface PerfilRepository extends JpaRepository<Perfil, Long>{
-	
+
+	Perfil findByEmail(String username);
 
 }

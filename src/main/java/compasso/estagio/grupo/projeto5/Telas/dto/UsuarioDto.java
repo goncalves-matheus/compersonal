@@ -6,7 +6,6 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import compasso.estagio.grupo.projeto5.Telas.model.Perfil;
-import compasso.estagio.grupo.projeto5.Telas.model.Permissao;
 import compasso.estagio.grupo.projeto5.Telas.model.Usuario;
 
 public class UsuarioDto {

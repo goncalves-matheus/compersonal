@@ -32,23 +32,23 @@
 
 							<div class="row g-3">
 								<div class="col-sm-6">
-									<label for="nome" class="form-label">Nome</label> <input
+									<label for="nome" class="form-label">Nome</label> <input th:value="${nome}"
 										type="text" class="form-control" id="nome"
 										placeholder="Seu nome" value="" required="">
 									<div class="invalid-feedback">Nome inválido!</div>
 								</div>
 
 								<div class="col-sm-6">
-									<label for="sobreNome" class="form-label">Sobrenome</label> <input
+									<label for="sobreNome" class="form-label">Sobrenome</label> <input th:value="${sobrenome}"
 										type="text" class="form-control" id="sobreNome"
 										placeholder="Seu sobrenome" value="" required="">
 									<div class="invalid-feedback">Sobrenome inválido!</div>
 								</div>
 
 								<div class="col-sm-6">
-									<label for="email" class="form-label">Email</label> <input
+									<label for="email" class="form-label">Email</label> <input th:value="${email}"
 										type="email" class="form-control" id="email"
-										placeholder="seuemail@exemplo.com" disabled="">
+										 disabled="">
 									<div class="invalid-feedback">Por favor, digite um email
 										válido!</div>
 								</div>
