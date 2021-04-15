@@ -55,11 +55,11 @@
 
 								<div class="col-sm-6 ">
 									<div class="d-flex justify-content-between">
-										<label for="novaSenha" class="form-label">Nova Senha</label> <a
-											href="" class="text-secondary ">Mudar Senha</a>
+										<label for="novaSenha" class="form-label">Senha</label> <a data-bs-toggle="modal"
+											href="" data-bs-target="#staticBackdrop" class="text-secondary ">Mudar Senha</a>
 									</div>
-									<input type="novaSenha" class="form-control" id="novaSenha"
-										placeholder="Nova senha" value="" required="">
+									<input type="password" class="form-control" id="novaSenha" 
+										placeholder="Nova senha" value="123123123" disabled required>
 									<div class="invalid-feedback">Por favor, digite um senha
 										válida!</div>
 								</div>
@@ -134,6 +134,44 @@
 					</div>
 				</div>
 			</div>
+			
+			<div class="modal fade" id="staticBackdrop"
+					data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+					aria-labelledby="staticBackdropLabel" aria-hidden="true">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="staticBackdropLabel">Mudar
+									Senha</h5>
+								<button type="button" class="btn-close" data-bs-dismiss="modal"
+									aria-label="Close"></button>
+							</div>
+							<div class="modal-body">
+								<div class="card-body cor-borda">
+									<form class="card-body">
+										<div class="mb-3">
+											<input type="text" class="form-control" placeholder="Senha atual">
+											<!--                         <div class="invalid-feedback" th:errors="*{codigo}">Errors do telefone</div> -->
+										</div>
+										<div class="mb-3">
+											<input type="password" class="form-control"
+												placeholder="Nova senha">
+											<!--                         <div class="invalid-feedback" th:errors="*{senha}">Errors da senha</div> -->
+										</div>
+										<div class="mb-3">
+											<input type="password" class="form-control"
+												placeholder="Confirme a nova Senha">
+											<!--                         <div class="invalid-feedback" th:errors="*{confirmacaoSenha}">Errors da confirmacaoSenha -->
+											<!--                         </div> -->
+										</div>
+										<button type="submit" class="btn cor-botao">Registar</button>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			
 		</article>
 	
 	<footer th:replace="~{base::footer}"></footer>
