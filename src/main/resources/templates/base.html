@@ -31,21 +31,21 @@
 				<ul class="navbar-nav">
 					<li class="nav-item"><a class="nav-link active text-light"
 						aria-current="page" href="/">Home</a></li>
-					<li class="nav-item"><a class="nav-link text-light"
-						href="/dashboard/aluno">Dashboard Aluno</a></li>
-					<li class="nav-item"><a class="nav-link text-light"
-						href="/dashboard/personal">Dashboard Personal</a></li>
+					<li class="nav-item"><a class="nav-link text-light" sec:authorize="hasAnyAuthority('Usuario')"
+						href="/dashboard/aluno">Dashboard</a></li>
+					<li class="nav-item"><a class="nav-link text-light" sec:authorize="hasAnyAuthority('Personal')"
+						href="/dashboard/personal">Dashboard</a></li>
 					<li class="nav-item"><a class="nav-link text-light"
 						href="/planos">Planos</a></li>
-					<li class="nav-item"><a class="nav-link text-light"
+					<li class="nav-item"><a class="nav-link text-light" sec:authorize="isAuthenticated()"
 						href="/perfil">Meu Perfil</a></li>
-					<li class="nav-item"><a class="nav-link text-light"
+					<li class="nav-item"><a class="nav-link text-light" sec:authorize="!isAuthenticated()"
 						href="/cadastro">Criar conta</a></li>
 					<li class="nav-item"><a
 						onclick="document.querySelector('#form-login').submit()"
 						class="nav-link btn bg-light" sec:authorize="isAuthenticated()"
-						href="#">Logout</a> <!-- Descomentar depois de implementar o logout -->
-						<!-- <form id="form-login" th:action="@{/logout}" method="POST"></form> -->
+						href="#">Logout</a>
+						<form id="form-login" th:action="@{/logout}" method="POST"></form>
 					</li>
 					<li class="nav-item"><a class="nav-link btn bg-light"
 						sec:authorize="!isAuthenticated()" href="/login">Login</a></li>
@@ -120,8 +120,7 @@
 								<li><a class="dropdown-item" href="#"
 									onclick="document.querySelector('#form-login').submit()"
 									sec:authorize="isAuthenticated()">Sair</a>
-								<!-- Descomentar depois de implementar o logout --> 
-								<!-- <form id="form-login" th:action="@{/logout}" method="POST"></form> -->
+								<form id="form-login" th:action="@{/logout}" method="POST"></form>
 								</li>
 							</ul>
 						</div>

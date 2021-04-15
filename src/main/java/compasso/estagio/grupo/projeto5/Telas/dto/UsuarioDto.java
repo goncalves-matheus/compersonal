@@ -5,75 +5,96 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import compasso.estagio.grupo.projeto5.Telas.model.Perfil;
+import compasso.estagio.grupo.projeto5.Telas.model.Permissao;
+import compasso.estagio.grupo.projeto5.Telas.model.Usuario;
+
 public class UsuarioDto {
 
-    @NotBlank
-    private String primeiroNome;
-    
-    @NotBlank
-    private String ultimoNome;
+	@NotBlank
+	private String primeiroNome;
 
-    @NotNull
-    @Size(min = 8, max = 30)
-    private String senha;
+	@NotBlank
+	private String ultimoNome;
 
-    @NotNull
-    @Size(min = 8, max = 30)
-    private String confirmacaoSenha;
+	@NotNull
+	@Size(min = 8, max = 30)
+	private String senha;
 
-    @NotBlank
-    @Email
-    private String email;
+	@NotNull
+	@Size(min = 8, max = 30)
+	private String confirmacaoSenha;
 
-    @Size(min = 11, max = 11)
-    private String telefone;
+	@NotBlank
+	@Email
+	private String email;
 
-    public String getTelefone() {
-        return telefone;
-    }
+	@Size(min = 11, max = 11)
+	private String telefone;
 
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
-    }
+	public String getTelefone() {
+		return telefone;
+	}
 
-    public String getSenha() {
-        return senha;
-    }
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
+	}
 
-    public void setSenha(String senha) {
-        this.senha = senha;
-    }
+	public String getSenha() {
+		return senha;
+	}
 
-    public String getEmail() {
-        return email;
-    }
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+	public String getEmail() {
+		return email;
+	}
 
-    public String getConfirmacaoSenha() {
-        return confirmacaoSenha;
-    }
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
-    public void setConfirmacaoSenha(String confirmacaoSenha) {
-        this.confirmacaoSenha = confirmacaoSenha;
-    }
+	public String getConfirmacaoSenha() {
+		return confirmacaoSenha;
+	}
 
-    public String getPrimeiroNome() {
-        return primeiroNome;
-    }
+	public void setConfirmacaoSenha(String confirmacaoSenha) {
+		this.confirmacaoSenha = confirmacaoSenha;
+	}
 
-    public void setPrimeiroNome(String primeiroNome) {
-        this.primeiroNome = primeiroNome;
-    }
+	public String getPrimeiroNome() {
+		return primeiroNome;
+	}
 
-    public String getUltimoNome() {
-        return ultimoNome;
-    }
+	public void setPrimeiroNome(String primeiroNome) {
+		this.primeiroNome = primeiroNome;
+	}
 
-    public void setUltimoNome(String ultimoNome) {
-        this.ultimoNome = ultimoNome;
-    }
+	public String getUltimoNome() {
+		return ultimoNome;
+	}
+
+	public void setUltimoNome(String ultimoNome) {
+		this.ultimoNome = ultimoNome;
+	}
+
+	public Perfil toPerfil() {
+		Perfil perfil = new Perfil();
+		perfil.setPrimeiroNome(this.primeiroNome);
+		perfil.setUltimoNome(this.ultimoNome);
+		perfil.setEmail(this.email);
+		perfil.setTelefone(this.telefone);
+
+		return perfil;
+	}
+	
+	public Usuario toUsuario() {
+		Usuario usuario = new Usuario();
+		usuario.setEmail(this.email);
+		usuario.setSenha(this.senha);
+		return usuario;
+	}
 
 }
