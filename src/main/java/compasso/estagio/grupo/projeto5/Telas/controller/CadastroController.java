@@ -37,7 +37,7 @@ public class CadastroController {
 		Usuario usuario = usuarioDto.toUsuario();
 		perfilRepository.save(perfil);
 		Permissao permissao = new Permissao();
-		//permissao.setPermissao("Personal");	
+		permissao.setPermissao("Personal");	
 		//permissao.setPermissao("Usuario");
 		usuario.setPermissao(permissao);
 		usuarioRepository.save(usuario);
