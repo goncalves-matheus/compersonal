@@ -1,7 +1,5 @@
 package compasso.estagio.grupo.projeto5.Telas.dto;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -15,9 +13,9 @@ import compasso.estagio.grupo.projeto5.Telas.security.verificacao.CamposIguais;
 @CamposIguais(primeiroCampo = "senha", segundoCampo = "confirmacaoSenha", message = "Senha e confirmação precisam ser iguais")
 
 public class RecuperaSenhaDto {
-    @NotBlank(message = "O email precisa ser preenchido!")
-    @Email(message = "Email inválido!")
+
     private String email;
+    
     @NotNull
     private String codigoDigitado;
 

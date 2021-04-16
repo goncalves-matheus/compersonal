@@ -37,6 +37,7 @@ public class RecuperaSenhaController {
     @PostMapping("email")
     public String email(RecuperaSenhaDto recuperaSenhaDto){
         String email = recuperaSenhaDto.getEmail();
+    
         Optional<Usuario> usuario = usuarioRepository.findByEmail(email);
         if(usuario.isPresent()){
             String codigo = emailSerive.enviarCodigo(email);
@@ -50,7 +51,7 @@ public class RecuperaSenhaController {
     public String mudarSenha(@Valid RecuperaSenhaDto recuperaSenhaDto, BindingResult resultado) {
         
         recuperaSenhaDto = this.auxiliarRecuperaSenhaDto.atualizarDto(recuperaSenhaDto);
-        
+        System.out.println(recuperaSenhaDto.getEmail());
         if (resultado.hasErrors() || !recuperaSenhaDto.validarCodigo()) {
             return "recuperacao";
         }
