@@ -18,20 +18,15 @@ public class PerfilController {
 	PerfilRepository repository;
 
 	@GetMapping
-	public String aulas(Model modelo) {
+	public String aulas(Model modelo, Principal principal) {
 
-		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		String email;
+		Perfil perfil = repository.findByEmail(principal.getName());
 
-		if (principal instanceof UserDetails) {
-			email = ((UserDetails) principal).getUsername();
-			Perfil perfil = repository.findByEmail(email);
-			modelo.addAttribute("nome", perfil.getPrimeiroNome());
-			modelo.addAttribute("sobrenome", perfil.getUltimoNome());
-			modelo.addAttribute("email", email);
-		} else {
-			email = principal.toString();
-		}
+		modelo.addAttribute("nome", perfil.getPrimeiroNome());
+
+		modelo.addAttribute("sobrenome", perfil.getUltimoNome());
+
+		modelo.addAttribute("email", principal.getName());
 
 		return "perfil";
 	}
