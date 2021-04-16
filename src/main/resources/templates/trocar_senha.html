@@ -16,12 +16,13 @@
                 <form class="card-body cor-borda" th:object="${recuperaSenhaDto}" th:action="@{/recuperar/codigo}"
                     method="POST">
                     <h5>Recuperação de Senha</h5>
-                   <!--  <div class="mb-3">
-                        <input th:value="${email}" type="email" class="form-control" id="email" disabled="">
+                    <!-- <div class="mb-3">
+                        <input th:field="*{email}" type="text" class="form-control" placeholder="Codigo">
+                        <div class="invalid-feedback" th:errors="*{email}">Errors do codigo</div>
                     </div> -->
                     <div class="mb-3">
                         <input th:field="*{codigoDigitado}" type="text" class="form-control" placeholder="Codigo">
-                        <div class="invalid-feedback" th:errors="*{codigoDigitado}">Errors do telefone</div>
+                        <div class="invalid-feedback" th:errors="*{codigoDigitado}">Errors do codigo</div>
                     </div>
                     <div class="mb-3">
                         <input th:field="*{senha}" type="password" class="form-control" placeholder="Nova Senha">
@@ -33,7 +34,7 @@
                         <div class="invalid-feedback" th:errors="*{confirmacaoSenha}">Errors da
                             confirmacaoSenha</div>
                     </div>
-                    <button type="submit" class="btn cor-botao">Alterar</button>
+                    <button type="submit" class="btn cor-botao">Alterar Senha</button>
                 </form>
             </div>
         </article>

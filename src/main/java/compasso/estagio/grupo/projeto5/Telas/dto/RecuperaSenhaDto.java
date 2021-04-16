@@ -3,9 +3,12 @@ package compasso.estagio.grupo.projeto5.Telas.dto;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import org.springframework.format.annotation.NumberFormat;
-
 import compasso.estagio.grupo.projeto5.Telas.security.verificacao.CamposIguais;
+
+/* @CamposIguais.List({
+    @CamposIguais(primeiroCampo = "senha", segundoCampo = "confirmacaoSenha", message = "Senha e confirmação precisam ser iguais"),
+    @CamposIguais(primeiroCampo = "codigoDigitado", segundoCampo = "codigoEnviadoPorEmail", message = "O código de verificação está errado")
+}) */
 
 @CamposIguais(primeiroCampo = "senha", segundoCampo = "confirmacaoSenha", message = "Senha e confirmação precisam ser iguais")
 
@@ -16,6 +19,8 @@ public class RecuperaSenhaDto {
     @NotNull
     private String codigoDigitado;
 
+    private String codigoEnviadoPorEmail = null;
+
     @NotNull
     @Size(min = 8, max = 30, message = "A senha precisa ter no mínimo 8 caracteres!")
     private String senha;
@@ -24,11 +29,10 @@ public class RecuperaSenhaDto {
     @Size(min = 8, max = 30, message = "A senha precisa ter no mínimo 8 caracteres!")
     private String confirmacaoSenha;
 
-    private String codigoEnviadoPorEmail = null;
-
-    public boolean validarCodigo() {
-        if(this.codigoDigitado.equals(codigoEnviadoPorEmail))
+    public boolean validarCodigo(){
+        if (this.codigoDigitado.equals(this.codigoEnviadoPorEmail)) {
             return true;
+        }
         return false;
     }
 
