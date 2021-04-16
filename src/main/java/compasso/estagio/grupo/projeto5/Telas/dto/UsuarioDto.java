@@ -8,28 +8,31 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import compasso.estagio.grupo.projeto5.Telas.model.Perfil;
 import compasso.estagio.grupo.projeto5.Telas.model.Usuario;
+import compasso.estagio.grupo.projeto5.Telas.security.verificacao.CamposIguais;
 
+@CamposIguais(primeiroCampo = "senha", segundoCampo = "confirmacaoSenha", message = "Senha e confirmação precisam ser iguais")
 public class UsuarioDto {
 
-	@NotBlank
+	@NotBlank(message = "O nome precisa ser preenchido")
 	private String primeiroNome;
 
-	@NotBlank
+	@NotBlank(message = "O nome precisa ser preenchido")
 	private String ultimoNome;
 
 	@NotNull
-	@Size(min = 8, max = 30)
+    @Size(min = 8, max = 30, message = "A senha precisa ter no mínimo 8 caracteres")
 	private String senha;
 
 	@NotNull
-	@Size(min = 8, max = 30)
+    @Size(min = 8, max = 30, message = "A senha precisa ter no mínimo 8 caracteres") 
 	private String confirmacaoSenha;
 
-	@NotBlank
-	@Email
+	@NotBlank(message = "O email precisa ser preenchido")
+    @Email(message = "Email inválido")
 	private String email;
-
-	@Size(min = 11, max = 11)
+	
+	@NotNull
+	@Size(min = 11, max = 11, message = "Telefone inválido")
 	private String telefone;
 
 	public UsuarioDto() {}
@@ -109,7 +112,7 @@ public class UsuarioDto {
 	}
 
     public static List<UsuarioDto> converte(List<Perfil> perfis) {
-        return perfis.stream().map( p -> new UsuarioDto(p)).collect(Collectors.toList());
+        return perfis.stream().map(p -> new UsuarioDto(p)).collect(Collectors.toList());
     }
 
 }
