@@ -47,7 +47,7 @@ public class CadastroController {
 		
 		
 		usuarioRepository.save(usuario);
-		return "index";
+		return "redirect:/";
 	}
 
 }
