@@ -21,8 +21,9 @@ public class Seguranca extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 
 		http.authorizeRequests().antMatchers("/*.css", "/*.jpeg").permitAll()
-				.antMatchers("/", "/cadastro", "/cadastro/*", "/planos").permitAll().anyRequest()
-				.authenticated().and()
+				.antMatchers("/", "/recuperar/**","/cadastro", "/cadastro/*", "/planos").permitAll()
+				.anyRequest().authenticated()
+				.and()
 				.formLogin(form -> form.loginPage("/login").permitAll().defaultSuccessUrl("/", true))
 				.logout(logout -> logout.logoutUrl("/logout").logoutSuccessUrl("/"));
 	}
