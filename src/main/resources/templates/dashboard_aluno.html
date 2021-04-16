@@ -15,27 +15,23 @@
 			<div th:replace="~{base::sidebar}"></div>
 
 			<div class="p-5">
-				<!-- descomentar quando implementar aulas -->
-				<!-- <div class="card mb-3"th:each="aula : ${aulas}"> -->
 				<div class="card mb-3" th:each="aula : ${aulas}">
 					<div class="row g-0">
-						<div class="col-md-3">
-							<iframe max-width="560" height="315" th:src="${aula.video}"
+						<div class="col-auto">
+							<iframe class="p-2" max-width="560" height="315" th:src="${aula.video}"
 								frameborder="0"
 								allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
 								allowfullscreen></iframe>
 						</div>
-						<div class="col-md-9">
+						<div class="col-auto">
 							<div class="card-body">
 								<a href="/aulas" class="link-dark">
 									<h5 class="card-title" th:text="${aula.titulo}">Titulo da
 										Aula</h5>
 								</a>
-								<!-- <h5 class="card-title" th:text="${aula.titulo}">Titulo da Aula</h5> -->
 								<p class="card-text" th:text="${aula.descricao}">Descrição
 									da Aula</p>
-								<!-- <p class="card-text" th:text="${aula.descrição}">Descrição da Aula</p>  -->
-								<a th:href="${aula.pdf}" class="btn cor-botao">Baixe o
+								<a th:href="${aula.pdf}" target="_blank" class="btn cor-botao">Baixe o
 									material</a>
 							</div>
 						</div>
