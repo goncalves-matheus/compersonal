@@ -13,32 +13,32 @@
 		<article class="d-flex align-items-stretch">
 
 			<div th:replace="~{base::sidebar}"></div>
-
-			<div class="p-5">
-				<div class="card mb-3" th:each="aula : ${aulas}">
-					<div class="row g-0">
-						<div class="col-auto">
-							<iframe class="p-2" max-width="560" height="315" th:src="${aula.video}"
-								frameborder="0"
-								allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-								allowfullscreen></iframe>
-						</div>
-						<div class="col-auto">
-							<div class="card-body">
-								<a href="/aulas" class="link-dark">
-									<h5 class="card-title" th:text="${aula.titulo}">Titulo da
-										Aula</h5>
-								</a>
-								<p class="card-text" th:text="${aula.descricao}">Descrição
-									da Aula</p>
-								<a th:href="${aula.pdf}" target="_blank" class="btn cor-botao">Baixe o
-									material</a>
+			<div class="container">
+				<div class="p-5">
+					<div class="card mb-3" th:each="aula : ${aulas}">
+						<div class="row g-0">
+							<div class="col-auto">
+								<iframe class="p-2" max-width="560" height="315"
+									th:src="${aula.video}" frameborder="0"
+									allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+									allowfullscreen></iframe>
+							</div>
+							<div class="col-auto">
+								<div class="card-body">
+									<a th:href="${aula.titulo}" class="link-dark">
+										<h5 class="card-title" th:text="${aula.titulo}">Titulo da
+											Aula</h5>
+									</a>
+									<p class="card-text" th:text="${aula.descricao}">Descrição
+										da Aula</p>
+									<a th:href="${aula.pdf}" target="_blank" class="btn cor-botao">Baixe
+										o material</a>
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 
-				
 
 			</div>
 		</article>
