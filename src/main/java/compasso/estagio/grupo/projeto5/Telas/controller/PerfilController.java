@@ -1,8 +1,6 @@
 package compasso.estagio.grupo.projeto5.Telas.controller;
 
-import java.util.Objects;
-
-import javax.validation.Valid;
+import java.security.Principal;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -26,20 +24,12 @@ public class PerfilController {
 	PerfilRepository repository;
 
 	@GetMapping
-	public String aulas(Model modelo) {
-		
-		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		String email;
+	public String aulas(Model modelo, Principal principal) {
 
-		if (principal instanceof UserDetails) {
-			email = ((UserDetails) principal).getUsername();
-			Perfil perfil = repository.findByEmail(((UserDetails) principal).getUsername());
-			modelo.addAttribute("primeiroNome", perfil.getPrimeiroNome());
-			modelo.addAttribute("ultimoNome", perfil.getUltimoNome());
-			modelo.addAttribute("email", email);
-		} else {
-			email = principal.toString();
-		}
+		Perfil perfil = repository.findByEmail(principal.getName());
+		modelo.addAttribute("nome", perfil.getPrimeiroNome());
+		modelo.addAttribute("sobrenome", perfil.getUltimoNome());
+		modelo.addAttribute("email", principal.getName());
 
 		return "perfil";
 	}
