@@ -7,7 +7,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import compasso.estagio.grupo.projeto5.Telas.model.Perfil;
 import compasso.estagio.grupo.projeto5.Telas.repository.PerfilRepository;
 
@@ -26,7 +25,7 @@ public class PerfilController {
 
 		if (principal instanceof UserDetails) {
 			email = ((UserDetails) principal).getUsername();
-			Perfil perfil = repository.findByEmail(((UserDetails) principal).getUsername());
+			Perfil perfil = repository.findByEmail(email);
 			modelo.addAttribute("nome", perfil.getPrimeiroNome());
 			modelo.addAttribute("sobrenome", perfil.getUltimoNome());
 			modelo.addAttribute("email", email);

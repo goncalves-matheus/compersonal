@@ -1,10 +1,11 @@
 package compasso.estagio.grupo.projeto5.Telas.dto;
 
+import java.util.List;
+import java.util.stream.Collectors;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-
 import compasso.estagio.grupo.projeto5.Telas.model.Perfil;
 import compasso.estagio.grupo.projeto5.Telas.model.Usuario;
 
@@ -30,6 +31,17 @@ public class UsuarioDto {
 
 	@Size(min = 11, max = 11)
 	private String telefone;
+
+	public UsuarioDto() {}
+
+	public UsuarioDto(Perfil p) {
+		this.primeiroNome = p.getPrimeiroNome();
+		this.ultimoNome = p.getUltimoNome();
+		this.senha = p.getSenha();
+		this.confirmacaoSenha = p.getConfirmacaoSenha();
+		this.email = p.getEmail();
+		this.telefone = p.getTelefone();
+	}
 
 	public String getTelefone() {
 		return telefone;
@@ -95,5 +107,9 @@ public class UsuarioDto {
 		usuario.setSenha(this.senha);
 		return usuario;
 	}
+
+    public static List<UsuarioDto> converte(List<Perfil> perfis) {
+        return perfis.stream().map( p -> new UsuarioDto(p)).collect(Collectors.toList());
+    }
 
 }

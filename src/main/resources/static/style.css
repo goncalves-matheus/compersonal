@@ -46,3 +46,6 @@ html, body {
 	border-color: rgb(214, 68, 0) !important;
 }
 
+.largura {
+	display: inline;
+}
