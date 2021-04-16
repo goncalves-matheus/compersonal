@@ -13,45 +13,65 @@
 			<div th:replace="~{base::sidebar}"></div>
 			<div class="container">
 				<div class="card col-auto mx-auto mb-5 mt-2 ">
-					<form class=" col-10 mb-4 mt-3 mx-auto">
+					<form class=" col-10 mb-4 mt-3 mx-auto" th:object="${aulaDto}"
+						th:action="@{/inseriraula/nova}" method="POST">
 						<div class="mb-2">
-							<label for="exampleFormControlInput1" class="form-label">Título</label>
-							<input type="text" class="form-control"
-								id="exampleFormControlInput1" placeholder="Escreva o título">
-						</div>
-						<div class="mb-2">
-							<label for="exampleFormControlInput1" class="form-label">URL
-								do vídeo</label> <input type="text" class="form-control"
-								id="exampleFormControlInput1" placeholder="URL do vídeo">
+							<label for="titulo" class="form-label">Título</label> <input
+								type="text" class="form-control" th:field="*{titulo}"
+								th:errorclass="is-invalid" placeholder="Escreva o título">
+							<div class="invalid-feedback" th:errors="*{titulo}">Errors
+								do titulo</div>
 						</div>
 						<div class="mb-2">
-							<label for="exampleFormControlTextarea1" class="form-label">Descrição</label>
-							<textarea class="form-control" id="exampleFormControlTextarea1"
-								rows="3"></textarea>
+							<label for="video" class="form-label">URL do vídeo</label> <input
+								th:errorclass="is-invalid" type="text" class="form-control"
+								th:field="*{video}" placeholder="URL do vídeo">
+							<div class="invalid-feedback" th:errors="*{video}">Errors
+								do video</div>
 						</div>
 						<div class="mb-2">
-							<label for="formFile" class="form-label">Arquivo PDF</label> <input
-								class="form-control" type="file" id="formFile">
+							<label for="descricao" class="form-label">Descrição</label>
+							<textarea class="form-control" th:errorclass="is-invalid"
+								th:field="*{descricao}" rows="3"></textarea>
+							<div class="invalid-feedback" th:errors="*{descricao}">Errors
+								da descricao</div>
 						</div>
-						</br>
-						<div>
-							<label for="exampleFormControlInput1" class="form-label">Escolha
-								o tipo</label>
-							<div class="btn-group">
-								<button class="btn btn-danger btn-sm dropdown-toggle"
-									type="button" data-bs-toggle="dropdown" aria-expanded="false">
-									Exercício</button>
-								<ul class="dropdown-menu">
-									<li><a class="dropdown-item" href="#">Glúteo</a></li>
-									<li><a class="dropdown-item" href="#">Abdômen</a></li>
-									<li><a class="dropdown-item" href="#">Pernas</a></li>
-									<li><a class="dropdown-item" href="#">Braços</a></li>
-									<li><a class="dropdown-item" href="#">Peito</a></li>
-								</ul>
-							</div>
+						<div class="mb-2">
+							<label for="pdf" class="form-label">Arquivo PDF</label> <input
+								th:errorclass="is-invalid" th:field="*{pdf}"
+								class="form-control" type="text">
+							<div class="invalid-feedback" th:errors="*{pdf}">Errors do
+								pdf</div>
 						</div>
-						</br>
-						</br>
+						</br> <label for="tipo" class="form-label">Escolha o tipo:</label>
+						<div class="form-check">
+							<input class="form-check-input" type="radio" th:field="*{tipo}"
+								th:errorclass="is-invalid" value="Glúteo"> <label
+								class="form-check-label" for="tipo"> Glúteo </label>
+						</div>
+						<div class="form-check">
+							<input class="form-check-input" type="radio" th:field="*{tipo}"
+								th:errorclass="is-invalid" value="Abdômen"> <label
+								class="form-check-label" for="tipo"> Abdômen </label>
+						</div>
+						<div class="form-check">
+							<input class="form-check-input" type="radio" th:field="*{tipo}"
+								th:errorclass="is-invalid" value="Pernas"> <label
+								class="form-check-label" for="tipo"> Pernas </label>
+						</div>
+						<div class="form-check">
+							<input class="form-check-input" type="radio" th:field="*{tipo}"
+								th:errorclass="is-invalid" value="Braços"> <label
+								class="form-check-label" for="tipo"> Braços </label>
+						</div>
+						<div class="form-check">
+							<input class="form-check-input" type="radio" th:field="*{tipo}"
+								th:errorclass="is-invalid" value="Peito"> <label
+								class="form-check-label" for="tipo"> Peito </label>
+						</div>
+						<div class="invalid-feedback" th:errors="*{tipo}">Errors do
+							pdf</div>
+						</br> </br>
 						<button type="submit" class="btn btn-danger">Adicionar</button>
 					</form>
 				</div>
