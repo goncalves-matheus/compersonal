@@ -25,12 +25,12 @@ public class DashboardController {
 	public String aluno(Model modelo) {
 
 		Pageable page = PageRequest.of(0, 10, Sort.by("Id").descending());
-
 		Page<Aula> aula = aulaRepository.findAll(page);
 		modelo.addAttribute("aulas", aula);
+
 		return "dashboard_aluno";
 	}
-	
+
 	@GetMapping("/{titulo}")
 	public String aulaSelecionada(@PathVariable String titulo) {
 		return "redirect:/aulas/{titulo}";
