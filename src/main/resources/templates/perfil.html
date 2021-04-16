@@ -7,142 +7,185 @@
 <head th:replace="~{base :: head(Perfil)}"></head>
 
 <body class="background">
-    <div class="geral">
-        <nav th:replace="~{base::navbar}"></nav>
-
-        <div class="container mt-3 mb-2 p-5">
-            <div class="col-md-2 col-lg-12">
-                <div class="card">
-                    <h5 class="card-header ">Seus dados pessoais</h5>
-                    <form class="needs-validation card-body mb-5 mt-3" novalidate="">
-
-                        <div class="form-input-container">
-                            <h4 for="foto" class="text-center">Foto</h4>
-                        </div>
-                        <div class="text-center">
-                            <img width="200" height="200"
-                                src="https://www.cursosabrafordes.com.br/webroot/img/cur_cursos/foto_1495509835.jpeg"
-                                class="rounded-circle" alt="">
-                        </div>
+	<div class="geral">
+		<nav th:replace="~{base::navbar}"></nav>
 
 
-                        <div class="row g-3">
-                            <div class="col-sm-6">
-                                <label for="nome" class="form-label">Nome</label>
-                                <input type="text" class="form-control" id="nome" placeholder="Seu nome" value=""
-                                    required="">
-                                <div class="invalid-feedback">
-                                    Nome inválido!
-                                </div>
-                            </div>
+		<article class="d-flex align-items-stretch">
+			<div th:replace="~{base::sidebar}"></div>
 
-                            <div class="col-sm-6">
-                                <label for="sobreNome" class="form-label">Sobrenome</label>
-                                <input type="text" class="form-control" id="sobreNome" placeholder="Seu sobrenome"
-                                    value="" required="">
-                                <div class="invalid-feedback">
-                                    Sobrenome inválido!
-                                </div>
-                            </div>
+			<div class="container mt-3 mb-5 p-2">
+				<div class="col-md-12 col-lg-12">
+					<div class="card">
+						<h5 class="card-header ">Seus dados pessoais</h5>
+						<form class="needs-validation card-body mb-5 mt-3" novalidate="">
 
-                            <div class="col-sm-6">
-                                <label for="email" class="form-label">Email</label>
-                                <input type="email" class="form-control" id="email" placeholder="seuemail@exemplo.com"
-                                    disabled="">
-                                <div class="invalid-feedback">
-                                    Por favor, digite um email válido!
-                                </div>
-                            </div>
+							<div class="form-input-container">
+								<h4 for="foto" class="text-center">Foto</h4>
+							</div>
 
-                            <div class="col-sm-6 ">
-                                <div class="d-flex justify-content-between">
-                                    <label for="novaSenha" class="form-label">Nova Senha</label>
-                                    <a href="" class="text-secondary ">Mudar Senha</a>
-                                </div>
-                                <input type="novaSenha" class="form-control" id="novaSenha" placeholder="Nova senha"
-                                    value="" required="">
-                                <div class="invalid-feedback">
-                                    Por favor, digite um senha válida!
-                                </div>
-                            </div>
+							<div class="text-center">
+								<img width="200" height="200"
+									src="https://www.cursosabrafordes.com.br/webroot/img/cur_cursos/foto_1495509835.jpeg"
+									class="rounded-circle" alt="">
+							</div>
+							<div class="text-center">
+								<input type="file">
+							</div>
+
+							<div class="row g-3">
+								<div class="col-sm-6">
+									<label for="nome" class="form-label">Nome</label> <input th:value="${nome}"
+										type="text" class="form-control" id="nome" placeholder="Seu nome" value=""
+										required="">
+									<div class="invalid-feedback">Nome inválido!</div>
+								</div>
+
+								<div class="col-sm-6">
+									<label for="sobreNome" class="form-label">Sobrenome</label> <input
+										th:value="${sobrenome}" type="text" class="form-control" id="sobreNome"
+										placeholder="Seu sobrenome" value="" required="">
+									<div class="invalid-feedback">Sobrenome inválido!</div>
+								</div>
+
+								<div class="col-sm-6">
+									<label for="email" class="form-label">Email</label> <input th:value="${email}"
+										type="email" class="form-control" id="email" disabled="">
+									<div class="invalid-feedback">Por favor, digite um email
+										válido!</div>
+								</div>
+
+								<div class="col-sm-6 ">
+									<div class="d-flex justify-content-between">
+										<label for="novaSenha" class="form-label">Senha</label> <a
+											data-bs-toggle="modal" href="" data-bs-target="#staticBackdrop"
+											class="text-secondary ">Mudar Senha</a>
+									</div>
+									<input type="password" class="form-control" id="novaSenha" placeholder="Nova senha"
+										value="123123123" disabled required>
+									<div class="invalid-feedback">Por favor, digite um senha
+										válida!</div>
+								</div>
 
 
-                            <hr class="my-4">
-                            <div class="d-flex justify-content-center">
-                                <button class="w-25 btn btn-md cor-botao" type="submit">Salvar dados pessoais</button>
-                            </div>
+								<hr class="my-4">
+								<div class="d-flex justify-content-center">
+									<button class="w-25 btn btn-md cor-botao" type="submit">Salvar
+										dados pessoais</button>
+								</div>
 
-                            <hr class="my-4">
+						</form>
+						<hr class="my-4">
+						<div class="row">
+							<form class="col">
 
-                            <h4 class="mb-3">Pagamento</h4>
 
-                            <div class="my-3">
-                                <div class="form-check">
-                                    <input id="credit" name="paymentMethod" type="radio" class="form-check-input"
-                                        checked="" required="">
-                                    <label class="form-check-label" for="credit">Cartão de Crédito</label>
-                                </div>
-                                <div class="form-check">
-                                    <input id="debit" name="paymentMethod" type="radio" class="form-check-input"
-                                        required="">
-                                    <label class="form-check-label" for="debit">Cartão de Débito</label>
-                                </div>
-                                <div class="form-check">
-                                    <input id="paypal" name="paymentMethod" type="radio" class="form-check-input"
-                                        required="">
-                                    <label class="form-check-label" for="paypal">Boleto</label>
-                                </div>
-                            </div>
+								<h4 class="mb-4">Informações Adicionais</h4>
 
-                            <div class="row gy-3">
-                                <div class="col-md-6">
-                                    <label for="cc-name" class="form-label">Nome no cartão</label>
-                                    <input type="text" class="form-control" id="cc-name" placeholder="" required="">
-                                    <small class="text-muted">Nome completo com está impresso no cartão</small>
-                                    <div class="invalid-feedback">
-                                        Campo obrigatório
-                                    </div>
-                                </div>
+								<div style="max-width:300px; min-width:300px">
 
-                                <div class="col-md-6">
-                                    <label for="cc-number" class="form-label">Número do cartão</label>
-                                    <input type="text" class="form-control" id="cc-number" placeholder="" required="">
-                                    <div class="invalid-feedback">
-                                        Campo obrigatório
-                                    </div>
-                                </div>
+									<div class="row g-3 mb-3">
+										<div class="col">
+											<label>Altura</label>
+											<input type="text" class=" mt-2 form-control" id="altura"
+												placeholder="Sua Altura">
+										</div>
+										<span class="col mt-5">m</span>
+									</div>
 
-                                <div class="col-md-3">
-                                    <label for="cc-expiration" class="form-label">Data de Validade</label>
-                                    <input type="text" class="form-control" id="cc-expiration" placeholder=""
-                                        required="">
-                                    <div class="invalid-feedback">
-                                        Campo obrigatório
-                                    </div>
-                                </div>
 
-                                <div class="col-md-3">
-                                    <label for="cc-cvv" class="form-label">CVV</label>
-                                    <input type="text" class="form-control" id="cc-cvv"
-                                        placeholder="Código de segurança" required="">
-                                    <div class="invalid-feedback">
-                                        Campo obrigatório
-                                    </div>
-                                </div>
-                            </div>
+									<div class="row g-3 mb-3">
+										<div class="col">
+											<label>Peso</label>
+											<input type="text" class=" mt-2 form-control" id="altura"
+												placeholder="Seu peso">
+										</div>
+										<span class="col mt-5">kg</span>
+									</div>
 
-                            <hr class="my-4">
-                            <div class="d-flex justify-content-center">
-                                <button class="w-25 btn btn-md cor-botao" type="submit">Salvar dados do cartão</button>
-                            </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-    <footer th:replace="~{base::footer}"></footer>
-    <script th:replace="~{base::script}"></script>
+								</div>
+								
 
-    </div>
+							</form>
+
+							<div class="col mt-3">
+								<h5>Sexo</h5>
+								<div class="btn-group btn-group-toggle" unchecked data-toggle="buttons">
+
+									<label class="btn btn-outline-light active">
+										<input type="radio" name="sexo" value="masc"> Masculino
+									</label>
+									<label class="btn btn-outline-light active">
+										<input type="radio" name="sexo" value="fem"> Feminino
+									</label>
+								</div>
+								
+								<div class="mt-2 mb-3">
+									<h5>Você possui algum problema de saúde?</h5>
+									<label class="btn btn-outline-light active">
+										<input type="radio" name="nao" value="nao">Sim </label>
+									<label class="btn btn-outline-light active">
+										<input type="radio" name="nao" value="nao">Não </label>
+								
+									<label class="mt-2">Qual?
+									<input type="text" class="form-input">
+								</label>
+								</div>
+							</div>
+
+							<div class="d-flex justify-content-center">
+								<button class="w-25 btn btn-md cor-botao mt-2" type="submit">Salvar
+									dados adicionais</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+				aria-labelledby="staticBackdropLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="staticBackdropLabel">Mudar
+								Senha</h5>
+							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							<div class="card-body cor-borda">
+								<form class="card-body">
+									<div class="mb-3">
+										<input type="text" class="form-control" placeholder="Senha atual">
+										<!--                         <div class="invalid-feedback" th:errors="*{codigo}">Errors do telefone</div> -->
+									</div>
+									<div class="mb-3">
+										<input type="password" class="form-control" placeholder="Nova senha">
+										<!--                         <div class="invalid-feedback" th:errors="*{senha}">Errors da senha</div> -->
+									</div>
+									<div class="mb-3">
+										<input type="password" class="form-control" placeholder="Confirme a nova Senha">
+										<!--                         <div class="invalid-feedback" th:errors="*{confirmacaoSenha}">Errors da confirmacaoSenha -->
+										<!--                         </div> -->
+									</div>
+									<button type="submit" class="btn cor-botao">Registar</button>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</article>
+		<script>
+
+		</script>
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+		crossorigin="anonymous"></script>
+
+		<footer th:replace="~{base::footer}"></footer>
+		<script th:replace="~{base::script}"></script>
+	</div>
 </body>
+
 </html>
