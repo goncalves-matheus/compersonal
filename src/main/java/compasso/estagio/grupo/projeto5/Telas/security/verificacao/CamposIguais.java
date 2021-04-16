@@ -13,8 +13,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Retention(RUNTIME)
 @Constraint(validatedBy = CamposIguaisValidator.class)
 @Documented
-public @interface CamposIguais
-{
+public @interface CamposIguais{
     String message() default "Os campos precisam ser iguais";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
@@ -24,8 +23,7 @@ public @interface CamposIguais
     @Target({TYPE, ANNOTATION_TYPE})
     @Retention(RUNTIME)
     @Documented
-    @interface List
-    {
+    @interface List{
         CamposIguais[] value();
     }
 }

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<meta charset="UTF-8">
+
+<!-- Tópico 2.1 -->
+
+<head th:replace="~{base::head(Recuperação)}"></head>
+
+
+<body class="background">
+    <div class="geral">
+        <nav th:replace="~{base::navbar}"></nav>
+
+        <article class="container larguraFormulario" style="width: 30rem">
+            <div class="card mt-5">
+                <form class="card-body cor-borda" th:object="${recuperaSenhaDto}" th:action="@{/recuperar/codigo}"
+                    method="POST">
+                    <h5>Recuperação de Senha</h5>
+                    <!-- <div class="mb-3">
+                        <input th:field="*{email}" type="text" class="form-control" placeholder="Codigo">
+                        <div class="invalid-feedback" th:errors="*{email}">Errors do codigo</div>
+                    </div> -->
+                    <div class="mb-3">
+                        <input th:field="*{codigoDigitado}" type="text" class="form-control" placeholder="Codigo">
+                        <div class="invalid-feedback" th:errors="*{codigoDigitado}">Errors do codigo</div>
+                    </div>
+                    <div class="mb-3">
+                        <input th:field="*{senha}" type="password" class="form-control" placeholder="Nova Senha">
+                        <div class="invalid-feedback" th:errors="*{senha}">Errors da senha</div>
+                    </div>
+                    <div class="mb-3">
+                        <input th:field="*{confirmacaoSenha}" type="password" class="form-control"
+                            placeholder="Confirme a Nova Senha">
+                        <div class="invalid-feedback" th:errors="*{confirmacaoSenha}">Errors da
+                            confirmacaoSenha</div>
+                    </div>
+                    <button type="submit" class="btn cor-botao">Alterar Senha</button>
+                </form>
+            </div>
+        </article>
+        <footer th:replace="~{base::footer}"></footer>
+        <script th:replace="~{base::script}"></script>
+    </div>
+</body>
+
+</html>

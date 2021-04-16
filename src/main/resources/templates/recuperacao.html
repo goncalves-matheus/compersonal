@@ -4,7 +4,7 @@
 
 <!-- Tópico 2.1 -->
 
-<head th:replace="~{base::head(Cadastro)}"></head>
+<head th:replace="~{base::head(Recuperação)}"></head>
 
 
 <body class="background">
@@ -14,26 +14,34 @@
 		<article class="container larguraFormulario" style="width: 30rem">
 			<div class="card mt-5">
 				<article class="card-body mb-0">
-					<h1>Ops, esqueceu senha?!</h1>
+					<h1>Ops, Esqueceu a Senha?!</h1>
 					<p>Preencha os campos e confira o código em seu email</p>
 				</article>
 
 				<div class="card-body cor-borda">
-					<form class="card-body">
+					<form class="card-body" th:object="${recuperaSenhaDto}" th:action="@{/recuperar/email}"
+						method="POST">
 						<div class="mb-3">
-							<input name="email" class="form-control" type="email"
-								placeholder="Email">
+							<input th:field="*{email}" class="form-control" type="email" placeholder="Email">
 						</div>
-						<button type="button" class="btn cor-botao" data-bs-toggle="modal"
+						<button type="submit" class="btn cor-botao">Enviar</button>
+					</form>
+				</div>
+
+				<!-- <div class="card-body cor-borda">
+					<form class="card-body" th:object="${recuperaSenhaDto}" th:action="@{/recuperar/email}"
+						method="POST">
+						<div class="mb-3">
+							<input th:field="*{email}" class="form-control" type="email" placeholder="Email">
+						</div>
+						<button type="submit" class="btn cor-botao" data-bs-toggle="modal"
 							data-bs-target="#staticBackdrop">Enviar</button>
 					</form>
 				</div>
 
 
-
-				<div class="modal fade" id="staticBackdrop"
-					data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-					aria-labelledby="staticBackdropLabel" aria-hidden="true">
+				<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
+					tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
 					<div class="modal-dialog">
 						<div class="modal-content">
 							<div class="modal-header">
@@ -44,33 +52,36 @@
 							</div>
 							<div class="modal-body">
 								<div class="card-body cor-borda">
-									<form class="card-body">
+									<form class="card-body" th:object="${recuperaSenhaDto}"
+										th:action="@{/recuperar/codigo}" method="POST">
 										<div class="mb-3">
-											<input type="email" class="form-control" placeholder="Email">
-											<!--                         <div class="invalid-feedback" th:errors="*{email}">Errors do email</div> -->
+											<input th:field="*{email}" type="email" class="form-control"
+												placeholder="Email">
+											<div class="invalid-feedback" disabled required></div>
 										</div>
 										<div class="mb-3">
-											<input type="text" class="form-control" placeholder="Codigo">
-											<!--                         <div class="invalid-feedback" th:errors="*{codigo}">Errors do telefone</div> -->
+											<input th:field="*{codigo}" type="text" class="form-control"
+												placeholder="Codigo">
+											<div class="invalid-feedback" th:errors="*{codigo}">Errors do telefone</div>
 										</div>
 										<div class="mb-3">
-											<input type="password" class="form-control"
+											<input th:field="*{senha}" type="password" class="form-control"
 												placeholder="Senha">
-											<!--                         <div class="invalid-feedback" th:errors="*{senha}">Errors da senha</div> -->
+											<div class="invalid-feedback" th:errors="*{senha}">Errors da senha</div>
 										</div>
 										<div class="mb-3">
-											<input type="password" class="form-control"
+											<input th:field="*{confirmacaoSenha}" type="password" class="form-control"
 												placeholder="Confirme a Senha">
-											<!--                         <div class="invalid-feedback" th:errors="*{confirmacaoSenha}">Errors da confirmacaoSenha -->
-											<!--                         </div> -->
+											<div class="invalid-feedback" th:errors="*{confirmacaoSenha}">Errors da
+												confirmacaoSenha</div>
 										</div>
-										<button type="submit" class="btn cor-botao">Registar</button>
+										<button type="submit" class="btn cor-botao">Alterar</button>
 									</form>
 								</div>
 							</div>
 						</div>
 					</div>
-				</div>
+				</div> -->
 
 			</div>
 
@@ -78,6 +89,12 @@
 		<footer th:replace="~{base::footer}"></footer>
 		<script th:replace="~{base::script}"></script>
 	</div>
+	<script>
+		$('#staticBackdrop').modal({
+			keyboard: false,
+			backdrop: 'static'
+		});
+	</script>
 </body>
 
 </html>
