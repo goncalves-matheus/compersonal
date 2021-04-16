@@ -1,10 +1,7 @@
-@import
-	url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&display=swap')
-	;
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&display=swap');
 
 .background {
-	background-image:
-		url(https://i.pinimg.com/originals/72/dc/f2/72dcf2d1fcbb8e5a0425ca0adf11ae4e.jpg);
+	background-image: url(https://i.pinimg.com/originals/72/dc/f2/72dcf2d1fcbb8e5a0425ca0adf11ae4e.jpg);
 	background-size: cover;
 	background-position: 0% -10%;
 }
