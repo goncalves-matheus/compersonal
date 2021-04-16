@@ -25,6 +25,8 @@ public class RecuperaSenhaController {
 
     @Autowired
     private EnviaEmailService emailSerive;
+    
+    private RecuperaSenhaDto recuperaSenhaDtoAuxiliar = new RecuperaSenhaDto();
 
     @GetMapping
     public String novoCadastro(RecuperaSenhaDto recuperaSenhaDto) {
@@ -35,7 +37,8 @@ public class RecuperaSenhaController {
     public String enviarEmail(RecuperaSenhaDto recuperaSenhaDto){
         Optional<Usuario> usuario = usuarioRepository.findByEmail(recuperaSenhaDto.getEmail());
         if(usuario.isPresent()){
-            recuperaSenhaDto.setCodigoEnviadoPorEmail(emailSerive.enviarCodigo(recuperaSenhaDto.getEmail()));
+            this.recuperaSenhaDtoAuxiliar.setEmail(recuperaSenhaDto.getEmail());
+            this.recuperaSenhaDtoAuxiliar.setCodigoEnviadoPorEmail(emailSerive.enviarCodigo(recuperaSenhaDto.getEmail()));
             return "trocar_senha";
         }
         return "recuperacao";
@@ -43,13 +46,17 @@ public class RecuperaSenhaController {
 
     @PostMapping("codigo")
     public String mudarSenha(@Valid RecuperaSenhaDto recuperaSenhaDto, BindingResult resultado) {
-        if (resultado.hasErrors() && !recuperaSenhaDto.validarCodigo()) {
+        recuperaSenhaDto.setEmail(this.recuperaSenhaDtoAuxiliar.getEmail());
+        recuperaSenhaDto.setCodigoEnviadoPorEmail(this.recuperaSenhaDtoAuxiliar.getCodigoEnviadoPorEmail());
+        
+        if (resultado.hasErrors() || !recuperaSenhaDto.validarCodigo()) {
             System.out.println(recuperaSenhaDto.getEmail());
             return "recuperacao";
         }
+
+        System.out.println(recuperaSenhaDto.getEmail());
         Optional<Usuario> usuarioOptional = usuarioRepository.findByEmail(recuperaSenhaDto.getEmail());
         if (usuarioOptional.isPresent()) {
-            System.out.println(recuperaSenhaDto.getEmail());
             Usuario usuario = usuarioOptional.get();
             usuario.setSenha(recuperaSenhaDto.getSenha());
             usuarioRepository.save(usuario);
