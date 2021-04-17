@@ -17,51 +17,13 @@
 			<div class="container mt-3 mb-5 p-2">
 				<div class="col-md-12 col-lg-12">
 					<div class="card">
-						<h5 class="card-header ">Seus dados pessoais</h5>
-						<form class="needs-validation card-body mb-5 mt-3" novalidate="">
-
-							<div class="form-input-container">
-								<h4 for="foto" class="text-center">Foto</h4>
-							</div>
-							<div class="text-center">
-								<img width="200" height="200"
-									src="https://www.cursosabrafordes.com.br/webroot/img/cur_cursos/foto_1495509835.jpeg"
-									class="rounded-circle" alt="">
-							</div>
-
-
-							<div class="row g-3">
-								<div class="col-sm-6">
-									<label for="nome" class="form-label">Nome</label> <input th:value="${nome}"
-										type="text" class="form-control" id="nome"
-										required>
-									<div class="invalid-feedback">Nome inválido!</div>
-								</div>
-
-								<div class="col-sm-6">
-									<label for="sobreNome" class="form-label">Sobrenome</label> <input th:value="${sobrenome}"
-										type="text" class="form-control" id="sobreNome"
-										required>
-									<div class="invalid-feedback">Sobrenome inválido!</div>
-								</div>
-
-								<div class="col-sm-6">
-									<label for="email" class="form-label">Email</label> <input th:value="${email}"
-										type="email" class="form-control" id="email"
-										 disabled>
-									<div class="invalid-feedback">Por favor, digite um email
-										válido!</div>
-								</div>
-
-								<div class="col-sm-6 ">
-									<div class="d-flex justify-content-between">
-										<label for="novaSenha" class="form-label">Senha</label> <a data-bs-toggle="modal"
-											href="" data-bs-target="#staticBackdrop" class="text-secondary ">Mudar Senha</a>
-									</div>
-									<input type="password" class="form-control" id="novaSenha" 
-										placeholder="Nova senha" value="123123123" disabled required>
-									<div class="invalid-feedback">Por favor, digite um senha
-										válida!</div>
+						<div>
+							<h5 class="card-header ">Seus dados pessoais</h5>
+							<form th:object="${usuarioDto}" class="card-body mb-5 mt-3" 
+								th:action="@{/perfil/}" method="POST">
+								
+								<div class="form-input-container">
+									<h4 for="foto" class="text-center">Foto</h4>
 								</div>
 								<div class="text-center">
 									<img width="200" height="200"
