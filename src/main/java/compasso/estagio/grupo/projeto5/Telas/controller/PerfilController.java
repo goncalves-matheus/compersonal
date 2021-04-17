@@ -1,6 +1,9 @@
 package compasso.estagio.grupo.projeto5.Telas.controller;
 
 import java.security.Principal;
+import java.util.Objects;
+
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
