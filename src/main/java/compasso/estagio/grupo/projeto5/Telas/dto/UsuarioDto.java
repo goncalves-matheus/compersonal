@@ -2,15 +2,19 @@ package compasso.estagio.grupo.projeto5.Telas.dto;
 
 import java.util.List;
 import java.util.stream.Collectors;
+
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
 import compasso.estagio.grupo.projeto5.Telas.model.Perfil;
 import compasso.estagio.grupo.projeto5.Telas.model.Usuario;
 import compasso.estagio.grupo.projeto5.Telas.security.verificacao.CamposIguais;
+import compasso.estagio.grupo.projeto5.Telas.security.verificacao.Telefone;
 
 @CamposIguais(primeiroCampo = "senha", segundoCampo = "confirmacaoSenha", message = "Senha e confirmação precisam ser iguais")
+@Telefone(numeroDoTelefone = "telefone")
 public class UsuarioDto {
 
 	@NotBlank(message = "O nome precisa ser preenchido")
@@ -31,8 +35,6 @@ public class UsuarioDto {
     @Email(message = "Email inválido")
 	private String email;
 	
-	@NotNull
-	@Size(min = 11, max = 11, message = "Telefone inválido")
 	private String telefone;
 
 	public UsuarioDto() {}
@@ -99,7 +101,7 @@ public class UsuarioDto {
 		perfil.setPrimeiroNome(this.primeiroNome);
 		perfil.setUltimoNome(this.ultimoNome);
 		perfil.setEmail(this.email);
-		perfil.setTelefone(this.telefone);
+		perfil.setTelefone(formatarTelefone(this.telefone));
 
 		return perfil;
 	}
@@ -115,4 +117,11 @@ public class UsuarioDto {
         return perfis.stream().map(p -> new UsuarioDto(p)).collect(Collectors.toList());
     }
 
+	private String formatarTelefone(String telefone){
+		telefone = telefone.replace("-", "");
+		telefone = telefone.replace("(", "");
+		telefone = telefone.replace(")", "");
+		telefone = telefone.replace(" ", "");
+		return telefone;
+	}
 }
