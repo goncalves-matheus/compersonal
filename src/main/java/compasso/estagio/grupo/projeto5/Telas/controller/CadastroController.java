@@ -42,7 +42,7 @@ public class CadastroController {
 		perfilRepository.save(perfil);
 
 		Permissao permissao = new Permissao();
-		permissao.setPermissao("Personal");
+		permissao.setPermissao("Aluno");
 		usuario.setPermissao(permissao);
 		
 		
