@@ -7,6 +7,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 import compasso.estagio.grupo.projeto5.Telas.Service.Autenticador;
 
 @Configuration
@@ -21,6 +22,8 @@ public class Seguranca extends WebSecurityConfigurerAdapter {
 
 		http.authorizeRequests().antMatchers("/*.css", "/*.jpeg").permitAll()
 				.antMatchers("/", "/recuperar/**","/cadastro", "/cadastro/*", "/planos").permitAll()
+				.antMatchers("/dashboard/aluno").hasAuthority("Usuario")
+				.antMatchers("/dashboard/personal").hasAuthority("Personal")
 				.anyRequest().authenticated()
 				.and()
 				.formLogin(form -> form.loginPage("/login").permitAll().defaultSuccessUrl("/", true))
