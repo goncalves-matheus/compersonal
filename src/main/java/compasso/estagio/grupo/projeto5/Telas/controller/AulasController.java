@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import compasso.estagio.grupo.projeto5.Telas.dto.MensagemDto;
 import compasso.estagio.grupo.projeto5.Telas.model.Tipo;
 import compasso.estagio.grupo.projeto5.Telas.repository.AulaRepository;
 
@@ -18,7 +19,7 @@ public class AulasController {
 	AulaRepository aulaRepository;
 
 	@GetMapping
-	public String aulas(Model modelo) {
+	public String aulas(Model modelo, MensagemDto mensagemDto) {
 
 		modelo.addAttribute("aula", aulaRepository.findById((long) 1).get());
 		modelo.addAttribute("gluteo", aulaRepository.findByTipo(Tipo.GLUTEO));
@@ -31,7 +32,7 @@ public class AulasController {
 	}
 
 	@GetMapping("/{titulo}")
-	public String AulaId(@PathVariable String titulo, Model modelo) {
+	public String AulaId(@PathVariable String titulo, Model modelo, MensagemDto mensagemDto) {
 
 		modelo.addAttribute("aula", aulaRepository.findByTitulo(titulo));
 		modelo.addAttribute("gluteo", aulaRepository.findByTipo(Tipo.GLUTEO));

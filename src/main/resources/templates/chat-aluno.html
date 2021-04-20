@@ -11,17 +11,16 @@
             <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body small" >
-            <form th:object="${mensagemDto}"  th:action="@{/mensagem/nova}" method="POST">
+            <form th:object="${mensagemDto}" th:action="@{/mensagem/nova}" method="POST">
                 <div class="card" style="min-height: 270px;">
                     <label id="instrutor" class="card-body form-control cor-botao align-self-start" style="max-width: 200px;">A última
                         mensagem do instrutor vem aqui.</label>
                     <label id="aluno" class="card-body form-control align-self-end" style="max-width: 200px; color: white; background-color: gray;">sua Ãºltima mensagem vem aqui.</label>
                 </div>
                 <div class="d-flex">
-                    <input th:field="*{mensagem}" class="form-control align-bottom" placeholder="Deixe uma mensagem"></input>
+                    <input th:field="*{corpoDaMensagem}" th:errorclass="is-invalid" class="form-control align-bottom" placeholder="Deixe uma mensagem">
                     <button type="submit" class=" btn btn cor-botao">></button>
                 </div>
-                
             </form>
         </div>
     </div>

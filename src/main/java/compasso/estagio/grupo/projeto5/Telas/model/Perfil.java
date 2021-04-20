@@ -33,7 +33,7 @@ public class Perfil {
 
 	private String telefone;
 
-	@OneToMany(mappedBy = "chat", fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+	@OneToMany(mappedBy = "perfil", fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
 	private List<Mensagem> mensagens = new ArrayList<Mensagem>();
 
 	public String getTelefone() {
@@ -96,8 +96,8 @@ public class Perfil {
         return mensagens;
     }
 
-    public void setMensagens(List<Mensagem> mensagens) {
-        this.mensagens = mensagens;
+    public void setMensagens(Mensagem mensagem) {
+        this.mensagens.add(mensagem);
     }
 
 }

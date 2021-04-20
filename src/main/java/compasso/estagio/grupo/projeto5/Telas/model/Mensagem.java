@@ -11,11 +11,11 @@ import javax.persistence.ManyToOne;
 @Entity
 public class Mensagem {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
-	private String texto;
+    private String texto;
 
     public LocalDateTime dataEHorario = LocalDateTime.now();
 
@@ -48,5 +48,15 @@ public class Mensagem {
     public void setDataEHorario(LocalDateTime dataEHorario) {
         this.dataEHorario = dataEHorario;
     }
-    
+
+    public Perfil getPerfil() {
+        return perfil;
+    }
+
+    public void setPerfil(Perfil perfil) {
+        this.perfil = perfil;
+    }
+
+
+
 }
