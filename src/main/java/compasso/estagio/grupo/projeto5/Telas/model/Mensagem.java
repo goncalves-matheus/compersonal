@@ -10,7 +10,6 @@ import javax.persistence.ManyToOne;
 
 @Entity
 public class Mensagem {
-    private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -21,13 +20,9 @@ public class Mensagem {
     public LocalDateTime dataEHorario = LocalDateTime.now();
 
     @ManyToOne
-    private Chat chat;
+    private Perfil perfil;
 
     public Mensagem() {
-    }
-
-    public static long getSerialversionuid() {
-        return serialVersionUID;
     }
 
     public Long getId() {
@@ -53,15 +48,5 @@ public class Mensagem {
     public void setDataEHorario(LocalDateTime dataEHorario) {
         this.dataEHorario = dataEHorario;
     }
-
-    public Chat getChat() {
-        return chat;
-    }
-
-    public void setChat(Chat chat) {
-        this.chat = chat;
-    }
-
-   
     
 }

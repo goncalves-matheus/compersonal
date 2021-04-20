@@ -1,9 +1,15 @@
 package compasso.estagio.grupo.projeto5.Telas.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
@@ -26,6 +32,9 @@ public class Perfil {
 	private String email;
 
 	private String telefone;
+
+	@OneToMany(mappedBy = "chat", fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+	private List<Mensagem> mensagens = new ArrayList<Mensagem>();
 
 	public String getTelefone() {
 		return telefone;
@@ -82,5 +91,13 @@ public class Perfil {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
+	public List<Mensagem> getMensagens() {
+        return mensagens;
+    }
+
+    public void setMensagens(List<Mensagem> mensagens) {
+        this.mensagens = mensagens;
+    }
 
 }

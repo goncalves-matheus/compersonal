@@ -4,38 +4,34 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-@Entity
+//@Entity
 public class Chat {
-
-    private static final long serialVersionUID = 1L;
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long Id;
+	private Long id;
 
     private Usuario aluno;
 
     private Usuario personal;
-    
-    @OneToMany(mappedBy = "chat", fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+
+    @OneToMany(mappedBy = "perfil", fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
 	private List<Mensagem> mensagens = new ArrayList<Mensagem>();
 
     public Chat() {
     }
 
     public Long getId() {
-        return Id;
+        return id;
     }
 
     public void setId(Long id) {
-        Id = id;
+        this.id = id;
     }
 
     public Usuario getAluno() {
