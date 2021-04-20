@@ -1,16 +1,13 @@
 package compasso.estagio.grupo.projeto5.Telas.controller;
 
 import java.util.Optional;
-
 import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import compasso.estagio.grupo.projeto5.Telas.dto.AuxiliarRecuperaSenhaDto;
 import compasso.estagio.grupo.projeto5.Telas.dto.RecuperaSenhaDto;
 import compasso.estagio.grupo.projeto5.Telas.model.Usuario;

@@ -2,7 +2,6 @@ package compasso.estagio.grupo.projeto5.Telas.security.verificacao;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
-
 import org.apache.commons.beanutils.BeanUtils;
 
 public class CamposIguaisValidator implements ConstraintValidator<CamposIguais, Object> {

@@ -2,10 +2,8 @@ package compasso.estagio.grupo.projeto5.Telas.security.verificacao;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
-
 import org.apache.commons.beanutils.BeanUtils;
 
 public class TelefoneValidator implements ConstraintValidator<Telefone, Object> {
