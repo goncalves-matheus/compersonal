@@ -19,7 +19,7 @@ public class AlunosController {
 
     @GetMapping
     public String alunosAll(Model modelo) {
-        List<Perfil> perfis = repository.findAll();
+        List<Perfil> perfis = repository.findByNotEmailPersonal("personal@compasso.com");
         List<UsuarioDto> estudantes = UsuarioDto.converte(perfis);
         modelo.addAttribute("estudantes", estudantes);
         return "alunos";
