@@ -1,7 +1,6 @@
 package compasso.estagio.grupo.projeto5.Telas.dto;
 
 import javax.validation.constraints.NotBlank;
-
 import compasso.estagio.grupo.projeto5.Telas.model.Perfil;
 
 public class PerfilDto {

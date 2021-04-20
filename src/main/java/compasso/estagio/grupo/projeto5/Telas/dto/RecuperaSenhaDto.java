@@ -2,7 +2,6 @@ package compasso.estagio.grupo.projeto5.Telas.dto;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-
 import compasso.estagio.grupo.projeto5.Telas.security.verificacao.CamposIguais;
 
 /* @CamposIguais.List({
@@ -11,7 +10,6 @@ import compasso.estagio.grupo.projeto5.Telas.security.verificacao.CamposIguais;
 }) */
 
 @CamposIguais(primeiroCampo = "senha", segundoCampo = "confirmacaoSenha", message = "Senha e confirmação precisam ser iguais")
-
 public class RecuperaSenhaDto {
 
     private String email;

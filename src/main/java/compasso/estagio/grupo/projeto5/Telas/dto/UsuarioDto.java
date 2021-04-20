@@ -2,12 +2,10 @@ package compasso.estagio.grupo.projeto5.Telas.dto;
 
 import java.util.List;
 import java.util.stream.Collectors;
-
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-
 import compasso.estagio.grupo.projeto5.Telas.model.Perfil;
 import compasso.estagio.grupo.projeto5.Telas.model.Usuario;
 import compasso.estagio.grupo.projeto5.Telas.security.verificacao.CamposIguais;
