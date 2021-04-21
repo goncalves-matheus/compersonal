@@ -9,7 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class Mensagem {
+public class Mensagem implements Comparable<Mensagem> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -65,6 +65,11 @@ public class Mensagem {
 
     public void setDestinatarioId(Long destinatarioId) {
         this.destinatarioId = destinatarioId;
+    }
+
+    @Override
+    public int compareTo(Mensagem outraMensagem) {
+        return this.dataEHorario.compareTo(outraMensagem.getDataEHorario());
     }
 
 }

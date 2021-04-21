@@ -1,12 +1,12 @@
 package compasso.estagio.grupo.projeto5.Telas.controller;
 
 import java.security.Principal;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -66,8 +66,18 @@ public class AulasController {
 
 	private void carregarMensagensDoChat(Model modelo, Principal principal) {
 		Perfil perfil = perfilRepository.findByEmail(principal.getName());
-        Pageable page = PageRequest.of(0, 20, Sort.by("Id").ascending());
-		Page<Mensagem> mensagens = mensagemRepository.findByPerfilId(perfil.getId(), page);
-		modelo.addAttribute("mensagens", mensagens);
+		List<Mensagem> mensagensDoAluno = mensagemRepository.findByPerfilId(perfil.getId());
+		List<Mensagem> mensagensDoPersonal = mensagemRepository.findByPerfilIdDestinatarioId(Long.valueOf(1), perfil.getId());
+		List<Mensagem> todasAsMensagens = Stream.concat(mensagensDoAluno.stream(), mensagensDoPersonal.stream()).collect(Collectors.toList());
+
+		modelo.addAttribute("mensagensDoAluno", mensagensDoAluno);
+		modelo.addAttribute("mensagensDoPersonal", mensagensDoPersonal);
+		modelo.addAttribute("mensagens", todasAsMensagens);
+
+		Collections.sort(todasAsMensagens);
+		for (Mensagem mensagem : todasAsMensagens) {
+			System.out.println(mensagem.getTexto());
+		}
+
 	}
 }

@@ -18,4 +18,5 @@ public interface PerfilRepository extends JpaRepository<Perfil, Long>{
 
 	List<Perfil> findByPermissao(Permissao permissao);
 
+	Perfil findByPermissaoPermissao(String persmissao);
 }

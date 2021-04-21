@@ -13,10 +13,12 @@
         <div class="offcanvas-body small" >
             <form th:object="${mensagemDto}" th:action="@{/mensagem/nova}" method="POST">
                 <div class="card" style="min-height: 270px;">
-                    <div th:each="mensagem : ${mensagens}">
+                    <div th:each="mensagem:${mensagens}">
                         <!-- <label id="instrutor" class="card-body form-control cor-botao align-self-start" style="max-width: 200px;">A última
                             mensagem do instrutor vem aqui.</label> -->
-                        <label th:text="${mensagem.texto}" id="aluno" class="card-body form-control align-self-end" style="max-width: 200px; color: white; background-color: gray;"></label>
+                            
+                            <label th:if="${mensagem.destinatarioId == '4'}" th:text="${mensagem.texto}" id="aluno" class="card-body form-control align-self-end" style="max-width: 200px; color: white; background-color: gray;"></label>
+                            <label th:text="${mensagem.texto}" id="aluno" class="card-body cor-botao form-control align-self-end" style="max-width: 200px; color: white; background-color: gray;"></label>
                     </div>
                     <!-- <label id="instrutor" class="card-body form-control cor-botao align-self-start" style="max-width: 200px;">A última
                         mensagem do instrutor vem aqui.</label>

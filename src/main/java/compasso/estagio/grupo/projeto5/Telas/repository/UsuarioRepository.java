@@ -9,8 +9,5 @@ import compasso.estagio.grupo.projeto5.Telas.model.Usuario;
 @Repository
 @Transactional
 public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
-
-	Optional<Usuario> findByEmail(String username);
-	Usuario findByPersmissaoPermissao(String permissao);
-
+	Optional<Usuario> findByEmail(String username);;
 }

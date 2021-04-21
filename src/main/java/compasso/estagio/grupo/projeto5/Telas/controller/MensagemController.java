@@ -21,7 +21,6 @@ import compasso.estagio.grupo.projeto5.Telas.model.Mensagem;
 import compasso.estagio.grupo.projeto5.Telas.model.Perfil;
 import compasso.estagio.grupo.projeto5.Telas.repository.MensagemRepository;
 import compasso.estagio.grupo.projeto5.Telas.repository.PerfilRepository;
-import compasso.estagio.grupo.projeto5.Telas.repository.UsuarioRepository;
 
 @Controller
 @RequestMapping("mensagem")
@@ -29,9 +28,6 @@ public class MensagemController {
 
     @Autowired
     private PerfilRepository perfilRepository;
-
-    @Autowired
-    private UsuarioRepository usuarioRepository;
 
     @Autowired
     private MensagemRepository mensagemRepository;
@@ -61,7 +57,8 @@ public class MensagemController {
 
     private void salvarMensagemDoAluno(MensagemDto mensagemDto, Principal principal) {
         Mensagem mensagem = mensagemDto.toMensagem();
-        /* mensagem.setDestinatarioId(usuarioRepository.findByPersmissaoPermissao("Personal").getId()); */
+        //mensagem.setDestinatarioId(perfilRepository.findByPermissaoPermissao("Personal").getId());
+        mensagem.setDestinatarioId(Long.valueOf(1));
         Perfil perfil = perfilRepository.findByEmail(principal.getName());
         mensagem.setPerfil(perfil);
         perfil.setMensagens(mensagem);
