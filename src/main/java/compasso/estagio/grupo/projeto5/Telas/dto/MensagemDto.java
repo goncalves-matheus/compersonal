@@ -15,7 +15,6 @@ public class MensagemDto {
         Mensagem mensagem = new Mensagem();
         mensagem.setDataEHorario(datetime);
         mensagem.setTexto(this.corpoDaMensagem);
-        System.out.println(this.corpoDaMensagem);
         return mensagem;
     }
 
@@ -34,6 +33,5 @@ public class MensagemDto {
     public void setDatetime(LocalDateTime datetime) {
         this.datetime = datetime;
     }
-
     
 }

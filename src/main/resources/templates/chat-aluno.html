@@ -13,9 +13,15 @@
         <div class="offcanvas-body small" >
             <form th:object="${mensagemDto}" th:action="@{/mensagem/nova}" method="POST">
                 <div class="card" style="min-height: 270px;">
-                    <label id="instrutor" class="card-body form-control cor-botao align-self-start" style="max-width: 200px;">A última
+                    <div th:each="mensagem : ${mensagens}">
+                        <!-- <label id="instrutor" class="card-body form-control cor-botao align-self-start" style="max-width: 200px;">A última
+                            mensagem do instrutor vem aqui.</label> -->
+                        <label th:text="${mensagem.texto}" id="aluno" class="card-body form-control align-self-end" style="max-width: 200px; color: white; background-color: gray;"></label>
+                    </div>
+                    <!-- <label id="instrutor" class="card-body form-control cor-botao align-self-start" style="max-width: 200px;">A última
                         mensagem do instrutor vem aqui.</label>
-                    <label id="aluno" class="card-body form-control align-self-end" style="max-width: 200px; color: white; background-color: gray;">sua Ãºltima mensagem vem aqui.</label>
+                    <label id="aluno" class="card-body form-control align-self-end" style="max-width: 200px; color: white; background-color: gray;">sua Ãºltima mensagem vem aqui.</label> -->
+                    
                 </div>
                 <div class="d-flex">
                     <input th:field="*{corpoDaMensagem}" th:errorclass="is-invalid" class="form-control align-bottom" placeholder="Deixe uma mensagem">

@@ -19,7 +19,7 @@ public class Perfil {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long Id;
+	private Long id;
 
 	private String primeiroNome;
 
@@ -45,11 +45,11 @@ public class Perfil {
 	}
 
 	public Long getId() {
-		return Id;
+		return id;
 	}
 
 	public void setId(Long id) {
-		Id = id;
+		this.id = id;
 	}
 
 	public String getPrimeiroNome() {
