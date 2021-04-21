@@ -19,6 +19,8 @@ public class Mensagem {
 
     public LocalDateTime dataEHorario = LocalDateTime.now();
 
+    public Long destinatarioId;
+
     @ManyToOne
     private Perfil perfil;
 
@@ -57,6 +59,12 @@ public class Mensagem {
         this.perfil = perfil;
     }
 
+    public Long getDestinatarioId() {
+        return destinatarioId;
+    }
 
+    public void setDestinatarioId(Long destinatarioId) {
+        this.destinatarioId = destinatarioId;
+    }
 
 }
