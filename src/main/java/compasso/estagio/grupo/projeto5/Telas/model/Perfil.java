@@ -1,9 +1,12 @@
 package compasso.estagio.grupo.projeto5.Telas.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
@@ -26,6 +29,9 @@ public class Perfil {
 	private String email;
 
 	private String telefone;
+
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+	private Permissao permissao;
 
 	public String getTelefone() {
 		return telefone;
@@ -81,6 +87,14 @@ public class Perfil {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public Permissao getPermissao() {
+		return permissao;
+	}
+
+	public void setPermissao(Permissao permissao) {
+		this.permissao = permissao;
 	}
 
 }

@@ -45,8 +45,12 @@ public class CalendarioController {
 	}
 
 	@PostMapping("/criar")
-	public String Criar(String inicio, String fim) {
-
+	public String Criar(String inicio, String fim, Principal principal, Model modelo) {
+		
+		Perfil perfil = perfilRepository.findByEmail(principal.getName());
+		modelo.addAttribute("nome", perfil.getPrimeiroNome() + " " + perfil.getUltimoNome());
+		modelo.addAttribute("email", perfil.getEmail());
+		
 		Agenda agenda = new Agenda();
 		agenda.setTitle("Livre");
 		agenda.setColor("#7FFF00");
@@ -54,11 +58,15 @@ public class CalendarioController {
 		agenda.setEnd(fim);
 		repository.save(agenda);
 
-		return "redirect:/calendario";
+		return "calendario";
 	}
 
 	@PostMapping("/agendar")
 	public String Agendar(String nome, String email, String inicio, String fim, Principal principal, Model modelo) {
+		
+		Perfil perfil = perfilRepository.findByEmail(principal.getName());
+		modelo.addAttribute("nome", perfil.getPrimeiroNome() + " " + perfil.getUltimoNome());
+		modelo.addAttribute("email", perfil.getEmail());
 
 		Agenda agenda = repository.findByStart(inicio);
 		if (agenda.getTitle().equals("Livre")) {
@@ -72,7 +80,7 @@ public class CalendarioController {
 			modelo.addAttribute("erro", "Horário indisponível para cadastro");
 		}
 
-		return "redirect:/calendario";
+		return "calendario";
 	}
 
 }

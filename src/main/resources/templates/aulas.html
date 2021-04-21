@@ -29,10 +29,10 @@
 								class="d-flex btn align-items-center text-white text-decoration-none dropdown-toggle"
 								id="dropdownUser1" data-bs-toggle="dropdown"
 								aria-expanded="false">Glúteo</a>
-							<ul class="dropdown-menu shadow" 
-								aria-labelledby="dropdownUser1">
-								<li th:each="gluteo : ${gluteo}"><a class="dropdown-item" th:text="${gluteo.titulo}"
-									th:href="${gluteo.titulo}">Título Gluteo</a></li>
+							<ul class="dropdown-menu shadow" aria-labelledby="dropdownUser1">
+								<li th:each="gluteo : ${gluteo}"><a class="dropdown-item"
+									th:text="${gluteo.titulo}" th:href="${gluteo.titulo}">Título
+										Gluteo</a></li>
 							</ul>
 						</div>
 					</li>
@@ -117,19 +117,19 @@
 							<div class="card-body ">
 								<article class="cor-borda mt-0 background-card">
 									<p th:text="${aula.descricao}">Descrição da Aula</p>
-									<a th:href="${aula.pdf}" target="_blank" class="btn cor-botao">Baixe o
-										material</a>
+									<a th:href="${aula.pdf}" target="_blank" class="btn cor-botao">Baixe
+										o material</a>
 								</article>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-			
+
 		</article>
+		<footer th:replace="~{base::footer}"></footer>
+		<script th:replace="~{base::script}"></script>
 	</div>
-	<footer th:replace="~{base::footer}"></footer>
-	<script th:replace="~{base::script}"></script>
 </body>
 
 </html>

@@ -36,17 +36,18 @@ public class CadastroController {
 
 		Perfil perfil = usuarioDto.toPerfil();
 		Usuario usuario = usuarioDto.toUsuario();
-		perfilRepository.save(perfil);
-
+		
 		Permissao permissao = new Permissao();
 		if(perfil.getEmail().equals("personal@compasso.com")) {
 			permissao.setPermissao("Personal");	
 		} else {
 			permissao.setPermissao("Usuario");
 		}
+		
 		usuario.setPermissao(permissao);
+		perfil.setPermissao(permissao);
 		
-		
+		perfilRepository.save(perfil);
 		usuarioRepository.save(usuario);
 		return "redirect:/";
 	}
