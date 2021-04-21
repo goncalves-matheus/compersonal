@@ -17,7 +17,7 @@
 			<div class="container mt-3 mb-5 p-2">
 				<div class="col-md-12 col-lg-12">
 					<div class="card">
-						<h5 class="card-header ">Seus dados pessoais</h5>
+						<h5 class="card-header">Seus dados pessoais</h5>
 						<form th:object="${perfilDto}" class="card-body mb-0 mt-3 pb-0"
 							th:action="@{/perfil/alterar}" method="POST">
 
@@ -77,91 +77,92 @@
 							</div>
 						</form>
 						<hr class="mb-0 mt-5">
-						<h5 class="card-header mt-0">Informações Adicionais</h5>
-						<form class="needs-validation card-body mt-3 pb-0" novalidate
-							th:action="@{/perfil/informacoes}" method="POST">
 
-							<div class="row g-3">
-								<div class="col-sm-6">
-									<div class="col-12">
-										<label for="altura" class="form-label">Altura</label>
-										<div class="row">
-											<div class="col-5 pe-0">
-												<input type="text" class="form-control"
-													placeholder="Sua Altura">
+						<h4 class="mb-4 card-header">Informações Adicionais</h4>
+						<form>
+							<div class="container">
+								<div class="row g-3">
+									<div class="col-sm-6">
+										<div class="col-12">
+											<label for="altura" class="form-label">Altura</label>
+											<div class="row">
+												<div class="col-5 pe-0">
+													<input type="text" class="form-control"
+														placeholder="Sua Altura">
+												</div>
+												<span class="col-7 mt-1 ps-1">m</span>
+												<div class="invalid-feedback">Altura inválida, apenas
+													números permitidos!</div>
 											</div>
-											<span class="col-7 mt-1 ps-1">m</span>
-											<div class="invalid-feedback">Altura inválida, apenas
-												números permitidos!</div>
+										</div>
+
+										<div class="col-12 mt-1">
+											<label for="peso" class="form-label">Peso</label>
+											<div class="row">
+												<div class="col-5 pe-0">
+													<input type="text" class="form-control"
+														placeholder="Seu peso">
+												</div>
+												<span class="col-7 mt-1 ps-1">kg</span>
+												<div class="invalid-feedback">Por favor, digite um
+													peso válido!</div>
+											</div>
 										</div>
 									</div>
 
-									<div class="col-12 mt-1">
-										<label for="peso" class="form-label">Peso</label>
-										<div class="row">
-											<div class="col-5 pe-0">
-												<input type="text" class="form-control"
-													placeholder="Seu peso">
-											</div>
-											<span class="col-7 mt-1 ps-1">kg</span>
-											<div class="invalid-feedback">Por favor, digite um peso
-												válido!</div>
-										</div>
-									</div>
-								</div>
+									<div class="col-sm-6 ">
+										<h5>Sexo</h5>
+										<select class="form-select col-6" name="sexo"
+											aria-label="Default select example">
+											<option selected>Escolha...</option>
+											<option value="Masculino">Masculino</option>
+											<option value="Feminino">Feminino</option>
+											<option value="Trans">Trans</option>
+											<option value="Outros">Outros</option>
+											<option value="Sem sexo definido">Não se identificar</option>
+										</select>
 
-								<div class="col-sm-6 ">
-									<h5>Sexo</h5>
-									<div class="btn-group btn-group-toggle" unchecked
-										data-toggle="buttons">
+										<div class="mt-2 mb-3">
+											<script language="javascript">
+												function habilitacao() {
+													if (document
+															.getElementById('sim').checked == true) {
+														document
+																.getElementById('qual').disabled = false;
 
-										<label class="btn btn-outline-light active"> <input
-											type="radio" value="masculino"> Masculino
-										</label> <label class="btn btn-outline-light active"> <input
-											type="radio" value="feminino"> Feminino
-										</label>
-									</div>
-
-									<div class="mt-2 mb-3">
-										<script language="javascript">
-											function habilitacao() {
-												if (document
-														.getElementById('sim').checked == true) {
-													document
-															.getElementById('qual').disabled = false;
-
+													}
+													if (document
+															.getElementById('sim').checked == false) {
+														document
+																.getElementById('qual').disabled = true;
+													}
 												}
-												if (document
-														.getElementById('sim').checked == false) {
-													document
-															.getElementById('qual').disabled = true;
-												}
-											}
-										</script>
+											</script>
 
-										<h5 class="mt-4">Você possui algum problema de saúde?</h5>
-										<label for="radio4" class="radio-inline"> <input
-											type="radio" name="optionsRadiosInline" id="sim"
-											onClick="habilitacao()" value="sim"> Sim
-										</label> <label class="radio-inline"> <input type="radio"
-											name="optionsRadiosInline" id="nao" value="nao"
-											onClick="habilitacao()" unchecked> Não
-										</label>
-
-										<div class="form-group mt-2">
-											<label>Qual? <input style="width: 300px;" type="text"
-												class="form-group" id="qual">
+											<h5 class="mt-4">Você possui algum problema de saúde?</h5>
+											<label for="radio4" class="radio-inline"> <input
+												type="radio" name="optionsRadiosInline" id="sim"
+												onClick="habilitacao()" value="sim"> Sim
+											</label> <label class="radio-inline"> <input type="radio"
+												name="optionsRadiosInline" id="nao" value="nao"
+												onClick="habilitacao()" unchecked> Não
 											</label>
+
+											<div class="form-group mt-2">
+												<label>Qual? <input style="width: 300px;"
+													type="text" class="form-group" id="qual">
+												</label>
+											</div>
 										</div>
+
+
+
 									</div>
-
-
-
-								</div>
-								<hr class="my-4">
-								<div class="d-flex justify-content-center">
-									<button class="w-25 btn btn-md cor-botao mb-5" type="submit">Salvar
-										informações pessoais</button>
+									<hr class="my-4">
+									<div class="d-flex justify-content-center">
+										<button class="w-25 btn btn-md cor-botao mb-5" type="submit">Salvar
+											informações pessoais</button>
+									</div>
 								</div>
 							</div>
 						</form>
@@ -205,11 +206,11 @@
 					</div>
 				</div>
 			</div>
-
 		</article>
 
 		<footer th:replace="~{base::footer}"></footer>
 		<script th:replace="~{base::script}"></script>
 	</div>
 </body>
+
 </html>

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<meta charset="UTF-8">
+
+<!-- Tópico 3, preview 3.1, 3.4 -->
+
+<head th:replace="~{base::head(Calendario)}"></head>
+
+<body class="background">
+	<div class="geral">
+		<nav th:replace="~{base::navbar}"></nav>
+
+		<article class="d-flex align-items-stretch">
+			<div th:replace="~{base::sidebar}"></div>
+			<div class="container">
+				<div th:if="${erro}!=null" class="mt-2 alert alert-danger alert-dismissible fade show"
+					role="alert">
+					<span th:text="${erro}"></span>
+					<button type="button" class="btn-close" data-bs-dismiss="alert"
+						aria-label="Close"></button>
+				</div>
+				<div id='calendar' class="bg-light mt-3 mb-5 ms-5 p-3 "></div>
+			</div>
+
+		</article>
+
+		<div sec:authorize="hasAnyAuthority('Personal')" class="modal fade"
+			id="agendar" tabindex="-1" aria-labelledby="exampleModalLabel"
+			aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">Marcação:</h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal"
+							aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<form th:action="@{/calendario/criar}" method="POST">
+							<div class="mb-3">
+								<label for="aluno" class="form-label">Inicio: </label> <span
+									id="start"> </span> <input type="hidden" name="inicio"
+									class="form-control" id="start">
+							</div>
+							<div class="mb-3">
+								<label for="aluno" class="form-label">Fim: </label> <span
+									id="end"></span> <input type="hidden" name="fim"
+									class="form-control" id="end">
+							</div>
+							<button type="submit" class="btn cor-botao">Marcar</button>
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary"
+							data-bs-dismiss="modal">Fechar</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div sec:authorize="hasAnyAuthority('Personal')" class="modal fade"
+			id="visualizar" tabindex="-1" aria-labelledby="exampleModalLabel"
+			aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">Horário
+							Marcado:</h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal"
+							aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<div class="mb-3">
+							<label class="form-label">Aluno: </label> <span id="aluno"></span>
+						</div>
+						<div class="mb-3">
+							<label class="form-label">Email: </label> <span id="email"></span>
+						</div>
+						<div class="mb-3">
+							<label class="form-label">Inicio: </label> <span id="start"></span>
+						</div>
+						<div class="mb-3">
+							<label class="form-label">Fim: </label> <span id="end"></span>
+						</div>
+
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary"
+							data-bs-dismiss="modal">Fechar</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div sec:authorize="hasAnyAuthority('Usuario')" class="modal fade"
+			id="visualizar" tabindex="-1" aria-labelledby="exampleModalLabel"
+			aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">Faça seu
+							agendamento:</h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal"
+							aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<form th:action="@{/calendario/agendar}" method="POST">
+							<div class="mb-3">
+								<label for="aluno" class="form-label">Inicio: </label><span
+									id="start"></span> <input type="hidden" name="inicio"
+									class="form-control" id="start">
+							</div>
+							<div class="mb-3">
+								<label for="aluno" class="form-label">Fim: </label><span
+									id="end"></span> <input type="hidden" name="fim"
+									class="form-control" id="end">
+							</div>
+							<button type="submit" class="btn cor-botao">Agendar</button>
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary"
+							data-bs-dismiss="modal">Fechar</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<footer th:replace="~{base::footer}"></footer>
+		<script th:replace="~{base::script}"></script>
+		<div th:replace="~{base::calendar}"></div>
+	</div>
+</body>
+
+</html>

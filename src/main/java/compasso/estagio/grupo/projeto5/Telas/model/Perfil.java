@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
@@ -35,6 +36,9 @@ public class Perfil {
 
 	@OneToMany(mappedBy = "perfil", fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
 	private List<Mensagem> mensagens = new ArrayList<Mensagem>();
+	
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+	private Permissao permissao;
 
 	public String getTelefone() {
 		return telefone;
@@ -99,5 +103,12 @@ public class Perfil {
     public void setMensagens(Mensagem mensagem) {
         this.mensagens.add(mensagem);
     }
+	public Permissao getPermissao() {
+		return permissao;
+	}
+
+	public void setPermissao(Permissao permissao) {
+		this.permissao = permissao;
+	}
 
 }

@@ -7,7 +7,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-
 import compasso.estagio.grupo.projeto5.Telas.Service.Autenticador;
 
 @Configuration
@@ -20,10 +19,10 @@ public class Seguranca extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 
-		http.authorizeRequests().antMatchers("/*.css", "/*.jpeg").permitAll()
+		http.authorizeRequests().antMatchers("/*.css", "/*.jpeg","/*.js").permitAll()
 				.antMatchers("/", "/recuperar/**","/cadastro", "/cadastro/*", "/planos").permitAll()
 				.antMatchers("/dashboard/aluno").hasAuthority("Usuario")
-				.antMatchers("/dashboard/personal").hasAuthority("Personal")
+				.antMatchers("/dashboard/personal","/inseriraula/**","/alunos").hasAuthority("Personal")
 				.anyRequest().authenticated()
 				.and()
 				.formLogin(form -> form.loginPage("/login").permitAll().defaultSuccessUrl("/", true))

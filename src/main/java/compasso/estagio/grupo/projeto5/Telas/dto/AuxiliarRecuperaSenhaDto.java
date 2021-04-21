@@ -5,8 +5,6 @@ public class AuxiliarRecuperaSenhaDto {
     public String email;
     public String codigo;
 
-
-
     public AuxiliarRecuperaSenhaDto(String email, String codigo) {
         this.email = email;
         this.codigo = codigo;

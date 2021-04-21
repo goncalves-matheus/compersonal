@@ -1,9 +1,7 @@
 package compasso.estagio.grupo.projeto5.Telas.dto;
 
 import javax.validation.constraints.NotBlank;
-
 import org.hibernate.validator.constraints.Length;
-
 import compasso.estagio.grupo.projeto5.Telas.model.Aula;
 
 public class AulaDto {

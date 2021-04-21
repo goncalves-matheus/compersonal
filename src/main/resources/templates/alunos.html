@@ -11,34 +11,40 @@
 		<article class="d-flex align-items-stretch">
 
 			<div th:replace="~{base::sidebar}"></div>
-
-			<div class="p-5">
-				<div class="card mb-3" th:each="estudante : ${estudantes}">
-					<div class="row g-0">
-						<div class="col-md-3">
-							<a href="#"><img class="img-thumbnail"
-								src="https://images.pexels.com/photos/1552242/pexels-photo-1552242.jpeg?cs=srgb&dl=pexels-leon-ardho-1552242.jpg&fm=jpg "
-								alt="..."></a>
-						</div>
-						<div class="col-md-9">
-							<div class="card-body">
-								<a href="#" class="link-dark">
-									<h5 class="card-title">Aluno(a) </h5>
-								</a>
-								<div>
-									<h5 class="card-title largura">Nome:</h5>
-                                	<h5 class="card-text largura" th:text="${estudante.primeiroNome}">Nome:</h5>
-									<h5 class="card-text largura" th:text="${estudante.ultimoNome}">Último Nome:</h5>
+			<div class="container">
+				<div class="p-5">
+					<div class="row d-flex justify-content-between">
+						<div class="card mb-3 row col-lg-6"
+							th:each="estudante : ${estudantes}">
+							<div class="row g-0">
+								<div class="col-md-3">
+									<a href="#"><img class="img-thumbnail"
+										src="https://images.pexels.com/photos/1552242/pexels-photo-1552242.jpeg?cs=srgb&dl=pexels-leon-ardho-1552242.jpg&fm=jpg "
+										alt="..."></a>
 								</div>
-								<div>
-									<h5 class="card-title largura">Email:</h5>
-									<h5 class="card-text largura" th:text="${estudante.email}">Email:</h5>
+								<div class="col-md-9">
+									<div class="card-body">
+										<a href="#" class="link-dark">
+											<h5 class="card-title">Aluno(a)</h5>
+										</a>
+										<div>
+											<h5 class="card-title largura">Nome:</h5>
+											<p class="card-text largura"
+												th:text="${estudante.primeiroNome}">Nome:</p>
+											<p class="card-text largura"
+												th:text="${estudante.ultimoNome}">Último Nome:</p>
+										</div>
+										<div>
+											<h5 class="card-title largura">Email:</h5>
+											<p class="card-text largura" th:text="${estudante.email}">Email:</p>
+										</div>
+										<div>
+											<h5 class="card-title largura">Telefone:</h5>
+											<p class="card-text largura" th:text="${estudante.telefone}">Telefone:</p>
+										</div>
+										<!--<a class="card-text btn cor-botao">Baixe o material</a>-->
+									</div>
 								</div>
-								<div>
-									<h5 class="card-title largura">Telefone:</h5>
-									<h5 class="card-text largura" th:text="${estudante.telefone}">Telefone:</h5>
-								</div>
-								<!--<a class="card-text btn cor-botao">Baixe o material</a>-->
 							</div>
 						</div>
 					</div>

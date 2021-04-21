@@ -3,13 +3,15 @@ package compasso.estagio.grupo.projeto5.Telas.model;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -27,12 +29,14 @@ public class Usuario implements UserDetails {
 
 	private String senha;
 
-	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
-	private List<Permissao> permissao = new ArrayList<Permissao>();
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+	private Permissao permissao;
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return permissao;
+		List<Permissao> permissoes = new ArrayList<Permissao>();
+		permissoes.add(permissao);
+		return permissoes;
 	}
 
 	@Override
@@ -91,12 +95,12 @@ public class Usuario implements UserDetails {
 		this.senha = senha;
 	}
 
-	public List<Permissao> getPermissao() {
+	public Permissao getPermissao() {
 		return permissao;
 	}
 
 	public void setPermissao(Permissao permissao) {
-		this.permissao.add(permissao);
+		this.permissao = permissao;
 	}
 
 }

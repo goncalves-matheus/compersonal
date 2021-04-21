@@ -1,7 +1,6 @@
 package compasso.estagio.grupo.projeto5.Telas.security.recuperacao;
 
 import java.util.Random;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
