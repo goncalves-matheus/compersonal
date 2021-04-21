@@ -26,6 +26,43 @@ public class Perfil {
 	private String email;
 
 	private String telefone;
+	
+	private String altura;
+	private String peso;
+	private String sexo;
+	private String problemaDeSaude;
+
+	public String getAltura() {
+		return altura;
+	}
+
+	public void setAltura(String altura) {
+		this.altura = altura;
+	}
+
+	public String getPeso() {
+		return peso;
+	}
+
+	public void setPeso(String peso) {
+		this.peso = peso;
+	}
+
+	public String getSexo() {
+		return sexo;
+	}
+
+	public void setSexo(String sexo) {
+		this.sexo = sexo;
+	}
+
+	public String getProblemaDeSaude() {
+		return problemaDeSaude;
+	}
+
+	public void setProblemaDeSaude(String problemaDeSaude) {
+		this.problemaDeSaude = problemaDeSaude;
+	}
 
 	public String getTelefone() {
 		return telefone;

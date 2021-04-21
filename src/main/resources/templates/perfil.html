@@ -43,7 +43,7 @@
 								<div class="col-sm-6">
 									<label for="ultimoNome" class="form-label">Sobrenome</label> <input
 										th:field="*{ultimoNome}" type="text" class="form-control"
-										th:errorclass="is-invalid" th.value="${perfil.ultimoNome}"
+										th:errorclass="is-invalid" th:value="${perfil.ultimoNome}"
 										required>
 									<div class="invalid-feedback" th:errors="*{ultimoNome}">Sobrenome
 										inválido!</div>
@@ -79,19 +79,23 @@
 						<hr class="mb-0 mt-5">
 
 						<h4 class="mb-4 card-header">Informações Adicionais</h4>
-						<form>
+						<form th:object="${infoAdDto}" 
+							  th:action="@{/perfil/alterarInfo}" method="POST">
 							<div class="container">
 								<div class="row g-3">
 									<div class="col-sm-6">
 										<div class="col-12">
 											<label for="altura" class="form-label">Altura</label>
 											<div class="row">
-												<div class="col-5 pe-0">
-													<input type="text" class="form-control"
-														placeholder="Sua Altura">
+												<div class="col-5 pe-0"> <input 
+													th:field="*{altura}"
+													type="text"
+													class="form-control" 
+													th:value="${infoAd.altura} ?: 'Altura'" 
+													required>
 												</div>
 												<span class="col-7 mt-1 ps-1">m</span>
-												<div class="invalid-feedback">Altura inválida, apenas
+												<div class="invalid-feedback"  >Altura inválida, apenas
 													números permitidos!</div>
 											</div>
 										</div>
@@ -100,8 +104,9 @@
 											<label for="peso" class="form-label">Peso</label>
 											<div class="row">
 												<div class="col-5 pe-0">
-													<input type="text" class="form-control"
-														placeholder="Seu peso">
+													<input  class="form-control" type="text"
+															th:value="${infoAd.peso}"
+															>
 												</div>
 												<span class="col-7 mt-1 ps-1">kg</span>
 												<div class="invalid-feedback">Por favor, digite um
@@ -114,12 +119,10 @@
 										<h5>Sexo</h5>
 										<select class="form-select col-6" name="sexo"
 											aria-label="Default select example">
-											<option selected>Escolha...</option>
-											<option value="Masculino">Masculino</option>
-											<option value="Feminino">Feminino</option>
-											<option value="Trans">Trans</option>
-											<option value="Outros">Outros</option>
-											<option value="Sem sexo definido">Não se identificar</option>
+											<option th:each= "infoAd.sexo : ${sexo}"
+													th:value= "${infoAd.sexo}"
+													selected th:text="${infoAd.sexo} ?: 'Escolha...'"  
+													/>
 										</select>
 
 										<div class="mt-2 mb-3">
@@ -150,7 +153,8 @@
 
 											<div class="form-group mt-2">
 												<label>Qual? <input style="width: 300px;"
-													type="text" class="form-group" id="qual">
+													type="text" class="form-group" id="qual"
+													th:value="${infoAd.problemaDeSaude}">
 												</label>
 											</div>
 										</div>
