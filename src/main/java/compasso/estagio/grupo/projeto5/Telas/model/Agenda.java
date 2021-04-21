@@ -14,6 +14,7 @@ public class Agenda {
 
 	private String title;
 	private String aluno;
+	private String email;
 	private String color;
 	private String start;
 	private String end;
@@ -64,6 +65,14 @@ public class Agenda {
 
 	public void setColor(String color) {
 		this.color = color;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 }

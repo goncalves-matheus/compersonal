@@ -13,7 +13,12 @@
 		<article class="d-flex align-items-stretch">
 			<div th:replace="~{base::sidebar}"></div>
 			<div class="container">
-				<div class="alert bg-danger" th:text="${erro}"></div>
+				<div th:if="${erro}!=null" class="mt-2 alert alert-danger alert-dismissible fade show"
+					role="alert">
+					<span th:text="${erro}"></span>
+					<button type="button" class="btn-close" data-bs-dismiss="alert"
+						aria-label="Close"></button>
+				</div>
 				<div id='calendar' class="bg-light mt-3 mb-5 ms-5 p-3 "></div>
 			</div>
 
@@ -32,12 +37,14 @@
 					<div class="modal-body">
 						<form th:action="@{/calendario/criar}" method="POST">
 							<div class="mb-3">
-								<label for="aluno" class="form-label">Inicio: </label> <span id="start"> </span> <input
-									type="hidden" name="inicio" class="form-control" id="start">
+								<label for="aluno" class="form-label">Inicio: </label> <span
+									id="start"> </span> <input type="hidden" name="inicio"
+									class="form-control" id="start">
 							</div>
 							<div class="mb-3">
-								<label for="aluno" class="form-label">Fim: </label> <span id="end"></span> <input
-									type="hidden" name="fim" class="form-control" id="end">
+								<label for="aluno" class="form-label">Fim: </label> <span
+									id="end"></span> <input type="hidden" name="fim"
+									class="form-control" id="end">
 							</div>
 							<button type="submit" class="btn cor-botao">Marcar</button>
 						</form>
@@ -64,6 +71,9 @@
 					<div class="modal-body">
 						<div class="mb-3">
 							<label class="form-label">Aluno: </label> <span id="aluno"></span>
+						</div>
+						<div class="mb-3">
+							<label class="form-label">Email: </label> <span id="email"></span>
 						</div>
 						<div class="mb-3">
 							<label class="form-label">Inicio: </label> <span id="start"></span>
@@ -94,15 +104,6 @@
 					</div>
 					<div class="modal-body">
 						<form th:action="@{/calendario/agendar}" method="POST">
-							<div class="mb-3">
-								<label for="aluno" class="form-label">Nome: </label> <input
-									type="text" name="nome" th:value="${nome}" class="form-control">
-							</div>
-							<div class="mb-3">
-								<label for="aluno" class="form-label">Email: </label> <input
-									type="text" name="email" th:value="${email}"
-									class="form-control">
-							</div>
 							<div class="mb-3">
 								<label for="aluno" class="form-label">Inicio: </label><span
 									id="start"></span> <input type="hidden" name="inicio"

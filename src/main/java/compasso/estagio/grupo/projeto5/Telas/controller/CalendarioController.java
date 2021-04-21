@@ -19,68 +19,65 @@ import compasso.estagio.grupo.projeto5.Telas.repository.PerfilRepository;
 @Controller
 @RequestMapping("/calendario")
 public class CalendarioController {
+	
+	private int aux;
 
 	@Autowired
-	private AgendaRepositoy repository;
+	private AgendaRepositoy agendaRepository;
 
 	@Autowired
 	private PerfilRepository perfilRepository;
 
 	@GetMapping
-	public String MontaAgenda(Principal principal, Model modelo) {
+	public String MontaAgenda(Model modelo) {
 
-		Perfil perfil = perfilRepository.findByEmail(principal.getName());
-		modelo.addAttribute("nome", perfil.getPrimeiroNome() + " " + perfil.getUltimoNome());
-		modelo.addAttribute("email", perfil.getEmail());
-
+		if(aux>0) {
+			modelo.addAttribute("erro", "Horário indisponível");
+			aux=0;
+		}
+		
 		return "calendario";
 	}
 
 	@GetMapping(value = "/getEventos.json")
 	public @ResponseBody List<Agenda> GetEventos() {
 
-		List<Agenda> eventos = repository.findAll();
+		List<Agenda> eventos = agendaRepository.findAll();
 		return eventos;
 
 	}
 
 	@PostMapping("/criar")
-	public String Criar(String inicio, String fim, Principal principal, Model modelo) {
-		
-		Perfil perfil = perfilRepository.findByEmail(principal.getName());
-		modelo.addAttribute("nome", perfil.getPrimeiroNome() + " " + perfil.getUltimoNome());
-		modelo.addAttribute("email", perfil.getEmail());
+	public String Criar(String inicio, String fim) {
 		
 		Agenda agenda = new Agenda();
 		agenda.setTitle("Livre");
 		agenda.setColor("#7FFF00");
 		agenda.setStart(inicio);
 		agenda.setEnd(fim);
-		repository.save(agenda);
+		agendaRepository.save(agenda);
 
-		return "calendario";
+		return "redirect:/calendario";
 	}
 
 	@PostMapping("/agendar")
-	public String Agendar(String nome, String email, String inicio, String fim, Principal principal, Model modelo) {
-		
-		Perfil perfil = perfilRepository.findByEmail(principal.getName());
-		modelo.addAttribute("nome", perfil.getPrimeiroNome() + " " + perfil.getUltimoNome());
-		modelo.addAttribute("email", perfil.getEmail());
+	public String Agendar(String inicio, String fim, Principal principal) {
 
-		Agenda agenda = repository.findByStart(inicio);
+		Perfil aluno = perfilRepository.findByEmail(principal.getName());
+		Agenda agenda = agendaRepository.findByStart(inicio);
 		if (agenda.getTitle().equals("Livre")) {
 			agenda.setTitle("Ocupado");
-			agenda.setAluno(nome);
+			agenda.setAluno(aluno.getPrimeiroNome()+" "+aluno.getUltimoNome());
+			agenda.setEmail(aluno.getEmail());
 			agenda.setColor("#FF6347");
 			agenda.setStart(inicio);
 			agenda.setEnd(fim);
-			repository.save(agenda);
+			agendaRepository.save(agenda);
 		}else {
-			modelo.addAttribute("erro", "Horário indisponível para cadastro");
+			aux++;
 		}
 
-		return "calendario";
+		return "redirect:/calendario";
 	}
 
 }
