@@ -8,6 +8,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import compasso.estagio.grupo.projeto5.Telas.dto.InformacaoAdicionalDto;
 import compasso.estagio.grupo.projeto5.Telas.dto.UsuarioDto;
 import compasso.estagio.grupo.projeto5.Telas.model.Perfil;
 import compasso.estagio.grupo.projeto5.Telas.repository.PerfilRepository;
@@ -34,6 +36,13 @@ public class AlunosController {
 	@GetMapping("/perfil/{email}")
 	public String uuniPerfil(@PathVariable("email") String email, Model modelo) {
 		UsuarioDto u = UsuarioDto.converte(repository.findByEmail(email));
+		if(repository.findByEmail(email).getInformacao()!=null) {
+			InformacaoAdicionalDto info = new InformacaoAdicionalDto();
+			info.toInformacaoAdicionalDto(repository.findByEmail(email).getInformacao());
+			modelo.addAttribute("info", info);
+		} else {
+			modelo.addAttribute("info", null);
+		}
 		modelo.addAttribute("aluno", u);
 		return "uniPerfil";
 	}

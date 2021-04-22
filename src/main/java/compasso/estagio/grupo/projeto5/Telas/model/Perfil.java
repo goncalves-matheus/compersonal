@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
@@ -28,54 +29,34 @@ public class Perfil {
 
 	private String senha;
 
-	private String confirmacaoSenha;
-
 	private String email;
 
 	private String telefone;
-	
-	private String altura;
-	private String peso;
-	private String genero;
-	private String problemaDeSaude;
 
-	public String getAltura() {
-		return altura;
-	}
-
-	public void setAltura(String altura) {
-		this.altura = altura;
-	}
-
-	public String getPeso() {
-		return peso;
-	}
-
-	public void setPeso(String peso) {
-		this.peso = peso;
-	}
-
-	public String getGenero() {
-		return genero;
-	}
-
-	public void setGenero(String sexo) {
-		this.genero = sexo;
-	}
-
-	public String getProblemaDeSaude() {
-		return problemaDeSaude;
-	}
-
-	public void setProblemaDeSaude(String problemaDeSaude) {
-		this.problemaDeSaude = problemaDeSaude;
-	}
+	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+	private Informacoes informacao;
 
 	@OneToMany(mappedBy = "perfil", fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
 	private List<Mensagem> mensagens = new ArrayList<Mensagem>();
-	
+
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
 	private Permissao permissao;
+
+	public Informacoes getInformacao() {
+		return informacao;
+	}
+
+	public void setInformacao(Informacoes informacao) {
+		this.informacao = new Informacoes();
+		this.informacao.setAltura(informacao.getAltura());
+		this.informacao.setGenero(informacao.getGenero());
+		this.informacao.setPeso(informacao.getPeso());
+		this.informacao.setProblemaDeSaude(informacao.getProblemaDeSaude());
+	}
+
+	public void setMensagens(List<Mensagem> mensagens) {
+		this.mensagens = mensagens;
+	}
 
 	public String getTelefone() {
 		return telefone;
@@ -117,14 +98,6 @@ public class Perfil {
 		this.senha = senha;
 	}
 
-	public String getConfirmacaoSenha() {
-		return confirmacaoSenha;
-	}
-
-	public void setConfirmacaoSenha(String confirmacaoSenha) {
-		this.confirmacaoSenha = confirmacaoSenha;
-	}
-
 	public String getEmail() {
 		return email;
 	}
@@ -134,12 +107,13 @@ public class Perfil {
 	}
 
 	public List<Mensagem> getMensagens() {
-        return mensagens;
-    }
+		return mensagens;
+	}
 
-    public void setMensagens(Mensagem mensagem) {
-        this.mensagens.add(mensagem);
-    }
+	public void setMensagens(Mensagem mensagem) {
+		this.mensagens.add(mensagem);
+	}
+
 	public Permissao getPermissao() {
 		return permissao;
 	}

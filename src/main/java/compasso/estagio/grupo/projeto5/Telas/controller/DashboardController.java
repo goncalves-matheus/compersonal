@@ -30,6 +30,11 @@ public class DashboardController {
 		return "dashboard_aluno";
 	}
 
+	@GetMapping("/aulas")
+	public String ultimaAula() {
+		return "redirect:/aulas/"+aulaRepository.findAll().get(aulaRepository.findAll().size()-1).getTitulo();
+	}
+	
 	@GetMapping("/{titulo}")
 	public String aulaSelecionada(@PathVariable String titulo) {
 		return "redirect:/aulas/{titulo}";
@@ -37,7 +42,7 @@ public class DashboardController {
 
 	@GetMapping("/personal")
 	public String personal() {
-		return "dashboard_personal";
+		return "redirect:/alunos";
 	}
 
 }

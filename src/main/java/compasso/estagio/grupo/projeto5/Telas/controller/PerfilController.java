@@ -1,10 +1,9 @@
 package compasso.estagio.grupo.projeto5.Telas.controller;
 
 import java.security.Principal;
-import java.util.Arrays;
-import java.util.List;
 
 import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import compasso.estagio.grupo.projeto5.Telas.dto.InformacaoAdicionalDto;
 import compasso.estagio.grupo.projeto5.Telas.dto.PerfilDto;
-import compasso.estagio.grupo.projeto5.Telas.model.Genero;
+import compasso.estagio.grupo.projeto5.Telas.model.Informacoes;
 import compasso.estagio.grupo.projeto5.Telas.model.Perfil;
 import compasso.estagio.grupo.projeto5.Telas.repository.PerfilRepository;
 
@@ -32,17 +31,10 @@ public class PerfilController {
 		perfilDto = perfilDto.toPerfilDto(repository.findByEmail(principal.getName()));
 		modelo.addAttribute("perfil", perfilDto);
 		modelo.addAttribute("email", principal.getName());
-		
-		infoAdDto = infoAdDto.toInformacaoAdicionalDto(repository.findByEmail(principal.getName()));
+		if(repository.findByEmail(principal.getName()).getInformacao()!=null) {
+		infoAdDto = infoAdDto.toInformacaoAdicionalDto(repository.findByEmail(principal.getName()).getInformacao());
 		modelo.addAttribute("infoAd", infoAdDto);
-		
-		List<Genero> ls = Arrays.asList(new Genero( 1L, "Masculino"), new Genero( 2L, "Feminino"), new Genero( 3L, "Não Binário"), new Genero( 4L, "Outros"), new Genero( 5L, "Não se identificar"));
-		if(!infoAdDto.getGenero().isEmpty()) {
-			String po = infoAdDto.getGenero();
-			Genero generoSelecionado = (Genero)ls.stream().filter(Genero -> Genero.getNome().equals(po));
-			modelo.addAttribute("selecionado", generoSelecionado);
 		}
-		modelo.addAttribute("ls", ls);
 				
 		return "perfil";
 	}
@@ -63,17 +55,14 @@ public class PerfilController {
 	}
 	
 	@PostMapping("/alterarInfo")
-	public String alterarInfo( InformacaoAdicionalDto infoAdDto, BindingResult result, Principal principal) {
+	public String alterarInfo(@Valid InformacaoAdicionalDto infoAdDto, BindingResult result, Principal principal) {
 		
 		if(result.hasErrors()) {
 			return "perfil";
 		}
-		
+		Informacoes informacao = new Informacoes();
 		Perfil perfil = repository.findByEmail(principal.getName());
-		perfil.setAltura(infoAdDto.getAltura());
-		perfil.setPeso(infoAdDto.getPeso());
-		perfil.setGenero(infoAdDto.getGenero());
-		perfil.setProblemaDeSaude(infoAdDto.getProblemaDeSaude());
+		perfil.setInformacao(infoAdDto.toInformacoes(informacao));
 		repository.save(perfil);
 
 		return "redirect:/perfil";

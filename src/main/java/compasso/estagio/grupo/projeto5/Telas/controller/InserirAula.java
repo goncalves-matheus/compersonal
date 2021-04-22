@@ -31,6 +31,7 @@ public class InserirAula {
 		}
 
 		Aula aula = aulaDto.toAula();
+		aula.setVideo(aula.getVideo().replace("watch?v=", "embed/"));
 
 		switch (aulaDto.getTipo()) {
 			case "Glúteo":

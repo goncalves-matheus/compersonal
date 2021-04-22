@@ -41,7 +41,6 @@ public class UsuarioDto {
 		this.primeiroNome = p.getPrimeiroNome();
 		this.ultimoNome = p.getUltimoNome();
 		this.senha = p.getSenha();
-		this.confirmacaoSenha = p.getConfirmacaoSenha();
 		this.email = p.getEmail();
 		this.telefone = p.getTelefone();
 	}

@@ -24,7 +24,7 @@
 	<nav th:fragment="navbar"
 		class="navbar navbar-expand-lg navbar-light p-1 background-navbar">
 		<div class="container-fluid">
-			<a class="navbar-brand text-light" href="#">Título</a>
+			<a class="navbar-brand text-light">Compersonal</a>
 			<button class="navbar-toggler" type="button"
 				data-bs-toggle="collapse" data-bs-target="#navbarNav"
 				aria-controls="navbarNav" aria-expanded="false"
@@ -42,7 +42,7 @@
 						sec:authorize="hasAnyAuthority('Personal')"
 						href="/dashboard/personal">Dashboard</a></li>
 					<li class="nav-item"><a class="nav-link text-light"
-						href="/planos">Planos</a></li>
+						sec:authorize="!hasAnyAuthority('Personal')" href="/planos">Planos</a></li>
 					<li class="nav-item"><a class="nav-link text-light"
 						sec:authorize="isAuthenticated()" href="/perfil">Meu Perfil</a></li>
 					<li class="nav-item"><a class="nav-link text-light"
@@ -77,7 +77,7 @@
 			<div class="d-flex flex-column p-3 text-white bg-dark"
 				style="min-width: 250px; height: 60vh; position: relative">
 
-				<a href="/"
+				<a
 					class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
 					<svg class="bi me-2" width="40" height="32">
 				<use xlink:href="#bootstrap" />
@@ -85,7 +85,8 @@
 				</a>
 				<hr>
 				<ul class="nav nav-pills flex-column mb-auto sidebar">
-					<li><a href="/calendario" sec:authorize="hasAnyAuthority('Usuario')"
+					<li><a href="/calendario"
+						sec:authorize="hasAnyAuthority('Usuario')"
 						class="nav-link text-white"><svg class="bi me-2" width="16"
 								height="16"></svg>Agendar Aula</a></li>
 					<li><a href="/calendario"
@@ -100,22 +101,10 @@
 						class="nav-link text-white"><svg class="bi me-2" width="16"
 								height="16"></svg>Criar Aula</a></li>
 					<hr sec:authorize="hasAnyAuthority('Usuario')">
-					<li>
-						<div sec:authorize="hasAnyAuthority('Usuario')"
-							class="dropdown bi me-2  text-white" width="16" height="16">
-							<a href="#"
-								class="d-flex btn align-items-center text-white text-decoration-none dropdown-toggle"
-								id="dropdownUser1" data-bs-toggle="dropdown"
-								aria-expanded="false">Minhas Aulas</a>
-							<ul class="dropdown-menu dropdown-menu-dark text-small shadow"
-								aria-labelledby="dropdownUser1">
-								<li><a class="dropdown-item" href="#">Aula 01</a></li>
-								<li><a class="dropdown-item" href="#">Aula 02</a></li>
-								<li><a class="dropdown-item" href="#">Aula 03</a></li>
-								<li><a class="dropdown-item" href="#">Aula 04</a></li>
-							</ul>
-						</div>
-					</li>
+					<li><a href="/dashboard/aulas"
+						sec:authorize="hasAnyAuthority('Usuario')"
+						class="d-flex btn align-items-center text-white text-decoration-none">Minhas
+							Aulas</a></li>
 					<hr>
 					<li>
 						<div class="dropdown">
@@ -185,8 +174,10 @@
 													select : function(start,
 															end) {
 														$('#agendar #start')
-																.val(moment(start));
-														$('#agendar #end').val(moment(end));
+																.val(
+																		moment(start));
+														$('#agendar #end').val(
+																moment(end));
 														$('#agendar #start')
 																.text(
 																		start
@@ -207,8 +198,8 @@
 																.text(
 																		event.aluno);
 														$('#visualizar #email')
-														.text(
-																event.email);
+																.text(
+																		event.email);
 														$('#visualizar #start')
 																.text(
 																		event.start

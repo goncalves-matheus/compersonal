@@ -1,12 +1,14 @@
 package compasso.estagio.grupo.projeto5.Telas.controller;
 
 import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
 import compasso.estagio.grupo.projeto5.Telas.dto.UsuarioDto;
 import compasso.estagio.grupo.projeto5.Telas.model.Perfil;
 import compasso.estagio.grupo.projeto5.Telas.model.Permissao;
@@ -42,7 +44,7 @@ public class CadastroController {
 			permissao.setPermissao("Personal");	
 		} else {
 			permissao.setPermissao("Usuario");
-		}
+		}	
 		
 		usuario.setPermissao(permissao);
 		perfil.setPermissao(permissao);
