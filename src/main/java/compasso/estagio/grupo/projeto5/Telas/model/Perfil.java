@@ -1,11 +1,15 @@
 package compasso.estagio.grupo.projeto5.Telas.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
@@ -16,7 +20,7 @@ public class Perfil {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long Id;
+	private Long id;
 
 	private String primeiroNome;
 
@@ -30,6 +34,9 @@ public class Perfil {
 
 	private String telefone;
 
+	@OneToMany(mappedBy = "perfil", fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+	private List<Mensagem> mensagens = new ArrayList<Mensagem>();
+	
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
 	private Permissao permissao;
 
@@ -42,11 +49,11 @@ public class Perfil {
 	}
 
 	public Long getId() {
-		return Id;
+		return id;
 	}
 
 	public void setId(Long id) {
-		Id = id;
+		this.id = id;
 	}
 
 	public String getPrimeiroNome() {
@@ -89,6 +96,13 @@ public class Perfil {
 		this.email = email;
 	}
 
+	public List<Mensagem> getMensagens() {
+        return mensagens;
+    }
+
+    public void setMensagens(Mensagem mensagem) {
+        this.mensagens.add(mensagem);
+    }
 	public Permissao getPermissao() {
 		return permissao;
 	}
