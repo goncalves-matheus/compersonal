@@ -22,13 +22,19 @@ public class AlunosController {
 
 	@GetMapping
 	public String alunosAll(Model modelo, Principal principal) {
+	
+		List<UsuarioDto> estudantes = getListaDeAlunos(principal);
+		modelo.addAttribute("estudantes", estudantes);
 		
+		return "alunos";
+	}
+
+	private List<UsuarioDto> getListaDeAlunos(Principal principal) {
 		List<Perfil> perfis = repository.findAll();
 		List<Perfil> personais = repository.findByPermissao(repository.findByEmail(principal.getName()).getPermissao());
 		perfis.removeAll(personais);
 		List<UsuarioDto> estudantes = UsuarioDto.converte(perfis);
-		modelo.addAttribute("estudantes", estudantes);
-		return "alunos";
+		return estudantes;
 	}
 
 }
