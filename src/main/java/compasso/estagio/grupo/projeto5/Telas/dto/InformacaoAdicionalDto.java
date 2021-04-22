@@ -3,19 +3,19 @@ package compasso.estagio.grupo.projeto5.Telas.dto;
 import javax.validation.constraints.NotBlank;
 
 import compasso.estagio.grupo.projeto5.Telas.model.Perfil;
-import compasso.estagio.grupo.projeto5.Telas.model.Sexo;
+import compasso.estagio.grupo.projeto5.Telas.model.Genero;
 
 public class InformacaoAdicionalDto {
 	
 	private String altura;
 	private String peso;
-	private String sexo;
+	private String genero;
 	private String problemaDeSaude;
 	
 	public InformacaoAdicionalDto toInformacaoAdicionalDto(Perfil p) {
 		this.altura = p.getAltura();
 		this.peso = p.getPeso();
-		this.sexo = p.getSexo();
+		this.genero = p.getGenero();
 		this.problemaDeSaude = p.getProblemaDeSaude();
 		
 		return this;
@@ -34,12 +34,12 @@ public class InformacaoAdicionalDto {
 		this.peso = peso;
 	}
 
-	public String getSexo() {
-		return sexo;
+	public String getGenero() {
+		return genero;
 	}
 
-	public void setSexo(String sexo) {
-		this.sexo = sexo;
+	public void setGenero(String genero) {
+		this.genero = genero;
 	}
 
 	public String getProblemaDeSaude() {

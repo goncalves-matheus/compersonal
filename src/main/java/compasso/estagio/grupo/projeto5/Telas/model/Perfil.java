@@ -29,7 +29,7 @@ public class Perfil {
 	
 	private String altura;
 	private String peso;
-	private String sexo;
+	private String genero;
 	private String problemaDeSaude;
 
 	public String getAltura() {
@@ -48,12 +48,12 @@ public class Perfil {
 		this.peso = peso;
 	}
 
-	public String getSexo() {
-		return sexo;
+	public String getGenero() {
+		return genero;
 	}
 
-	public void setSexo(String sexo) {
-		this.sexo = sexo;
+	public void setGenero(String sexo) {
+		this.genero = sexo;
 	}
 
 	public String getProblemaDeSaude() {
