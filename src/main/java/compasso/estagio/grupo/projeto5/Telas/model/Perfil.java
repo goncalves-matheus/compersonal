@@ -33,6 +33,43 @@ public class Perfil {
 	private String email;
 
 	private String telefone;
+	
+	private String altura;
+	private String peso;
+	private String genero;
+	private String problemaDeSaude;
+
+	public String getAltura() {
+		return altura;
+	}
+
+	public void setAltura(String altura) {
+		this.altura = altura;
+	}
+
+	public String getPeso() {
+		return peso;
+	}
+
+	public void setPeso(String peso) {
+		this.peso = peso;
+	}
+
+	public String getGenero() {
+		return genero;
+	}
+
+	public void setGenero(String sexo) {
+		this.genero = sexo;
+	}
+
+	public String getProblemaDeSaude() {
+		return problemaDeSaude;
+	}
+
+	public void setProblemaDeSaude(String problemaDeSaude) {
+		this.problemaDeSaude = problemaDeSaude;
+	}
 
 	@OneToMany(mappedBy = "perfil", fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
 	private List<Mensagem> mensagens = new ArrayList<Mensagem>();
