@@ -30,7 +30,8 @@ public class AlunosController {
 		return "alunos";
 	}
 	
-	@GetMapping("/uniPerfil/{email}")
+	
+	@GetMapping("/perfil/{email}")
 	public String uuniPerfil(@PathVariable("email") String email, Model modelo) {
 		UsuarioDto u = UsuarioDto.converte(repository.findByEmail(email));
 		modelo.addAttribute("aluno", u);
