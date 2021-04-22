@@ -122,4 +122,8 @@ public class UsuarioDto {
 		telefone = telefone.replace(" ", "");
 		return telefone;
 	}
+
+    public static UsuarioDto converte(Perfil p) {
+        return new UsuarioDto(p);
+    }
 }
