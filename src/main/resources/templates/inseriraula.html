@@ -72,7 +72,12 @@
 						<div class="invalid-feedback" th:errors="*{tipo}">Errors do
 							pdf</div>
 						</br> </br>
-						<button type="submit" class="btn btn-danger">Adicionar</button>
+						<script>
+							function add() {
+								alert("Aula adicionada com sucesso!");
+							}
+						</script>
+						<button type="submit" onclick="add();" class="btn btn-danger">Adicionar</button>
 					</form>
 				</div>
 			</div>

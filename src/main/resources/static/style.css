@@ -44,12 +44,12 @@ html, body {
 
 .borda-botao {
 	border-color: rgb(214, 68, 0) !important;
-	border-color: black !important;
+	border-color: rgb(214, 68, 0) !important;
 	width: 8rem !important;
 }
 
 .borda-neew {
-	border-color: black !important;
+	border-color: rgb(214, 68, 0)!important;
 }
 
 .largura {
