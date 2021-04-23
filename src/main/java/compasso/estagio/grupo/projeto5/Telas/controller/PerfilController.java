@@ -9,6 +9,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import compasso.estagio.grupo.projeto5.Telas.dto.AlterarSenhatDto;
 import compasso.estagio.grupo.projeto5.Telas.dto.InformacaoAdicionalDto;
 import compasso.estagio.grupo.projeto5.Telas.dto.PerfilDto;
 import compasso.estagio.grupo.projeto5.Telas.model.Informacoes;
@@ -64,4 +66,18 @@ public class PerfilController {
 
 		return "redirect:/perfil";
 	}
+	
+//	@PostMapping("/alterarSenha")
+//	public String alterarSenha(@Valid AlterarSenhatDto senhaDto, BindingResult result, Principal principal) {
+//		
+//		if(result.hasErrors()) {
+//			return "perfil";
+//		}
+//		
+//		Perfil perfil = repository.findByEmail(principal.getName());
+//		if(perfil.getSenha().equals(senhaDto.getSenhaAntiga())) {
+//			perfil.setSenha(senhaDto.getSenha());
+//		}
+//		return "redirect:/perfil";
+//	}
 }
