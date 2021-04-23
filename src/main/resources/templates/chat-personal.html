@@ -4,144 +4,112 @@
 <!--Sem Tópico -->
 <meta charset="UTF-8">
 
-<head th:replace="~{base::head(Index)}"></head>
+<head th:replace="~{base :: head(Perfil)}"></head>
 
-<body class="bg-light">
-	<div class="container py-5 px-4">
-		<!-- For demo purpose-->
-		<div class="row rounded-lg overflow-hidden shadow">
-			<!-- Users box-->
-			<article class="col-5 px-0">
-				<div class="bg-white">
+<body class="background">
+	<div class="geral ">
+		<nav th:replace="~{base::navbar}"></nav>
+		<div class="container p-2">
+			<!-- For demo purpose-->
+			<div class="row rounded-lg overflow-hidden shadow">
+				<!-- Users box-->
+				<article class="col-4 px-0"  style="background-color: white;">
+					<div class="bg-white">
 
-					<div class="bg-gray px-4 py-2 bg-light">
-						<p class="h5 mb-0 py-1">Ultimas Mensagem</p>
-					</div>
+						<div class="bg-gray px-4 py-2 bg-light">
+							<p class="h5 mb-0 py-1">Mensagens</p>
+						</div>
 
-					<div class="messages-box">
-						<!-- campo com a lista de alunos -->
-						<div class="list-group rounded-0">
+						<div class="messages-box">
+							<!-- campo com a lista de alunos -->
+							<div class="list-group rounded-0" style="background-color: white;">
 
-							<a class="list-group-item list-group-item-action active text-white rounded-0">
-								<div class="media">
+								<a th:each="aluno : ${alunos}" th:href="${aluno.email}"
+									class="list-group-item list-group-item-action rounded-0">
+									<!-- class="list-group-item list-group-item-action active text-white rounded-0" -->
+									<div class="d-flex align-items-center justify-content-between mb-1">
+										<img src="https://www.cursosabrafordes.com.br/webroot/img/cur_cursos/foto_1495509835.jpeg"
+										alt="user" width="50" height="50" class="rounded-circle">
+										<div>
+											<h6 th:text="${aluno.primeiroNome}" class="mb-0"></h6>
+											<small class="small font-weight-bold">data</small>
+										</div>
+										
+									</div>
+								</a>
+								<!-- <a href="#" class="list-group-item list-group-item-action rounded-0">
 									<img src="https://res.cloudinary.com/mhmd/image/upload/v1564960395/avatar_usae7z.svg"
 										alt="user" width="50" class="rounded-circle">
-									<div class="media-body ml-4">
-										<div class="d-flex align-items-center justify-content-between mb-1">
-											<h6 class="mb-0">Jason Doe</h6>
-											<small class="small font-weight-bold">25 Dec</small>
-										</div>
-										<!-- <p class="font-italic mb-0 text-small">Lorem ipsum dolor sit amet, consectetur
-											adipisicing elit, sed do eiusmod tempor incididunt ut labore.</p> -->
+									<div class="d-flex align-items-center justify-content-between mb-1">
+										<h6 class="mb-0">Jason Doe</h6>
+										<small class="small font-weight-bold">25 Dec</small>
 									</div>
-								</div>
-							</a>
+								</a> -->
 
-							<a href="#" class="list-group-item list-group-item-action list-group-item-light rounded-0">
-								<div class="media"><img
-										src="https://res.cloudinary.com/mhmd/image/upload/v1564960395/avatar_usae7z.svg"
-										alt="user" width="50" class="rounded-circle">
-									<div class="media-body ml-4">
-										<div class="d-flex align-items-center justify-content-between mb-1">
-											<h6 class="mb-0">Jason Doe</h6><small class="small font-weight-bold">14
-												Dec</small>
+								<!-- <a href="#" class="list-group-item list-group-item-action list-group-item-light rounded-0">
+									<div class="media"><img
+											src="https://res.cloudinary.com/mhmd/image/upload/v1564960395/avatar_usae7z.svg"
+											alt="user" width="50" class="rounded-circle">
+										<div class="media-body ml-4">
+											<div class="d-flex align-items-center justify-content-between mb-1">
+												<h6 class="mb-0">Jason Doe</h6>
+												<small class="small font-weight-bold">14 Dec</small>
+											</div>
 										</div>
-										<p class="font-italic text-muted mb-0 text-small">Lorem ipsum dolor sit amet,
-											consectetur. incididunt ut labore.</p>
 									</div>
+								</a> -->
+
+							</div>
+						</div>
+
+					</div>
+				</article>
+
+				<!-- Chat Box-->
+				<article class="col-8 px-0">
+					<div class="px-4 py-5 chat-box bg-white" style="min-height: 80vh;">
+						<!-- Sender Message-->
+						<div class="media w-50 mb-3"><img
+								src="https://www.cursosabrafordes.com.br/webroot/img/cur_cursos/foto_1495509835.jpeg"
+								alt="user" width="50" height="50" class="rounded-circle">
+							<div class="media-body ml-3">
+								<div class="bg-light rounded py-2 px-3 mb-2">
+									<p class="text-small mb-0 text-muted">Mensagem do Aluno</p>
 								</div>
-							</a>
-						</div>
-					</div>
-
-				</div>
-			</article>
-			<!-- Chat Box-->
-			<article class="col-7 px-0">
-				<div class="px-4 py-5 chat-box bg-white">
-					<!-- Sender Message-->
-					<div class="media w-50 mb-3"><img
-							src="https://res.cloudinary.com/mhmd/image/upload/v1564960395/avatar_usae7z.svg" alt="user"
-							width="50" class="rounded-circle">
-						<div class="media-body ml-3">
-							<div class="bg-light rounded py-2 px-3 mb-2">
-								<p class="text-small mb-0 text-muted">Test which is a new approach all solutions</p>
+								<p class="small text-muted">hora | data</p>
 							</div>
-							<p class="small text-muted">12:00 PM | Aug 13</p>
 						</div>
-					</div>
 
-					<!-- Reciever Message-->
-					<div class="media w-50 ml-auto mb-3">
-						<div class="media-body">
-							<div class="bg-primary rounded py-2 px-3 mb-2">
-								<p class="text-small mb-0 text-white">Test which is a new approach to have all solutions
-								</p>
+						<!-- Reciever Message-->
+						<div class="media w-50 ml-auto mb-3">
+							<div class="media-body">
+								<div class="cor-botao rounded py-2 px-3 mb-2">
+									<p class="text-small mb-0 text-white">Mensagem do instrutor
+									</p>
+								</div>
+								<p class="small text-muted">hora | data</p>
 							</div>
-							<p class="small text-muted">12:00 PM | Aug 13</p>
 						</div>
+
 					</div>
 
-					<!-- Sender Message-->
-					<div class="media w-50 mb-3"><img
-							src="https://res.cloudinary.com/mhmd/image/upload/v1564960395/avatar_usae7z.svg" alt="user"
-							width="50" class="rounded-circle">
-						<div class="media-body ml-3">
-							<div class="bg-light rounded py-2 px-3 mb-2">
-								<p class="text-small mb-0 text-muted">Test, which is a new approach to have</p>
+					<!-- Typing area -->
+					<form action="#" class="bg-light">
+						<div class="input-group">
+							<input type="text" placeholder="Escreva uma mensagem" aria-describedby="button-addon2"
+								class="form-control rounded-0 border-0 py-4 bg-light">
+							<div class="input-group-append">
+								<button id="button-addon2" type="submit" class="btn btn-link">>
+									<!-- <i class="fa fa-paper-plane"></i> -->
+								</button>
 							</div>
-							<p class="small text-muted">12:00 PM | Aug 13</p>
 						</div>
-					</div>
+					</form>
 
-					<!-- Reciever Message-->
-					<div class="media w-50 ml-auto mb-3">
-						<div class="media-body">
-							<div class="bg-primary rounded py-2 px-3 mb-2">
-								<p class="text-small mb-0 text-white">Apollo University, Delhi, India Test</p>
-							</div>
-							<p class="small text-muted">12:00 PM | Aug 13</p>
-						</div>
-					</div>
-
-					<!-- Sender Message-->
-					<div class="media w-50 mb-3"><img
-							src="https://res.cloudinary.com/mhmd/image/upload/v1564960395/avatar_usae7z.svg" alt="user"
-							width="50" class="rounded-circle">
-						<div class="media-body ml-3">
-							<div class="bg-light rounded py-2 px-3 mb-2">
-								<p class="text-small mb-0 text-muted">Test, which is a new approach</p>
-							</div>
-							<p class="small text-muted">12:00 PM | Aug 13</p>
-						</div>
-					</div>
-
-					<!-- Reciever Message-->
-					<div class="media w-50 ml-auto mb-3">
-						<div class="media-body">
-							<div class="bg-primary rounded py-2 px-3 mb-2">
-								<p class="text-small mb-0 text-white">Apollo University, Delhi, India Test</p>
-							</div>
-							<p class="small text-muted">12:00 PM | Aug 13</p>
-						</div>
-					</div>
-
-				</div>
-
-				<!-- Typing area -->
-				<form action="#" class="bg-light">
-					<div class="input-group">
-						<input type="text" placeholder="Type a message" aria-describedby="button-addon2"
-							class="form-control rounded-0 border-0 py-4 bg-light">
-						<div class="input-group-append">
-							<button id="button-addon2" type="submit" class="btn btn-link"> <i
-									class="fa fa-paper-plane"></i></button>
-						</div>
-					</div>
-				</form>
-
-			</article>
+				</article>
+			</div>
 		</div>
+		<script th:replace="~{base::script}"></script>
 	</div>
 </body>
 
