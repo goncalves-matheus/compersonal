@@ -1,17 +1,18 @@
 package compasso.estagio.grupo.projeto5.Telas.controller;
 
+import java.security.Principal;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+
 import compasso.estagio.grupo.projeto5.Telas.model.Aula;
 import compasso.estagio.grupo.projeto5.Telas.repository.AulaRepository;
+import compasso.estagio.grupo.projeto5.Telas.repository.PerfilRepository;
 
 @Controller
 @RequestMapping("dashboard")
@@ -19,20 +20,22 @@ public class DashboardController {
 
 	@Autowired
 	AulaRepository aulaRepository;
+	
+	@Autowired
+	PerfilRepository perfilRepository;
 
 	@GetMapping("/aluno")
-	public String aluno(Model modelo) {
-
-		Pageable page = PageRequest.of(0, 10, Sort.by("Id").descending());
-		Page<Aula> aula = aulaRepository.findAll(page);
-		modelo.addAttribute("aulas", aula);
+	public String aluno(Model modelo, Principal principal) {
+		
+		
+		List<Aula> aulas = aulaRepository.findByAlunos(perfilRepository.findByEmail(principal.getName()));
+		if(aulas.size()>10) {
+			aulas = aulas.subList(0, 10);
+		}
+		
+		modelo.addAttribute("aulas",aulas);
 
 		return "dashboard_aluno";
-	}
-
-	@GetMapping("/aulas")
-	public String ultimaAula() {
-		return "redirect:/aulas/"+aulaRepository.findAll().get(aulaRepository.findAll().size()-1).getTitulo();
 	}
 	
 	@GetMapping("/{titulo}")
