@@ -13,7 +13,7 @@
 			<!-- For demo purpose-->
 			<div class="row rounded-lg overflow-hidden shadow">
 				<!-- Users box-->
-				<article class="col-4 px-0"  style="background-color: white;">
+				<article class="col-4 px-0" style="background-color: white;">
 					<div class="bg-white">
 
 						<div class="bg-gray px-4 py-2 bg-light">
@@ -29,12 +29,12 @@
 									<!-- class="list-group-item list-group-item-action active text-white rounded-0" -->
 									<div class="d-flex align-items-center justify-content-between mb-1">
 										<img src="https://www.cursosabrafordes.com.br/webroot/img/cur_cursos/foto_1495509835.jpeg"
-										alt="user" width="50" height="50" class="rounded-circle">
+											alt="user" width="50" height="50" class="rounded-circle">
 										<div>
 											<h6 th:text="${aluno.primeiroNome}" class="mb-0"></h6>
 											<small class="small font-weight-bold">data</small>
 										</div>
-										
+
 									</div>
 								</a>
 								<!-- <a href="#" class="list-group-item list-group-item-action rounded-0">
@@ -69,7 +69,32 @@
 				<article class="col-8 px-0">
 					<div class="px-4 py-5 chat-box bg-white" style="min-height: 80vh;">
 						<!-- Sender Message-->
-						<div class="media w-50 mb-3"><img
+						<div th:each="mensagem: ${mensagens}" th:switch="${mensagem.destinatarioId}"
+							class="media w-50 mb-3">
+							<div th:case="'1'">
+								<img src="https://www.cursosabrafordes.com.br/webroot/img/cur_cursos/foto_1495509835.jpeg"
+									alt="user" width="50" height="50" class="rounded-circle">
+								<div class="media-body ml-3">
+									<div class="bg-light rounded py-2 px-3 mb-2">
+										<p th:text="${mensagem.texto}" class="text-small mb-0 text-muted"></p>
+									</div>
+									<!-- <p class="small text-muted">hora | data</p> -->
+									<p th:text="${mensagem.dataEHorario}" class="small text-muted"></p>
+								</div>
+							</div>
+
+							<div th:case="'4'" class="media-body">
+								<div class="cor-botao rounded py-2 px-3 mb-2">
+									<p th:text="${mensagem.texto}" class="text-small mb-0 text-white"></p>
+								</div>
+								<!-- <p class="small text-muted">hora | data</p> -->
+								<p th:text="${mensagem.dataEHorario}" class="small text-muted"></p>
+								
+							</div>
+						</div>
+
+						<!-- Sender Message-->
+						<!-- 	<div class="media w-50 mb-3"><img
 								src="https://www.cursosabrafordes.com.br/webroot/img/cur_cursos/foto_1495509835.jpeg"
 								alt="user" width="50" height="50" class="rounded-circle">
 							<div class="media-body ml-3">
@@ -78,10 +103,10 @@
 								</div>
 								<p class="small text-muted">hora | data</p>
 							</div>
-						</div>
+						</div> -->
 
 						<!-- Reciever Message-->
-						<div class="media w-50 ml-auto mb-3">
+						<!-- <div class="media w-50 ml-auto mb-3">
 							<div class="media-body">
 								<div class="cor-botao rounded py-2 px-3 mb-2">
 									<p class="text-small mb-0 text-white">Mensagem do instrutor
@@ -89,7 +114,7 @@
 								</div>
 								<p class="small text-muted">hora | data</p>
 							</div>
-						</div>
+						</div> -->
 
 					</div>
 

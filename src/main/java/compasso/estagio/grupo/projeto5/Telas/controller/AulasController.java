@@ -37,16 +37,8 @@ public class AulasController {
 	@GetMapping
 	public String aulas(Model modelo, MensagemDto mensagemDto, Principal principal) {
 
-		modelo.addAttribute("aula", aulaRepository.findById((long) 1).get());
-		modelo.addAttribute("gluteo", aulaRepository.findByTipo(Tipo.GLUTEO));
-		modelo.addAttribute("abdomen", aulaRepository.findByTipo(Tipo.ABDOMEN));
-		modelo.addAttribute("perna", aulaRepository.findByTipo(Tipo.PERNAS));
-		modelo.addAttribute("braco", aulaRepository.findByTipo(Tipo.BRACOS));
-		modelo.addAttribute("peito", aulaRepository.findByTipo(Tipo.PEITO));
-
-		carregarMensagensDoChat(modelo, principal);
-
-		return "aulas";
+		return "redirect:/aulas/"+aulaRepository.findAll().get(aulaRepository.findAll().size()-1).getTitulo();
+		
 	}
 
 	@GetMapping("/{titulo}")

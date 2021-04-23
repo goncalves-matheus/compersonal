@@ -34,20 +34,16 @@ public class MensagemController {
     @Autowired
     private MensagemRepository mensagemRepository;
 
-    @GetMapping
+     @GetMapping
     public String chatPersonal(MensagemDto mensagemDto, Model modelo, Principal principal){
-        /* ListaDeAlunos listaDeAlunos = new ListaDeAlunos(); */
-		List<UsuarioDto> alunos = getListaDeAlunos(principal);
-		modelo.addAttribute("alunos", alunos);
-
-        return "chat-personal";
-    }
+        
+        return "redirect:/mensagem/"+perfilRepository.findAll().get(1).getEmail();
+    } 
 
     @GetMapping("/{idAluno}")
     public String carregarChatDoAluno(@PathVariable String idAluno, MensagemDto mensagemDto, Model modelo, Principal principal){
         Perfil perfil = perfilRepository.findByEmail(idAluno);
         
-        /* ListaDeAlunos listaDeAlunos = new ListaDeAlunos(); */
 		List<UsuarioDto> alunos = getListaDeAlunos(principal);
 		modelo.addAttribute("alunos", alunos);
         carregarMensagensDoAlunoParaOPersonal(modelo, perfil);
