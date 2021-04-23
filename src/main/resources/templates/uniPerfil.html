@@ -18,6 +18,11 @@
 				<div class="col-md-12 col-lg-12">
 					<div class="card">
 						<h5 class="card-header">Dados pessoais do aluno</h5>
+						<p class="d-flex justify-content-end m-0 p-0">
+							<a data-bs-toggle="modal" href data-bs-target="#staticBackdrop"
+								class="link-secondary d-flex justify-content-end p-0 mx-2"
+								max-width="10">Adicionar Aula</a>
+						</p>
 						<form th:object="${aluno}" class="card-body mb-0 mt-3 pb-0"
 							th:action="@{/perfil/alterar}" method="POST">
 
@@ -59,7 +64,7 @@
 							</div>
 						</form>
 						<br class="mb-0 mt-5" th:if="${info}==null">
-						
+
 						<div th:if="${info}!=null">
 							<hr class="mb-0 mt-5">
 							<h4 class="mb-4 card-header">Informações Adicionais</h4>
@@ -111,7 +116,7 @@
 													</div>
 												</div>
 											</div>
-											
+
 											<br class="mb-0 mt-3">
 
 										</div>
@@ -129,30 +134,23 @@
 				<div class="modal-dialog">
 					<div class="modal-content">
 						<div class="modal-header">
-							<h5 class="modal-title" id="staticBackdropLabel">Mudar Senha</h5>
+							<h5 class="modal-title" id="staticBackdropLabel">Adicionar
+								aula</h5>
 							<button type="button" class="btn-close" data-bs-dismiss="modal"
 								aria-label="Close"></button>
 						</div>
 						<div class="modal-body">
 							<div class="card-body cor-borda">
-								<form class="card-body">
+								<form class="card-body" th:action="@{/alunos/adicionarAula}" method="POST">
 									<div class="mb-3">
-										<input type="text" class="form-control"
-											placeholder="Senha atual">
-										<!--                         <div class="invalid-feedback" th:errors="*{codigo}">Errors do telefone</div> -->
+										<h5>Selecione a aula:</h5>
+										<select class="form-select" name="titulo">
+											<option th:each="aulas : ${aulas}" th:value="${aulas.titulo}"
+												th:text="${aulas.titulo}"></option>
+										</select>
 									</div>
-									<div class="mb-3">
-										<input type="password" class="form-control"
-											placeholder="Nova senha">
-										<!--                         <div class="invalid-feedback" th:errors="*{senha}">Errors da senha</div> -->
-									</div>
-									<div class="mb-3">
-										<input type="password" class="form-control"
-											placeholder="Confirme a nova Senha">
-										<!--                         <div class="invalid-feedback" th:errors="*{confirmacaoSenha}">Errors da confirmacaoSenha -->
-										<!--                         </div> -->
-									</div>
-									<button type="submit" class="btn cor-botao">Registar</button>
+									<input type="hidden" name="email" th:value="${aluno.email}">
+									<button type="submit" class="btn cor-botao">Adicionar</button>
 								</form>
 							</div>
 						</div>

@@ -1,12 +1,18 @@
 package compasso.estagio.grupo.projeto5.Telas.model;
 
+import java.io.Serializable;
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 
 @Entity
-public class Aula {
+public class Aula implements Serializable{
+
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,6 +27,9 @@ public class Aula {
 	private String pdf;
 
 	private Tipo tipo;
+	
+	@ManyToMany(mappedBy = "aulas")
+	private List<Perfil> alunos;
 
 	public Long getId() {
 		return id;
