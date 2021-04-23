@@ -44,6 +44,10 @@ public class MensagemController {
     public String carregarChatDoAluno(@PathVariable String idAluno, MensagemDto mensagemDto, Model modelo, Principal principal){
         Perfil perfil = perfilRepository.findByEmail(idAluno);
         
+        modelo.addAttribute("perfil", perfil);
+        modelo.addAttribute("personal", perfilRepository.findByEmail(principal.getName()));
+
+        
 		List<UsuarioDto> alunos = getListaDeAlunos(principal);
 		modelo.addAttribute("alunos", alunos);
         carregarMensagensDoAlunoParaOPersonal(modelo, perfil);
@@ -51,14 +55,17 @@ public class MensagemController {
         return "chat-personal";
     }
 
-    @PostMapping("mensagem-personal")
-    public String novaMensagemPersonal(@Valid MensagemDto mensagemDto, Model modelo, BindingResult result, Principal principal){
+    @PostMapping("novaMensagemPersonal")
+    public String novaMensagemPersonal(@Valid MensagemDto mensagemDto, String email,Model modelo, BindingResult result, Principal principal){
         if (result.hasErrors()) {
-			return "redirect:/chat-personal";
+			return "chat-personal";
+            
 		}
+        mensagemDto.setIdDestinatario(email);
+        System.out.println(mensagemDto.getIdDestinatario());
         salvarMensagemDoPersonal(mensagemDto, principal);
 
-        return "redirect:/chat-personal";
+        return "redirect:/mensagem/"+email;
     }
 
 
@@ -83,9 +90,9 @@ public class MensagemController {
         mensagemRepository.save(mensagem);
     }
     private void salvarMensagemDoPersonal(MensagemDto mensagemDto, Principal principal) {
-        Mensagem mensagem = mensagemDto.toMensagem();
+        Mensagem mensagem = mensagemDto.toMensagemDoPersonal();
+        mensagem.setDestinatarioId(perfilRepository.findByEmail(mensagemDto.getIdDestinatario()).getId());
         //mensagem.setDestinatarioId(perfilRepository.findByPermissaoPermissao("Personal").getId());
-        mensagem.setDestinatarioId(Long.valueOf(4));
         Perfil perfil = perfilRepository.findByEmail(principal.getName());
         mensagem.setPerfil(perfil);
         perfil.setMensagens(mensagem);
@@ -124,11 +131,12 @@ public class MensagemController {
 		modelo.addAttribute("mensagensDoAluno", mensagensDoAluno);
 		modelo.addAttribute("mensagensDoPersonal", mensagensDoPersonal);
 		modelo.addAttribute("mensagens", todasAsMensagens);
+        modelo.addAttribute("horaFinal", todasAsMensagens.get(todasAsMensagens.size()-1).getDataEHorario());
 
 		Collections.sort(todasAsMensagens);
-		for (Mensagem mensagem : todasAsMensagens) {
+		/* for (Mensagem mensagem : todasAsMensagens) {
 			System.out.println(mensagem.getTexto());
-		}
+		} */
 	}
 
 }

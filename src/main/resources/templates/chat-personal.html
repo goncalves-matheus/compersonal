@@ -10,14 +10,14 @@
 	<div class="geral ">
 		<nav th:replace="~{base::navbar}"></nav>
 		<div class="container p-2">
-			<!-- For demo purpose-->
+
 			<div class="row rounded-lg overflow-hidden shadow">
-				<!-- Users box-->
+
 				<article class="col-4 px-0" style="background-color: white;">
 					<div class="bg-white">
 
 						<div class="bg-gray px-4 py-2 bg-light">
-							<p class="h5 mb-0 py-1">Mensagens</p>
+							<p class="h5 mb-0 py-1">Meus Alunos</p>
 						</div>
 
 						<div class="messages-box">
@@ -32,7 +32,7 @@
 											alt="user" width="50" height="50" class="rounded-circle">
 										<div>
 											<h6 th:text="${aluno.primeiroNome}" class="mb-0"></h6>
-											<small class="small font-weight-bold">data</small>
+											<small th:text="${horaFinal}" class="small font-weight-bold"></small>
 										</div>
 
 									</div>
@@ -67,31 +67,32 @@
 
 				<!-- Chat Box-->
 				<article class="col-8 px-0">
-					<div class="px-4 py-5 chat-box bg-white" style="min-height: 80vh;">
-						<!-- Sender Message-->
-						<div th:each="mensagem: ${mensagens}" th:switch="${mensagem.destinatarioId}"
-							class="media w-50 mb-3">
-							<div th:case="'1'">
+					<div class="px-4 py-5 chat-box bg-white d" style="min-height: 80vh;">
+
+						<div th:each="mensagem: ${mensagens}" th:switch="${mensagem.destinatarioId}">
+							<!-- Mensagem do Aluno -->
+							<div th:case="${personal.id}" class="media w-50 mb-3">
 								<img src="https://www.cursosabrafordes.com.br/webroot/img/cur_cursos/foto_1495509835.jpeg"
 									alt="user" width="50" height="50" class="rounded-circle">
 								<div class="media-body ml-3">
 									<div class="bg-light rounded py-2 px-3 mb-2">
-										<p th:text="${mensagem.texto}" class="text-small mb-0 text-muted"></p>
+										<p th:text="${mensagem.texto}" class="mb-0 text-muted"></p>
 									</div>
-									<!-- <p class="small text-muted">hora | data</p> -->
-									<p th:text="${mensagem.dataEHorario}" class="small text-muted"></p>
+									<small th:text="${mensagem.dataEHorario}" class="text-muted"></small>
+								</div>
+							</div>
+							<!-- Mensagem do Instrutor -->
+							<div th:case="${perfil.id}" class="media w-50 ml-auto mb-3">
+								<div class="media-body">
+									<div class="cor-botao rounded py-2 px-3 mb-2">
+										<p th:text="${mensagem.texto}" class="mb-0 text-white"></p>
+									</div>
+									<small th:text="${mensagem.dataEHorario}" class="text-muted"></small>
 								</div>
 							</div>
 
-							<div th:case="'4'" class="media-body">
-								<div class="cor-botao rounded py-2 px-3 mb-2">
-									<p th:text="${mensagem.texto}" class="text-small mb-0 text-white"></p>
-								</div>
-								<!-- <p class="small text-muted">hora | data</p> -->
-								<p th:text="${mensagem.dataEHorario}" class="small text-muted"></p>
-								
-							</div>
 						</div>
+
 
 						<!-- Sender Message-->
 						<!-- 	<div class="media w-50 mb-3"><img
@@ -118,13 +119,16 @@
 
 					</div>
 
-					<!-- Typing area -->
-					<form action="#" class="bg-light">
+					<form th:object="${mensagemDto}" th:action="@{/mensagem/novaMensagemPersonal}" method="POST"
+						class="bg-light">
 						<div class="input-group">
-							<input type="text" placeholder="Escreva uma mensagem" aria-describedby="button-addon2"
+							<input th:field="*{corpoDaMensagem}" placeholder="Escreva uma mensagem"
 								class="form-control rounded-0 border-0 py-4 bg-light">
 							<div class="input-group-append">
-								<button id="button-addon2" type="submit" class="btn btn-link">>
+								<input type="hidden" name="email" th:value="${perfil.email}">
+								<!-- <input type="hidden" name="email" th:value="${perfil.email}"> -->
+								<!-- <div th:field="*{__${aluno.email}__}" ></div> -->
+								<button id="button-addon2" type="submit" class="btn btn-link">Enviar
 									<!-- <i class="fa fa-paper-plane"></i> -->
 								</button>
 							</div>
@@ -134,6 +138,12 @@
 				</article>
 			</div>
 		</div>
+		<script>
+			bootstrap.min.css
+			jquery - 3.3.1.slim.min.js
+			bootstrap.bundle.min.js
+			awesome.min.css
+		</script>
 		<script th:replace="~{base::script}"></script>
 	</div>
 </body>
