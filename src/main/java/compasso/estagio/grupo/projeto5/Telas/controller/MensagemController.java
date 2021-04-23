@@ -1,6 +1,7 @@
 package compasso.estagio.grupo.projeto5.Telas.controller;
 
 import java.security.Principal;
+import java.time.format.DateTimeFormatter;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -131,7 +132,9 @@ public class MensagemController {
 		modelo.addAttribute("mensagensDoAluno", mensagensDoAluno);
 		modelo.addAttribute("mensagensDoPersonal", mensagensDoPersonal);
 		modelo.addAttribute("mensagens", todasAsMensagens);
-        modelo.addAttribute("horaFinal", todasAsMensagens.get(todasAsMensagens.size()-1).getDataEHorario());
+        /* modelo.addAttribute("horaDaMensagem", attributeValue) */
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        modelo.addAttribute("horaFinal", todasAsMensagens.get(todasAsMensagens.size()-1).getDataEHorario().format(formatter));
 
 		Collections.sort(todasAsMensagens);
 		/* for (Mensagem mensagem : todasAsMensagens) {

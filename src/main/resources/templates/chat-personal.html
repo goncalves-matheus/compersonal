@@ -37,27 +37,6 @@
 
 									</div>
 								</a>
-								<!-- <a href="#" class="list-group-item list-group-item-action rounded-0">
-									<img src="https://res.cloudinary.com/mhmd/image/upload/v1564960395/avatar_usae7z.svg"
-										alt="user" width="50" class="rounded-circle">
-									<div class="d-flex align-items-center justify-content-between mb-1">
-										<h6 class="mb-0">Jason Doe</h6>
-										<small class="small font-weight-bold">25 Dec</small>
-									</div>
-								</a> -->
-
-								<!-- <a href="#" class="list-group-item list-group-item-action list-group-item-light rounded-0">
-									<div class="media"><img
-											src="https://res.cloudinary.com/mhmd/image/upload/v1564960395/avatar_usae7z.svg"
-											alt="user" width="50" class="rounded-circle">
-										<div class="media-body ml-4">
-											<div class="d-flex align-items-center justify-content-between mb-1">
-												<h6 class="mb-0">Jason Doe</h6>
-												<small class="small font-weight-bold">14 Dec</small>
-											</div>
-										</div>
-									</div>
-								</a> -->
 
 							</div>
 						</div>
@@ -66,56 +45,30 @@
 				</article>
 
 				<!-- Chat Box-->
-				<article class="col-8 px-0">
-					<div class="px-4 py-5 chat-box bg-white d" style="min-height: 80vh;">
-
-						<div th:each="mensagem: ${mensagens}" th:switch="${mensagem.destinatarioId}">
+				<article class="col-8 px-0 card container ">
+					<div class="chat-box bg-white" style="min-height: 80vh;">
+						<div th:each="mensagem: ${mensagens}" th:switch="${mensagem.destinatarioId}" class="card-body">
 							<!-- Mensagem do Aluno -->
-							<div th:case="${personal.id}" class="media w-50 mb-3">
+							<div th:case="${personal.id}" class="d-flex justify-content-start w-80 mb-0">
 								<img src="https://www.cursosabrafordes.com.br/webroot/img/cur_cursos/foto_1495509835.jpeg"
-									alt="user" width="50" height="50" class="rounded-circle">
-								<div class="media-body ml-3">
-									<div class="bg-light rounded py-2 px-3 mb-2">
-										<p th:text="${mensagem.texto}" class="mb-0 text-muted"></p>
+									alt="aluno" width="35" height="35" class="rounded-circle">
+								<div class=" ml-3">
+									<div class="bg-light  form-control">
+										<label th:text="${mensagem.texto}" class="mb-0 text-muted"></label>
 									</div>
 									<small th:text="${mensagem.dataEHorario}" class="text-muted"></small>
 								</div>
 							</div>
 							<!-- Mensagem do Instrutor -->
-							<div th:case="${perfil.id}" class="media w-50 ml-auto mb-3">
-								<div class="media-body">
-									<div class="cor-botao rounded py-2 px-3 mb-2">
-										<p th:text="${mensagem.texto}" class="mb-0 text-white"></p>
+							<div th:case="${perfil.id}" class=" d-flex justify-content-end  w-60 mb-0">
+								<div class="align-items-center">
+									<div class="cor-botao rounded form-control">
+										<p th:text="${mensagem.texto}" class="mb-0 text-white" style="text-align: right;"></p>
 									</div>
-									<small th:text="${mensagem.dataEHorario}" class="text-muted"></small>
+									<p type="date" th:text="${mensagem.dataEHorario}" class="text-muted"></p>
 								</div>
 							</div>
-
 						</div>
-
-
-						<!-- Sender Message-->
-						<!-- 	<div class="media w-50 mb-3"><img
-								src="https://www.cursosabrafordes.com.br/webroot/img/cur_cursos/foto_1495509835.jpeg"
-								alt="user" width="50" height="50" class="rounded-circle">
-							<div class="media-body ml-3">
-								<div class="bg-light rounded py-2 px-3 mb-2">
-									<p class="text-small mb-0 text-muted">Mensagem do Aluno</p>
-								</div>
-								<p class="small text-muted">hora | data</p>
-							</div>
-						</div> -->
-
-						<!-- Reciever Message-->
-						<!-- <div class="media w-50 ml-auto mb-3">
-							<div class="media-body">
-								<div class="cor-botao rounded py-2 px-3 mb-2">
-									<p class="text-small mb-0 text-white">Mensagem do instrutor
-									</p>
-								</div>
-								<p class="small text-muted">hora | data</p>
-							</div>
-						</div> -->
 
 					</div>
 
@@ -126,9 +79,7 @@
 								class="form-control rounded-0 border-0 py-4 bg-light">
 							<div class="input-group-append">
 								<input type="hidden" name="email" th:value="${perfil.email}">
-								<!-- <input type="hidden" name="email" th:value="${perfil.email}"> -->
-								<!-- <div th:field="*{__${aluno.email}__}" ></div> -->
-								<button id="button-addon2" type="submit" class="btn btn-link">Enviar
+								<button type="submit" class="btn cor-botao">Enviar <!-- btn-link -->
 									<!-- <i class="fa fa-paper-plane"></i> -->
 								</button>
 							</div>
@@ -136,14 +87,10 @@
 					</form>
 
 				</article>
+
 			</div>
 		</div>
-		<script>
-			bootstrap.min.css
-			jquery - 3.3.1.slim.min.js
-			bootstrap.bundle.min.js
-			awesome.min.css
-		</script>
+		
 		<script th:replace="~{base::script}"></script>
 	</div>
 </body>
