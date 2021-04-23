@@ -54,3 +54,7 @@ html, body {
 	max-width: 750px;
 	margin: 0 auto;
 }
+
+.modi:hover {
+	background-color: gray !important;
+}

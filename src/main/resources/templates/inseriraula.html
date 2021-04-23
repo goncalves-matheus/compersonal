@@ -32,14 +32,14 @@
 						<div class="mb-2">
 							<label for="descricao" class="form-label">Descrição</label>
 							<textarea class="form-control" th:errorclass="is-invalid"
-								th:field="*{descricao}" rows="3"></textarea>
+								th:field="*{descricao}" rows="3" placeholder="Por favor, descreva a atividade física a ser realizada."></textarea>
 							<div class="invalid-feedback" th:errors="*{descricao}">Errors
 								da descricao</div>
 						</div>
 						<div class="mb-2">
 							<label for="pdf" class="form-label">Arquivo PDF</label> <input
 								th:errorclass="is-invalid" th:field="*{pdf}"
-								class="form-control" type="text">
+								class="form-control" type="text" placeholder="URL do pdf">
 							<div class="invalid-feedback" th:errors="*{pdf}">Errors do
 								pdf</div>
 						</div>
