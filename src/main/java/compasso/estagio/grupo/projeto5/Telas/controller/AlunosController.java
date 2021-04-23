@@ -42,6 +42,9 @@ public class AlunosController {
 	public String uuniPerfil(@PathVariable("email") String email, Model modelo) {
 		
 		List<Aula> aulas = aulaRepository.findAll();
+		List<Aula> aulasCadastradas = aulaRepository.findByAlunos(perfilRepository.findByEmail(email));
+		aulas.removeAll(aulasCadastradas);
+		
 		UsuarioDto u = UsuarioDto.converte(perfilRepository.findByEmail(email));
 		
 		if(perfilRepository.findByEmail(email).getInformacao()!=null) {
