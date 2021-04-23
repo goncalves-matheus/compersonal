@@ -37,13 +37,19 @@ html, body {
 	width: 100%;
 }
 
-#botao-test:hover {
+.botao-test:hover {
 	background-color: rgb(214, 68, 0) !important;
-	color: white;
+	color: white !important;
 }
 
 .borda-botao {
 	border-color: rgb(214, 68, 0) !important;
+	border-color: black !important;
+	width: 8rem !important;
+}
+
+.borda-neew {
+	border-color: black !important;
 }
 
 .largura {
@@ -57,4 +63,5 @@ html, body {
 
 .modi:hover {
 	background-color: gray !important;
+	color: white !important;
 }
