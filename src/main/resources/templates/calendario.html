@@ -7,7 +7,8 @@
 <head th:replace="~{base::head(Calendario)}"></head>
 
 <body class="background">
-	<div class="geral">
+	<main class="geral">
+		<div>
 		<nav th:replace="~{base::navbar}"></nav>
 
 		<article class="d-flex align-items-stretch">
@@ -135,11 +136,11 @@
 				</div>
 			</div>
 		</div>
-
+		</div>
 		<footer th:replace="~{base::footer}"></footer>
 		<script th:replace="~{base::script}"></script>
 		<div th:replace="~{base::calendar}"></div>
-	</div>
+	</main>
 </body>
 
 </html>

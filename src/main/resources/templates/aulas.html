@@ -8,7 +8,8 @@
 
 
 <body class="background">
-	<div class="geral">
+	<main class="geral">
+		<div>
 		<nav th:replace="~{base::navbar}"></nav>
 
 		<article class="d-flex align-items-stretch">
@@ -125,11 +126,12 @@
 					</div>
 				</div>
 			</div>
-
-		</article>
 		<footer th:replace="~{base::footer}"></footer>
 		<script th:replace="~{base::script}"></script>
+	</article>
 	</div>
+</main>
+		
 </body>
 
 </html>

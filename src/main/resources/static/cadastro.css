@@ -4,6 +4,21 @@
 	background-image: url(https://i.pinimg.com/originals/72/dc/f2/72dcf2d1fcbb8e5a0425ca0adf11ae4e.jpg);
 	background-size: cover;
 	background-position: 0% -10%;
+	position: relative;
+	background-size: cover;
+}
+
+.background main {
+	min-height: 100%;
+    position: absolute;
+    width: 100%;
+    background-color: rgba(43, 80, 142, 0.9);
+	opacity: 0.9;
+}
+
+div {
+    position: relative;
+    z-index: 2;
 }
 
 .fonte-branca {

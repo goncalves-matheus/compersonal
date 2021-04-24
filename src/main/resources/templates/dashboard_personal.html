@@ -7,17 +7,18 @@
 <head th:replace="~{base::head(Login)}"></head>
 
 <body class="background">
-	<div class="geral">
+	<main class="geral">
+		<div>
 		<nav th:replace="~{base::navbar}"></nav>
 
 		<article class="d-flex align-items-stretch">
 			<div th:replace="~{base::sidebar}"></div>
 
 		</article>
-
+		</div>
 		<footer th:replace="~{base::footer}"></footer>
 		<div th:replace="~{base::script}"></div>
-	</div>
+	</main>
 </body>
 
 </html>
