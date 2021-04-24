@@ -2,17 +2,17 @@ package compasso.estagio.grupo.projeto5.Telas.controller;
 
 import java.security.Principal;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+
 import compasso.estagio.grupo.projeto5.Telas.dto.MensagemDto;
 import compasso.estagio.grupo.projeto5.Telas.model.Aula;
-import compasso.estagio.grupo.projeto5.Telas.model.Mensagem;
+import compasso.estagio.grupo.projeto5.Telas.model.GestorDeMensagens;
 import compasso.estagio.grupo.projeto5.Telas.model.Perfil;
 import compasso.estagio.grupo.projeto5.Telas.model.Tipo;
 import compasso.estagio.grupo.projeto5.Telas.repository.AulaRepository;
@@ -21,7 +21,7 @@ import compasso.estagio.grupo.projeto5.Telas.repository.PerfilRepository;
 
 @Controller
 @RequestMapping("aulas")
-public class AulasController {
+public class AulasController extends GestorDeMensagens {
 
 	@Autowired
 	AulaRepository aulaRepository;
@@ -45,28 +45,16 @@ public class AulasController {
 		Perfil aluno = perfilRepository.findByEmail(principal.getName());
 
 		modelo.addAttribute("aula", aulaRepository.findByTitulo(titulo));
-		modelo.addAttribute("gluteo", aulaRepository.findByAlunoAndTipo(aluno, Tipo.GLUTEO));
-		modelo.addAttribute("abdomen", aulaRepository.findByAlunoAndTipo(aluno, Tipo.ABDOMEN));
-		modelo.addAttribute("perna", aulaRepository.findByAlunoAndTipo(aluno, Tipo.PERNAS));
-		modelo.addAttribute("braco", aulaRepository.findByAlunoAndTipo(aluno, Tipo.BRACOS));
-		modelo.addAttribute("peito", aulaRepository.findByAlunoAndTipo(aluno, Tipo.PEITO));
-
-		carregarMensagensDoChat(modelo, principal);
+		modelo.addAttribute("gluteo", aulaRepository.findByTipo(Tipo.GLUTEO));
+		modelo.addAttribute("abdomen", aulaRepository.findByTipo(Tipo.ABDOMEN));
+		modelo.addAttribute("perna", aulaRepository.findByTipo(Tipo.PERNAS));
+		modelo.addAttribute("braco", aulaRepository.findByTipo(Tipo.BRACOS));
+		modelo.addAttribute("peito", aulaRepository.findByTipo(Tipo.PEITO));
+		
+		super.setRepositories(this.perfilRepository, this.mensagemRepository);
+		carregarMensagensDoChat(modelo, aluno);
 
 		return "aulas";
 	}
 
-	private void carregarMensagensDoChat(Model modelo, Principal principal) {
-		Perfil perfil = perfilRepository.findByEmail(principal.getName());
-		List<Mensagem> mensagensDoAluno = mensagemRepository.findByPerfilId(perfil.getId());
-		List<Mensagem> mensagensDoPersonal = mensagemRepository.findByPerfilIdDestinatarioId(Long.valueOf(1),
-				perfil.getId());
-		List<Mensagem> todasAsMensagens = Stream.concat(mensagensDoAluno.stream(), mensagensDoPersonal.stream())
-				.collect(Collectors.toList());
-
-		modelo.addAttribute("mensagensDoAluno", mensagensDoAluno);
-		modelo.addAttribute("mensagensDoPersonal", mensagensDoPersonal);
-		modelo.addAttribute("mensagens", todasAsMensagens);
-
-	}
 }

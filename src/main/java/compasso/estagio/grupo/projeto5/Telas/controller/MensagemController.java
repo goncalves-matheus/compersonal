@@ -6,9 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import compasso.estagio.grupo.projeto5.Telas.dto.MensagemDto;
+import compasso.estagio.grupo.projeto5.Telas.model.GestorDeMensagens;
 import compasso.estagio.grupo.projeto5.Telas.model.Mensagem;
 import compasso.estagio.grupo.projeto5.Telas.model.Perfil;
 import compasso.estagio.grupo.projeto5.Telas.repository.MensagemRepository;
@@ -16,32 +19,60 @@ import compasso.estagio.grupo.projeto5.Telas.repository.PerfilRepository;
 
 @Controller
 @RequestMapping("mensagem")
-public class MensagemController {
+public class MensagemController extends GestorDeMensagens {
 
     @Autowired
-    private PerfilRepository perfilRepository;
+    PerfilRepository perfilRepository;
 
     @Autowired
-    private MensagemRepository mensagemRepository;
+    MensagemRepository mensagemRepository;
 
-    @PostMapping("nova")
-    public String novaMensagemAluno(@Valid MensagemDto mensagemDto, Model modelo, BindingResult result, Principal principal){
-        if (result.hasErrors()) {
-			return "redirect:/aulas";
-		}
-        salvarMensagemDoAluno(mensagemDto, principal);
-
-        return "redirect:/aulas";
+    @GetMapping()
+    public String chatPersonal(MensagemDto mensagemDto, Model modelo, Principal principal) {
+        return "redirect:/mensagem/"+ perfilRepository.findAll().get(1).getEmail();
     }
 
-    private void salvarMensagemDoAluno(MensagemDto mensagemDto, Principal principal) {
+    @GetMapping("{idAluno}")
+    public String carregarMensagensDoAluno(@PathVariable String idAluno, MensagemDto mensagemDto, Model modelo, Principal principal) {
+        super.setRepositories(this.perfilRepository, this.mensagemRepository);
+        Perfil perfilDoALuno = perfilRepository.findByEmail(idAluno);
+
+        modelo.addAttribute("alunos", listarAlunos(principal));
+        modelo.addAttribute("hora", mensagemRepository.findByPerfilId(perfilRepository.findByEmail(idAluno).getId()).get(1).getHoraFormatada());
+        
+        carregarMensagensDoChat(modelo, perfilDoALuno);
+
+        return "chat-personal";
+    }
+
+    @PostMapping("novaMensagemPersonal")
+    public String novaMensagemDoPersonal(@Valid MensagemDto mensagemDto, String email, Model modelo, BindingResult result, Principal principal) {
+        if (result.hasErrors()) {
+            return "chat-personal";
+        }
+        mensagemDto.setIdDestinatario(email);
         Mensagem mensagem = mensagemDto.toMensagem();
-        //mensagem.setDestinatarioId(perfilRepository.findByPermissaoPermissao("Personal").getId());
-        mensagem.setDestinatarioId(Long.valueOf(1));
+        mensagem.setDestinatarioId(perfilRepository.findByEmail(mensagemDto.getIdDestinatario()).getId());
+        salvarMensagem(mensagem, principal);
+        
+        return "redirect:/mensagem/" + email;
+    }
+
+    @PostMapping("novaMensagemAluno")
+    public String novaMensagemDoAluno(@Valid MensagemDto mensagemDto, Model modelo, BindingResult result, Principal principal) {
+        super.setRepositories(this.perfilRepository, this.mensagemRepository);
+        if (result.hasErrors()) {
+            return "redirect:/aulas";
+        }
+        Mensagem mensagem = mensagemDto.toMensagem();
+        mensagem.setDestinatarioId(perfilRepository.findByPermissaoPermissao("Personal").getId());
+        
+        salvarMensagem(mensagem, principal);
+
         Perfil perfil = perfilRepository.findByEmail(principal.getName());
-        mensagem.setPerfil(perfil);
-        perfil.setMensagens(mensagem);
-        mensagemRepository.save(mensagem);
+        carregarMensagensDoChat(modelo, perfil);
+
+        return "redirect:/aulas";
     }
 
 }

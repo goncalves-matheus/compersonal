@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<!--Sem Tópico -->
+<meta charset="UTF-8">
+
+<head th:replace="~{base :: head(Mensagens)}"></head>
+
+<body class="background">
+	<div class="geral" style="max-height: 50vh;">
+		<nav th:replace="~{base::navbar}"></nav>
+		<div class="container mt-1" style="max-width: 70vw;">
+
+			<div class="row rounded-lg overflow-hidden shadow">
+
+				<article class="col-4 px-0" style="background-color: white;">
+					<div class="bg-white">
+
+						<div class="bg-gray px-4 py-2 bg-light">
+							<p class="h5 mb-0 py-1">Meus Alunos</p>
+						</div>
+
+						<div class="messages-box">
+							<!-- campo com a lista de alunos -->
+							<div class="list-group rounded-0" style="background-color: white;">
+
+								<a th:each="aluno : ${alunos}" th:href="${aluno.email}"
+									class="list-group-item list-group-item-action  rounded-0">
+									<div class="d-flex align-items-center justify-content-between mb-1">
+										<img src="https://www.cursosabrafordes.com.br/webroot/img/cur_cursos/foto_1495509835.jpeg"
+											alt="user" width="50" height="50" class="rounded-circle">
+										<div>
+											<h6 th:text="${aluno.primeiroNome}" class="mb-0"></h6>
+											<small th:text="${hora}" class="small font-weight-bold"></small>
+										</div>
+									</div>
+								</a>
+
+							</div>
+						</div>
+
+					</div>
+				</article>
+
+				<!-- Chat -->
+				<article class="col-8 px-0 card container">
+					<div id="myChatBox" class="chat-box bg-white" style="min-height: 80vh;">
+						<div th:each="mensagem: ${mensagens}" th:switch="${mensagem.destinatarioId}" class="card-body">
+							<!-- Mensagem do Aluno -->
+							<div th:case="${personal.id}" class="d-flex justify-content-start mb-0">
+								<img src="https://www.cursosabrafordes.com.br/webroot/img/cur_cursos/foto_1495509835.jpeg"
+									alt="aluno" width="35" height="35" class="rounded-circle">
+								<div class=" ml-3">
+									<div class="bg-light  form-control">
+										<label th:text="${mensagem.texto}" class="mb-0 text-muted"></label>
+									</div>
+									<small th:text="${mensagem.horaFormatada}" class="text-muted"></small>
+								</div>
+							</div>
+							<!-- Mensagem do Instrutor -->
+							<div th:case="${perfil.id}" class="d-flex justify-content-end mb-0">
+								<div class="align-items-center">
+									<div class="cor-botao borda-botao rounded form-control">
+										<p th:text="${mensagem.texto}" class="mb-0 text-white"></p>
+									</div>
+									<p type="date" th:text="${mensagem.horaFormatada}" class="text-muted"
+										style="text-align: right;"></p>
+								</div>
+							</div>
+						</div>
+					</div>
+					<a onclick="scrollDown()" class="btn text-muted p-0">Ir Para Últimas Mensagens</a>
+					<!-- Imput -->
+					<form th:object="${mensagemDto}" th:action="@{/mensagem/novaMensagemPersonal}" method="POST"
+						class="bg-light">
+						<div class="input-group">
+							<input th:field="*{corpoDaMensagem}" placeholder="Escreva uma mensagem"
+								class="form-control rounded-0 border-0 mt-0 py-2 bg-light">
+							<div class="input-group-append">
+								<input type="hidden" name="email" th:value="${perfil.email}">
+								<button type="submit" class=" btn btn cor-botao fab fa-telegram-plane"></button>
+							</div>
+						</div>
+					</form>
+				</article>
+
+			</div>
+		</div>
+
+		<script>
+			var scrollDown = function (evt) {
+				var myChatBox = document.getElementById("myChatBox");
+				myChatBox.scrollTo(0,myChatBox.scrollHeight);
+			};
+		</script>
+
+		<script th:replace="~{base::script}"></script>
+	</div>
+</body>
+
+</html>

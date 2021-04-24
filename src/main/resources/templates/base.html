@@ -44,6 +44,8 @@
 					<li class="nav-item"><a class="nav-link text-light"
 						sec:authorize="!hasAnyAuthority('Personal')" href="/planos">Planos</a></li>
 					<li class="nav-item"><a class="nav-link text-light"
+						sec:authorize="!hasAnyAuthority('Usuario')" href="/mensagem">Mensagens</a></li>
+					<li class="nav-item"><a class="nav-link text-light"
 						sec:authorize="isAuthenticated()" href="/perfil"><i class="far fa-user"></i> Meu Perfil</a></li>
 					<li class="nav-item"><a class="nav-link text-light"
 						sec:authorize="!isAuthenticated()" href="/cadastro">Criar
