@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import compasso.estagio.grupo.projeto5.Telas.dto.MensagemDto;
+import compasso.estagio.grupo.projeto5.Telas.model.GestorDeMensagens;
 import compasso.estagio.grupo.projeto5.Telas.model.Mensagem;
 import compasso.estagio.grupo.projeto5.Telas.model.Perfil;
 import compasso.estagio.grupo.projeto5.Telas.model.Tipo;
@@ -28,17 +29,19 @@ public class AulasController {
 	@Autowired
 	AulaRepository aulaRepository;
 
-	@Autowired 
+	@Autowired
 	MensagemRepository mensagemRepository;
 
 	@Autowired
 	PerfilRepository perfilRepository;
 
+	GestorDeMensagens gestorDeMensagens = new GestorDeMensagens();
+
 	@GetMapping
 	public String aulas(Model modelo, MensagemDto mensagemDto, Principal principal) {
 
-		return "redirect:/aulas/"+aulaRepository.findAll().get(aulaRepository.findAll().size()-1).getTitulo();
-		
+		return "redirect:/aulas/" + aulaRepository.findAll().get(aulaRepository.findAll().size() - 1).getTitulo();
+
 	}
 
 	@GetMapping("/{titulo}")
@@ -50,26 +53,26 @@ public class AulasController {
 		modelo.addAttribute("perna", aulaRepository.findByTipo(Tipo.PERNAS));
 		modelo.addAttribute("braco", aulaRepository.findByTipo(Tipo.BRACOS));
 		modelo.addAttribute("peito", aulaRepository.findByTipo(Tipo.PEITO));
- 
-		carregarMensagensDoChat(modelo, principal);
+
+		carregarMensagensDoChat(modelo, perfilRepository.findByEmail(principal.getName()));
 
 		return "aulas";
 	}
+	
+	public void carregarMensagensDoChat(Model modelo, Perfil aluno) {
+        Perfil personal = perfilRepository.findByPermissaoPermissao("Personal");
 
-	private void carregarMensagensDoChat(Model modelo, Principal principal) {
-		Perfil perfil = perfilRepository.findByEmail(principal.getName());
-		List<Mensagem> mensagensDoAluno = mensagemRepository.findByPerfilId(perfil.getId());
-		List<Mensagem> mensagensDoPersonal = mensagemRepository.findByPerfilIdDestinatarioId(Long.valueOf(1), perfil.getId());
-		List<Mensagem> todasAsMensagens = Stream.concat(mensagensDoAluno.stream(), mensagensDoPersonal.stream()).collect(Collectors.toList());
+        List<Mensagem> mensagensDoAluno = mensagemRepository.findByPerfilId(aluno.getId());
+        List<Mensagem> mensagensDoPersonal = mensagemRepository.findByPerfilIdDestinatarioId(personal.getId(), aluno.getId());
+        List<Mensagem> todasAsMensagens = Stream.concat(mensagensDoAluno.stream(), mensagensDoPersonal.stream()).collect(Collectors.toList());
 
-		modelo.addAttribute("mensagensDoAluno", mensagensDoAluno);
-		modelo.addAttribute("mensagensDoPersonal", mensagensDoPersonal);
-		modelo.addAttribute("mensagens", todasAsMensagens);
+        Collections.sort(todasAsMensagens);
 
-		Collections.sort(todasAsMensagens);
-		for (Mensagem mensagem : todasAsMensagens) {
-			System.out.println(mensagem.getTexto());
-		}
+        modelo.addAttribute("perfil", aluno);
+        modelo.addAttribute("personal", personal);
 
-	}
+        modelo.addAttribute("mensagens", todasAsMensagens);
+        modelo.addAttribute("horaFinal", todasAsMensagens.get(todasAsMensagens.size()-1).getHoraFormatada());
+    }
+
 }

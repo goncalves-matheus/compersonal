@@ -1,12 +1,14 @@
 package compasso.estagio.grupo.projeto5.Telas.model;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
 
 @Entity
 public class Mensagem implements Comparable<Mensagem> {
@@ -18,6 +20,9 @@ public class Mensagem implements Comparable<Mensagem> {
     private String texto;
 
     public LocalDateTime dataEHorario = LocalDateTime.now();
+
+    @Transient
+    public String horaFormatada = this.dataEHorario.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
 
     public Long destinatarioId;
 
@@ -65,6 +70,10 @@ public class Mensagem implements Comparable<Mensagem> {
 
     public void setDestinatarioId(Long destinatarioId) {
         this.destinatarioId = destinatarioId;
+    }
+
+    public String getHoraFormatada(){
+        return this.dataEHorario.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
     }
 
     @Override

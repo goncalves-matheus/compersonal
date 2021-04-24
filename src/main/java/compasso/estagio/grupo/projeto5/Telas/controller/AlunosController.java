@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import compasso.estagio.grupo.projeto5.Telas.dto.UsuarioDto;
-import compasso.estagio.grupo.projeto5.Telas.model.ListaDeAlunos;
 import compasso.estagio.grupo.projeto5.Telas.model.Perfil;
 import compasso.estagio.grupo.projeto5.Telas.repository.PerfilRepository;
 
@@ -23,14 +22,13 @@ public class AlunosController {
 
 	@GetMapping
 	public String alunosAll(Model modelo, Principal principal) {
-		
-		/* ListaDeAlunos listaDeAlunos = new ListaDeAlunos(); */
+	
 		List<UsuarioDto> estudantes = getListaDeAlunos(principal);
 		modelo.addAttribute("estudantes", estudantes);
 		
 		return "alunos";
 	}
-
+	
     private List<UsuarioDto> getListaDeAlunos(Principal principal) {
 		List<Perfil> perfis = repository.findAll();
 		List<Perfil> personais = repository.findByPermissao(repository.findByEmail(principal.getName()).getPermissao());
@@ -38,7 +36,5 @@ public class AlunosController {
 		List<UsuarioDto> estudantes = UsuarioDto.converte(perfis);
 		return estudantes;
 	}
-
-	
 
 }

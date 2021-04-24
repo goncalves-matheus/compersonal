@@ -7,6 +7,7 @@ import javax.validation.constraints.NotBlank;
 import compasso.estagio.grupo.projeto5.Telas.model.Mensagem;
 
 public class MensagemDto {
+    
     @NotBlank
     private String corpoDaMensagem;
     private String idDestinatario;
@@ -14,21 +15,11 @@ public class MensagemDto {
 
     public Mensagem toMensagem(){
         Mensagem mensagem = new Mensagem();
-        mensagem.setDataEHorario(datetime);
+        mensagem.setDataEHorario(this.datetime);
         mensagem.setTexto(this.corpoDaMensagem);
 
         return mensagem;
     }
-
-    public Mensagem toMensagemDoPersonal(){
-        Mensagem mensagem = new Mensagem();
-        mensagem.setDataEHorario(datetime);
-        mensagem.setTexto(this.corpoDaMensagem);
-        System.out.println(idDestinatario);
-    
-        return mensagem;
-    }
-
 
     public String getCorpoDaMensagem() {
         return corpoDaMensagem;
@@ -53,4 +44,5 @@ public class MensagemDto {
     public void setIdDestinatario(String idDestinatario) {
         this.idDestinatario = idDestinatario;
     }
+    
 }
