@@ -26,17 +26,21 @@ public class GestorDeMensagens {
 
     public void carregarMensagensDoChat(Model modelo, Perfil aluno) {
         Perfil personal = perfilRepository.findByPermissaoPermissao("Personal");
+        try {
+            List<Mensagem> mensagensDoAluno = mensagemRepository.findByPerfilId(aluno.getId());
+            List<Mensagem> mensagensDoPersonal = mensagemRepository.findByPerfilIdDestinatarioId(personal.getId(), aluno.getId());
+            List<Mensagem> todasAsMensagens = Stream.concat(mensagensDoAluno.stream(), mensagensDoPersonal.stream()).collect(Collectors.toList());
 
-        List<Mensagem> mensagensDoAluno = mensagemRepository.findByPerfilId(aluno.getId());
-        List<Mensagem> mensagensDoPersonal = mensagemRepository.findByPerfilIdDestinatarioId(personal.getId(), aluno.getId());
-        List<Mensagem> todasAsMensagens = Stream.concat(mensagensDoAluno.stream(), mensagensDoPersonal.stream()).collect(Collectors.toList());
+            Collections.sort(todasAsMensagens);
 
-        Collections.sort(todasAsMensagens);
-
-        modelo.addAttribute("perfil", aluno);
-        modelo.addAttribute("personal", personal);
-        modelo.addAttribute("mensagens", todasAsMensagens);
-        modelo.addAttribute("horaFinal", todasAsMensagens.get(todasAsMensagens.size()-1).getHoraFormatada());
+            modelo.addAttribute("perfil", aluno);
+            modelo.addAttribute("personal", personal);
+            modelo.addAttribute("mensagens", todasAsMensagens);
+            modelo.addAttribute("horaFinal", todasAsMensagens.get(todasAsMensagens.size()-1).getHoraFormatada());
+        } catch (Exception e) {
+            modelo.addAttribute("erroMensagem", "O aluno ainda não enviou mensagens");
+        }
+        
     }
 
     public List<UsuarioDto> listarAlunos(Principal principal) {
