@@ -20,6 +20,8 @@ import compasso.estagio.grupo.projeto5.Telas.repository.PerfilRepository;
 @RequestMapping("/alunos")
 public class AlunosController {
 
+	private int cont;
+
 	@Autowired
 	private PerfilRepository perfilRepository;
 	
@@ -56,18 +58,22 @@ public class AlunosController {
 		}
 		modelo.addAttribute("aluno", u);
 		modelo.addAttribute("aulas", aulas);
-		
+		if(cont > 0) {
+			modelo.addAttribute("cadastrado", "Aula foi adicionada com sucesso!");
+			cont = 0;
+		}
 		return "uniPerfil";
 	}
 	
 	@PostMapping("/adicionarAula")
 	public String adicionarAula(String titulo, String email, Model modelo) {
-		
-		Perfil perfil = perfilRepository.findByEmail(email);
-		Aula aula = aulaRepository.findByTitulo(titulo);
-		perfil.setAulas(aula);
-		perfilRepository.save(perfil);
-		
+		if(!(titulo == null)) {
+			Perfil perfil = perfilRepository.findByEmail(email);
+			Aula aula = aulaRepository.findByTitulo(titulo);
+			perfil.setAulas(aula);
+			perfilRepository.save(perfil);
+			cont++;
+		}
 		return "redirect:/alunos/perfil/"+email;
 	}
 

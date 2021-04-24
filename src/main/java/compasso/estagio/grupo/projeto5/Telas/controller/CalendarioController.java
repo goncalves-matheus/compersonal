@@ -19,6 +19,7 @@ import compasso.estagio.grupo.projeto5.Telas.repository.PerfilRepository;
 public class CalendarioController {
 	
 	private int aux;
+	private int cont;
 
 	@Autowired
 	private AgendaRepositoy agendaRepository;
@@ -34,6 +35,11 @@ public class CalendarioController {
 			aux=0;
 		}
 		
+		if(cont>0) {
+			modelo.addAttribute("agenda", "Agendado com sucesso!");
+			cont=0;
+		}
+
 		return "calendario";
 	}
 
@@ -71,6 +77,7 @@ public class CalendarioController {
 			agenda.setStart(inicio);
 			agenda.setEnd(fim);
 			agendaRepository.save(agenda);
+			cont++;
 		}else {
 			aux++;
 		}

@@ -3,6 +3,7 @@ package compasso.estagio.grupo.projeto5.Telas.controller;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,15 +17,21 @@ import compasso.estagio.grupo.projeto5.Telas.repository.AulaRepository;
 @RequestMapping("inseriraula")
 public class InserirAula {
 
+	private int cont;
+
 	@Autowired
 	AulaRepository aulaRepository;
 
 	@GetMapping
-	public String inserir(AulaDto aulaDto) {
+	public String inserir(Model modelo,AulaDto aulaDto) {
+		if(cont > 0) {
+			modelo.addAttribute("cadastrado", "Aula cadastrada com sucesso!");
+			cont = 0;
+		}
 		return "inseriraula";
 	}
 
-	@PostMapping("/nova")
+	@PostMapping
 	public String novaAula(@Valid AulaDto aulaDto, BindingResult result) {
 		if (result.hasErrors()) {
 			return "inseriraula";
@@ -52,9 +59,8 @@ public class InserirAula {
 		}
 
 		aulaRepository.save(aula);
-
+		cont++;
 		aulaDto = null;
-
-		return "inseriraula";
+		return "redirect:inseriraula";
 	}
 }

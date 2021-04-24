@@ -19,6 +19,8 @@ import compasso.estagio.grupo.projeto5.Telas.repository.PerfilRepository;
 @RequestMapping("perfil")
 public class PerfilController {
 
+	private int up;
+
 	@Autowired
 	PerfilRepository repository;
 
@@ -29,8 +31,12 @@ public class PerfilController {
 		modelo.addAttribute("perfil", perfilDto);
 		modelo.addAttribute("email", principal.getName());
 		if(repository.findByEmail(principal.getName()).getInformacao()!=null) {
-		infoAdDto = infoAdDto.toInformacaoAdicionalDto(repository.findByEmail(principal.getName()).getInformacao());
-		modelo.addAttribute("infoAd", infoAdDto);
+			infoAdDto = infoAdDto.toInformacaoAdicionalDto(repository.findByEmail(principal.getName()).getInformacao());
+			modelo.addAttribute("infoAd", infoAdDto);
+			if(up>0) {
+				modelo.addAttribute("up", "Alterado com sucesso!");
+				up = 0;
+			}
 		}
 				
 		return "perfil";
@@ -47,7 +53,7 @@ public class PerfilController {
 		perfil.setPrimeiroNome(usuarioDto.getPrimeiroNome());
 		perfil.setUltimoNome(usuarioDto.getUltimoNome());
 		repository.save(perfil);
-
+		up++;
 		return "redirect:/perfil";
 	}
 	
@@ -61,7 +67,7 @@ public class PerfilController {
 		Perfil perfil = repository.findByEmail(principal.getName());
 		perfil.setInformacao(infoAdDto.toInformacoes(informacao));
 		repository.save(perfil);
-
+		up++;
 		return "redirect:/perfil";
 	}
 }

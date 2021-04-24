@@ -19,6 +19,12 @@
 					<button type="button" class="btn-close" data-bs-dismiss="alert"
 						aria-label="Close"></button>
 				</div>
+				<div th:if="${agenda}!=null" class="mt-2 alert alert-success alert-dismissible fade show"
+					role="alert">
+					<span th:text="${agenda}"></span>
+					<button type="button" class="btn-close" data-bs-dismiss="alert"
+						aria-label="Close"></button>
+				</div>
 				<div id='calendar' class="bg-light mt-3 mb-5 ms-5 p-3 "></div>
 			</div>
 
@@ -114,7 +120,12 @@
 									id="end"></span> <input type="hidden" name="fim"
 									class="form-control" id="end">
 							</div>
-							<button type="submit" class="btn cor-botao">Agendar</button>
+							<script>
+								function agendar() {
+									alert("Agendamento em análise!");
+								}
+							</script>
+							<button type="submit" onclick="agendar();" class="btn cor-botao">Agendar</button>
 						</form>
 					</div>
 					<div class="modal-footer">
