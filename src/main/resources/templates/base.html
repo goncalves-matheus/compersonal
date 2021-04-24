@@ -12,11 +12,11 @@
 	rel="stylesheet"
 	integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
 	crossorigin="anonymous">
-
+<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
 <link href='css/fullcalendar.min.css' rel='stylesheet' />
 <link href='css/fullcalendar.print.min.css' rel='stylesheet'
 	media='print' />
-
+<script src="https://kit.fontawesome.com/33f3498f19.js" crossorigin="anonymous"></script>
 
 </head>
 
@@ -44,24 +44,24 @@
 					<li class="nav-item"><a class="nav-link text-light"
 						sec:authorize="!hasAnyAuthority('Personal')" href="/planos">Planos</a></li>
 					<li class="nav-item"><a class="nav-link text-light"
-						sec:authorize="isAuthenticated()" href="/perfil">Meu Perfil</a></li>
+						sec:authorize="isAuthenticated()" href="/perfil"><i class="far fa-user"></i> Meu Perfil</a></li>
 					<li class="nav-item"><a class="nav-link text-light"
 						sec:authorize="!isAuthenticated()" href="/cadastro">Criar
 							conta</a></li>
 					<li class="nav-item"><a
 						onclick="document.querySelector('#form-login').submit()"
 						class="nav-link btn text-light modi" sec:authorize="isAuthenticated()"
-						href="#">Logout</a>
+						href="#"><i class="fas fa-sign-out-alt"></i></a>
 						<form id="form-login" th:action="@{/logout}" method="POST"></form>
 					</li>
 					<li class="nav-item"><a class="nav-link btn text-light modi"
-						sec:authorize="!isAuthenticated()" href="/login">Login</a></li>
+						sec:authorize="!isAuthenticated()" href="/login">Login <i class="fas fa-sign-in-alt"></i></a></li>
 				</ul>
 			</div>
 		</div>
 	</nav>
 
-	<div th:fragment="sidebar" class="bg-dark" style="height: 92vh;">
+	<div th:fragment="sidebar" class="bg-dark" style="max-height: 500vh;">
 		<nav class="navbar navbar-dark bg-dark d-flex flex-column"
 			style="position: relative; margin: 0px;">
 			<div class="container-fluid">
@@ -69,7 +69,7 @@
 					data-bs-toggle="collapse" data-bs-target="#sidebar"
 					aria-controls="sidebar" aria-expanded="false"
 					aria-label="Toggle navigation">
-					<span class="navbar-toggler-icon"></span>
+					<i class="fas fa-list"></i>
 				</button>
 			</div>
 		</nav>
@@ -88,22 +88,22 @@
 					<li><a href="/calendario"
 						sec:authorize="hasAnyAuthority('Usuario')"
 						class="nav-link text-white"><svg class="bi me-2" width="16"
-								height="16"></svg>Agendar Aula</a></li>
+								height="16"></svg><i class="far fa-calendar-alt"></i> Agendar Aula</a></li>
 					<li><a href="/calendario"
 						sec:authorize="hasAnyAuthority('Personal')"
 						class="nav-link text-white"><svg class="bi me-2" width="16"
-								height="16"></svg>Calendário</a></li>
+								height="16"></svg><i class="far fa-calendar-alt"></i> Calendário</a></li>
 					<li><a href="#" sec:authorize="hasAnyAuthority('Usuario')"
 						class="nav-link text-white"><svg class="bi me-2" width="16"
-								height="16"></svg>Meu Plano</a></li>
+								height="16"></svg><i class="far fa-credit-card"></i> Meu Plano</a></li>
 					<li><a href="/inseriraula"
 						sec:authorize="hasAnyAuthority('Personal')"
 						class="nav-link text-white"><svg class="bi me-2" width="16"
-								height="16"></svg>Criar Aula</a></li>
+								height="16"></svg><i class="far fa-edit"></i> Criar Aula</a></li>
 					<hr sec:authorize="hasAnyAuthority('Usuario')">
 					<li><a href="/aulas"
 						sec:authorize="hasAnyAuthority('Usuario')"
-						class="d-flex btn align-items-center text-white text-decoration-none">Minhas
+						class=" btn text-white text-decoration-none"><i class="fas fa-book"></i> Minhas
 							Aulas</a></li>
 					<hr>
 					<li>
@@ -169,6 +169,8 @@
 													maxTime : "21:00:00",
 													eventLimit : true,
 													selectable : true,
+													allDaySlot:false,
+													weekNumbers :true ,
 													fixedWeekCount : false,
 													selectHelper : true,
 													select : function(start,
@@ -212,7 +214,8 @@
 																.val(
 																		event.start);
 														$('#visualizar #end')
-																.val(event.end);
+														.val(
+																event.end.format('YYYY-MM-DD HH:mm:ss'));
 														$('#visualizar').modal(
 																'show');
 														return false;

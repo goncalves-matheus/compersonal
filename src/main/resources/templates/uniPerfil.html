@@ -16,13 +16,14 @@
 
 			<div class="container mt-3 mb-5 p-2">
 				<div class="col-md-12 col-lg-12">
+					<div th:if="${cadastrado}!=null"
+						class="mt-2 alert alert-success alert-dismissible fade show"
+						role="alert">
+						<span th:text="${cadastrado}"></span>
+						<button type="button" class="btn-close" data-bs-dismiss="alert"
+							aria-label="Close"></button>
+					</div>
 					<div class="card">
-						<div th:if="${cadastrado}!=null" class="mt-2 alert alert-success alert-dismissible fade show"
-								role="alert">
-								<span th:text="${cadastrado}"></span>
-								<button type="button" class="btn-close" data-bs-dismiss="alert"
-									aria-label="Close"></button>
-						</div>
 						<h5 class="card-header">Dados pessoais do aluno(a)</h5>
 						<p class="d-flex justify-content-end m-0 p-0">
 							<a data-bs-toggle="modal" href data-bs-target="#staticBackdrop"
@@ -147,23 +148,22 @@
 						</div>
 						<div class="modal-body">
 							<div class="card-body cor-borda">
-								<form th:each="aulas : ${aulas}" class="card-body" th:action="@{/alunos/adicionarAula}" method="POST">
-									<div th:if="${aulas.titulo} != null">
-										<div class="mb-3">
-											<h5>Selecione a aula:</h5>
-											<select class="form-select" name="titulo">
-												<option th:value="${aulas.titulo}"
-													th:text="${aulas.titulo}"></option>
-											</select>
-										</div>
-										<input type="hidden" name="email" th:value="${aluno.email}">
-										<script>
-											function add() {
-												alert("Adicionado com sucesso!");
-											}
-										</script>
-										<button type="submit" onclick="add();" class="btn cor-botao">Adicionar</button>
+								<form class="card-body" th:action="@{/alunos/adicionarAula}"
+									method="POST">
+									<div class="mb-3">
+										<h5>Selecione a aula:</h5>
+										<select class="form-select" name="titulo">
+											<option th:each="aulas : ${aulas}" th:value="${aulas.titulo}"
+												th:text="${aulas.titulo}"></option>
+										</select>
 									</div>
+									<input type="hidden" name="email" th:value="${aluno.email}">
+									<script>
+										function add() {
+											alert("Adicionado com sucesso!");
+										}
+									</script>
+									<button type="submit" onclick="add();" class="btn cor-botao">Adicionar</button>
 								</form>
 							</div>
 						</div>

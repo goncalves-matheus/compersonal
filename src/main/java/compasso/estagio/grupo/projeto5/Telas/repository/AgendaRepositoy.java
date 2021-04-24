@@ -17,4 +17,6 @@ public interface AgendaRepositoy extends JpaRepository<Agenda, Long> {
 
 	Agenda findByStart(String start);
 
+	ArrayList<Agenda> findByAluno(String aluno);
+
 }

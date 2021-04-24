@@ -1,7 +1,7 @@
 <meta charset="UTF-8">
 <div th:fragment="chat">
-    <button class="btn borda-botao" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom"
-        aria-controls="offcanvasBottom">Chat</svg>
+    <button class="btn borda-chat cor-chat fas fa-comments mt-1" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom"
+        aria-controls="offcanvasBottom">
     </button>
 
     <div class="offcanvas offcanvas-bottom" tabindex="-1" id="offcanvasBottom" aria-labelledby="offcanvasBottomLabel"
@@ -25,7 +25,7 @@
                 <div class="d-flex">
                     <input th:field="*{corpoDaMensagem}" th:errorclass="is-invalid" class="form-control align-bottom"
                         placeholder="Deixe uma mensagem">
-                    <button type="submit" class=" btn btn cor-botao">></button>
+                    <button type="submit" class=" btn btn cor-botao fab fa-telegram-plane"></button>
                 </div>
             </form>
         </div>
