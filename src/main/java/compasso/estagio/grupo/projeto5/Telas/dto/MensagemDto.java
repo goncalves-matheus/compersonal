@@ -7,14 +7,17 @@ import javax.validation.constraints.NotBlank;
 import compasso.estagio.grupo.projeto5.Telas.model.Mensagem;
 
 public class MensagemDto {
+    
     @NotBlank
     private String corpoDaMensagem;
+    private String idDestinatario;
     private LocalDateTime datetime = LocalDateTime.now();
 
     public Mensagem toMensagem(){
         Mensagem mensagem = new Mensagem();
-        mensagem.setDataEHorario(datetime);
+        mensagem.setDataEHorario(this.datetime);
         mensagem.setTexto(this.corpoDaMensagem);
+
         return mensagem;
     }
 
@@ -32,6 +35,14 @@ public class MensagemDto {
 
     public void setDatetime(LocalDateTime datetime) {
         this.datetime = datetime;
+    }
+    
+    public String getIdDestinatario() {
+        return idDestinatario;
+    }
+    
+    public void setIdDestinatario(String idDestinatario) {
+        this.idDestinatario = idDestinatario;
     }
     
 }
