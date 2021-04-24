@@ -7,7 +7,7 @@
 <head th:replace="~{base :: head(Mensagens)}"></head>
 
 <body class="background">
-	<div class="geral ">
+	<div class="geral" style="max-height: 50vh;">
 		<nav th:replace="~{base::navbar}"></nav>
 		<div class="container mt-1" style="max-width: 70vw;">
 
@@ -43,8 +43,8 @@
 				</article>
 
 				<!-- Chat -->
-				<article class="col-8 px-0 card container ">
-					<div class="chat-box bg-white" style="min-height: 80vh;">
+				<article class="col-8 px-0 card container">
+					<div id="myChatBox" class="chat-box bg-white" style="min-height: 80vh;">
 						<div th:each="mensagem: ${mensagens}" th:switch="${mensagem.destinatarioId}" class="card-body">
 							<!-- Mensagem do Aluno -->
 							<div th:case="${personal.id}" class="d-flex justify-content-start mb-0">
@@ -63,17 +63,19 @@
 									<div class="cor-botao borda-botao rounded form-control">
 										<p th:text="${mensagem.texto}" class="mb-0 text-white"></p>
 									</div>
-									<p type="date" th:text="${mensagem.horaFormatada}" class="text-muted" style="text-align: right;"></p>
+									<p type="date" th:text="${mensagem.horaFormatada}" class="text-muted"
+										style="text-align: right;"></p>
 								</div>
 							</div>
 						</div>
 					</div>
+					<a onclick="scrollDown()" class="btn text-muted p-0">Ir Para Últimas Mensagens</a>
 					<!-- Imput -->
 					<form th:object="${mensagemDto}" th:action="@{/mensagem/novaMensagemPersonal}" method="POST"
 						class="bg-light">
 						<div class="input-group">
 							<input th:field="*{corpoDaMensagem}" placeholder="Escreva uma mensagem"
-								class="form-control rounded-0 border-0 py-4 bg-light">
+								class="form-control rounded-0 border-0 mt-0 py-2 bg-light">
 							<div class="input-group-append">
 								<input type="hidden" name="email" th:value="${perfil.email}">
 								<button type="submit" class="btn cor-botao">Enviar</button>
@@ -84,7 +86,14 @@
 
 			</div>
 		</div>
-		
+
+		<script>
+			var scrollDown = function (evt) {
+				var myChatBox = document.getElementById("myChatBox");
+				myChatBox.scrollTo(0,myChatBox.scrollHeight);
+			};
+		</script>
+
 		<script th:replace="~{base::script}"></script>
 	</div>
 </body>
