@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import compasso.estagio.grupo.projeto5.Telas.dto.MensagemDto;
 import compasso.estagio.grupo.projeto5.Telas.model.Aula;
 import compasso.estagio.grupo.projeto5.Telas.model.GestorDeMensagens;
-import compasso.estagio.grupo.projeto5.Telas.model.Perfil;
 import compasso.estagio.grupo.projeto5.Telas.model.Tipo;
 import compasso.estagio.grupo.projeto5.Telas.repository.AulaRepository;
 import compasso.estagio.grupo.projeto5.Telas.repository.MensagemRepository;
@@ -34,15 +33,16 @@ public class AulasController extends GestorDeMensagens {
 
 	@GetMapping
 	public String aulas(Model modelo, MensagemDto mensagemDto, Principal principal) {
-
-		List<Aula> aulas = aulaRepository.findByAlunos(perfilRepository.findByEmail(principal.getName()));
-		return "redirect:/aulas/" + aulas.get(0).getTitulo();
+		try{
+			List<Aula> aulas = aulaRepository.findByAlunos(perfilRepository.findByEmail(principal.getName()));
+			return "redirect:/aulas/" + aulas.get(0).getTitulo();
+		}catch(Exception e){
+			return "redirect:/dashboard/aluno/erroAlunoSemAula";
+		}
 	}
-
+	
 	@GetMapping("/{titulo}")
 	public String AulaId(@PathVariable String titulo, Model modelo, MensagemDto mensagemDto, Principal principal) {
-
-		Perfil aluno = perfilRepository.findByEmail(principal.getName());
 
 		modelo.addAttribute("aula", aulaRepository.findByTitulo(titulo));
 		modelo.addAttribute("gluteo", aulaRepository.findByTipo(Tipo.GLUTEO));
@@ -52,7 +52,7 @@ public class AulasController extends GestorDeMensagens {
 		modelo.addAttribute("peito", aulaRepository.findByTipo(Tipo.PEITO));
 		
 		super.setRepositories(this.perfilRepository, this.mensagemRepository);
-		carregarMensagensDoChat(modelo, aluno);
+		carregarMensagensDoChat(modelo, perfilRepository.findByEmail(principal.getName()));
 
 		return "aulas";
 	}

@@ -16,6 +16,12 @@
 			<div th:replace="~{base::sidebar}"></div>
 			<div class="container">
 				<div class="p-5">
+					<div th:if="${erroAlunoSemAula}!=null" class="mt-2 alert alert-danger alert-dismissible fade show"
+					role="alert">
+					<span th:text="${erroAlunoSemAula}"></span>
+					<button type="button" class="btn-close" data-bs-dismiss="alert"
+						aria-label="Close"></button>
+				</div>
 					<div class="row d-flex justify-content-between">
 						<div class="row card mb-3 col-md-5 col-lg-6" th:each="aula : ${aulas}">
 							<div class="g-0">

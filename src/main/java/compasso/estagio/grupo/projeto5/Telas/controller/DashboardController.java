@@ -31,7 +31,15 @@ public class DashboardController {
 			aulas = aulas.subList(0, 10);
 		}
 		
-		modelo.addAttribute("aulas",aulas);
+		modelo.addAttribute("aulas", aulas);
+
+		return "dashboard_aluno";
+	}
+
+	@GetMapping("/aluno/erroAlunoSemAula")
+	public String alunoSemAulas(Model modelo) {
+
+		modelo.addAttribute("erroAlunoSemAula", "Sem aulas cadastradas, procure o inscrutor");
 
 		return "dashboard_aluno";
 	}
@@ -40,7 +48,7 @@ public class DashboardController {
 	public String aulaSelecionada(@PathVariable String titulo) {
 		return "redirect:/aulas/{titulo}";
 	}
-
+	
 	@GetMapping("/personal")
 	public String personal() {
 		return "redirect:/alunos";
