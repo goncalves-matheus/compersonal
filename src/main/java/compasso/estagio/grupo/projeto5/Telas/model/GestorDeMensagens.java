@@ -1,6 +1,7 @@
 package compasso.estagio.grupo.projeto5.Telas.model;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -28,26 +29,37 @@ public class GestorDeMensagens {
         Perfil personal = perfilRepository.findByPermissaoPermissao("Personal");
         try {
             List<Mensagem> mensagensDoAluno = mensagemRepository.findByPerfilId(aluno.getId());
-            List<Mensagem> mensagensDoPersonal = mensagemRepository.findByPerfilIdDestinatarioId(personal.getId(), aluno.getId());
-            List<Mensagem> todasAsMensagens = Stream.concat(mensagensDoAluno.stream(), mensagensDoPersonal.stream()).collect(Collectors.toList());
+            List<Mensagem> mensagensDoPersonal = mensagemRepository.findByPerfilIdDestinatarioId(personal.getId(),
+                    aluno.getId());
+            List<Mensagem> todasAsMensagens = Stream.concat(mensagensDoAluno.stream(), mensagensDoPersonal.stream())
+                    .collect(Collectors.toList());
 
             Collections.sort(todasAsMensagens);
 
             modelo.addAttribute("perfil", aluno);
             modelo.addAttribute("personal", personal);
             modelo.addAttribute("mensagens", todasAsMensagens);
-            modelo.addAttribute("horaFinal", todasAsMensagens.get(todasAsMensagens.size()-1).getHoraFormatada());
+            modelo.addAttribute("horaFinal", todasAsMensagens.get(todasAsMensagens.size() - 1).getHoraFormatada());
         } catch (Exception e) {
             modelo.addAttribute("erroMensagem", "O aluno ainda não enviou mensagens");
         }
-        
+
     }
 
     public List<UsuarioDto> listarAlunos(Principal principal) {
         List<Perfil> perfis = perfilRepository.findAll();
-        List<Perfil> personais = perfilRepository.findByPermissao(perfilRepository.findByEmail(principal.getName()).getPermissao());
-        perfis.removeAll(personais);
-        List<UsuarioDto> alunos = UsuarioDto.converte(perfis);
+        List<Perfil> alunosComMensagens = new ArrayList<Perfil>();
+        Long idPersonal = perfilRepository.findByPermissaoPermissao("Personal").getId();
+        for (Perfil perfil : perfis) {
+            if (!mensagemRepository.findByPerfilIdDestinatarioId(perfil.getId(),idPersonal).isEmpty()
+                    || !mensagemRepository.findByPerfilIdDestinatarioId(idPersonal, perfil.getId()).isEmpty()) {
+                alunosComMensagens.add(perfil);
+            }
+        }
+        Perfil personal = perfilRepository.findByPermissaoPermissao("Personal");
+        alunosComMensagens.remove(personal);
+
+        List<UsuarioDto> alunos = UsuarioDto.converte(alunosComMensagens);
         return alunos;
     }
 
@@ -55,5 +67,5 @@ public class GestorDeMensagens {
         this.perfilRepository = perfilRepository;
         this.mensagemRepository = mensagemRepository;
     }
-    
+
 }

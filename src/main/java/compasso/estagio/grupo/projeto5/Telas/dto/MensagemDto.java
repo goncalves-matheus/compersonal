@@ -7,8 +7,8 @@ import javax.validation.constraints.NotBlank;
 import compasso.estagio.grupo.projeto5.Telas.model.Mensagem;
 
 public class MensagemDto {
-    
-    @NotBlank
+    /* 
+    @NotBlank */
     private String corpoDaMensagem;
     private String idDestinatario;
     private LocalDateTime datetime = LocalDateTime.now();
