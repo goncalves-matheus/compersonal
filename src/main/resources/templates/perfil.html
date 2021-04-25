@@ -57,8 +57,9 @@
 
 								<div class="col-sm-6 ">
 									<div class="d-flex justify-content-between">
-										<label for="novaSenha" class="form-label">Senha</label> <a
-											data-bs-toggle="modal" th:href="'#' +${trocarSenha.id}"
+										<label for="novaSenha" class="form-label">Senha</label> 
+										<a
+											data-bs-toggle="modal" th:href=""
 											data-bs-target="#staticBackdrop" class="text-secondary ">Mudar
 											Senha</a>
 									</div>
@@ -168,7 +169,7 @@
 				</div>
 			</div>
 
-			<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" th:id="${trocarSenha.id}"
+			<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static"
 				data-bs-keyboard="false" tabindex="-1"
 				aria-labelledby="staticBackdropLabel" aria-hidden="true">
 				<div class="modal-dialog">
