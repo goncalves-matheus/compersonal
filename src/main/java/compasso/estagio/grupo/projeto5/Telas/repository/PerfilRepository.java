@@ -1,5 +1,6 @@
 package compasso.estagio.grupo.projeto5.Telas.repository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -19,5 +20,10 @@ public interface PerfilRepository extends JpaRepository<Perfil, Long>{
 	List<Perfil> findByPermissao(Permissao permissao);
 
 	Perfil findByPermissaoPermissao(String persmissao);
+
+    Perfil findByPrimeiroNome(String buscarAluno);
+
+    List<Perfil> findAllByPrimeiroNome(String buscarAluno);
+
 
 }

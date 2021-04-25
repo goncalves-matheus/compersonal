@@ -17,6 +17,10 @@ public interface MensagemRepository extends JpaRepository<Mensagem, Long>{
 	
     List<Mensagem> findByPerfilId(Long id);
 
+    List<Mensagem> findByDestinatarioId(Long id);
+
     @Query("select m from Mensagem m where destinatario_id = :destinatario_id and perfil_id = :perfil_id")
 	List<Mensagem> findByPerfilIdDestinatarioId(@Param("perfil_id")Long perfil_id, @Param("destinatario_id")Long destinatario_id);
+
+    
 }

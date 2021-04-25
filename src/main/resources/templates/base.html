@@ -105,6 +105,10 @@
 				</a>
 				<hr>
 				<ul class="nav nav-pills flex-column mb-auto sidebar">
+					<li><a href="/alunos"
+						sec:authorize="hasAnyAuthority('Personal')"
+						class="nav-link text-white"><svg class="bi me-2" width="16"
+								height="16"></svg><i class="far fa-calendar-alt"></i> Meus Alunos</a></li>
 					<li><a href="/calendario"
 						sec:authorize="hasAnyAuthority('Usuario')"
 						class="nav-link text-white"><svg class="bi me-2" width="16"
