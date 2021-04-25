@@ -64,8 +64,16 @@ public class AlunosController {
 		} else {
 			modelo.addAttribute("info", null);
 		}
+		
+		if(aulas.isEmpty()) {
+			modelo.addAttribute("SemAula", "Sem mais aulas!");
+			modelo.addAttribute("aulas", null);
+		}else {
+			modelo.addAttribute("aulas", aulas);
+		}
+		
 		modelo.addAttribute("aluno", u);
-		modelo.addAttribute("aulas", aulas);
+		
 		if(cont > 0) {
 			modelo.addAttribute("cadastrado", "Aula foi adicionada com sucesso!");
 			cont = 0;

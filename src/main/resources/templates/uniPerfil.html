@@ -9,169 +9,170 @@
 <body class="background">
 	<main class="geral">
 		<div>
-		<nav th:replace="~{base::navbar}"></nav>
+			<nav th:replace="~{base::navbar}"></nav>
 
 
-		<article class="d-flex align-items-stretch">
-			<div th:replace="~{base::sidebar}"></div>
+			<article class="d-flex align-items-stretch">
+				<div th:replace="~{base::sidebar}"></div>
 
-			<div class="container mt-3 mb-5 p-2">
-				<div class="col-md-12 col-lg-12">
-					<div th:if="${cadastrado}!=null"
-						class="mt-2 alert alert-success alert-dismissible fade show"
-						role="alert">
-						<span th:text="${cadastrado}"></span>
-						<button type="button" class="btn-close" data-bs-dismiss="alert"
-							aria-label="Close"></button>
-					</div>
-					<div class="card">
-						<h5 class="card-header">Dados pessoais do aluno(a)</h5>
-						<p class="d-flex justify-content-end m-0 p-0">
-							<a data-bs-toggle="modal" href data-bs-target="#staticBackdrop"
-								class="link-secondary d-flex justify-content-end p-0 mx-2"
-								max-width="10">Adicionar Aula</a>
-						</p>
-						<form th:object="${aluno}" class="card-body mb-0 mt-3 pb-0"
-							th:action="@{/perfil/alterar}" method="POST">
+				<div class="container mt-3 mb-5 p-2">
+					<div class="col-md-12 col-lg-12">
+						<div th:if="${cadastrado}!=null"
+							class="mt-2 alert alert-success alert-dismissible fade show"
+							role="alert">
+							<span th:text="${cadastrado}"></span>
+							<button type="button" class="btn-close" data-bs-dismiss="alert"
+								aria-label="Close"></button>
+						</div>
+						<div class="card">
+							<h5 class="card-header">Dados pessoais do aluno(a)</h5>
+							<p class="d-flex justify-content-end m-0 p-0">
+								<a data-bs-toggle="modal" href data-bs-target="#staticBackdrop"
+									class="link-secondary d-flex justify-content-end p-0 mx-2"
+									max-width="10">Adicionar Aula</a>
+							</p>
+							<form th:object="${aluno}" class="card-body mb-0 mt-3 pb-0"
+								th:action="@{/perfil/alterar}" method="POST">
 
-							<div class="form-input-container">
-								<h4 for="foto" class="text-center">Foto</h4>
-							</div>
-							<div class="text-center">
-								<img width="200" height="200"
-									src="https://www.cursosabrafordes.com.br/webroot/img/cur_cursos/foto_1495509835.jpeg"
-									class="rounded-circle" alt="">
-							</div>
-
-							<div class="row g-3">
-								<div class="col-sm-6">
-									<label for="primeiroNome" class="form-label">Nome</label> <input
-										th:field="*{primeiroNome}" id="primeiroNome"
-										class="form-control" disabled>
+								<div class="form-input-container">
+									<h4 for="foto" class="text-center">Foto</h4>
+								</div>
+								<div class="text-center">
+									<img width="200" height="200"
+										src="https://www.cursosabrafordes.com.br/webroot/img/cur_cursos/foto_1495509835.jpeg"
+										class="rounded-circle" alt="">
 								</div>
 
-								<div class="col-sm-6">
-									<label for="ultimoNome" class="form-label">Sobrenome</label> <input
-										th:field="*{ultimoNome}" type="text" id="ultimonome"
-										class="form-control" disabled>
-								</div>
-
-								<div class="col-sm-6">
-									<label for="email" class="form-label">Email</label> <input
-										th:field="*{email}" type="email" class="form-control"
-										id="email" disabled>
-								</div>
-
-								<div class="col-sm-6 ">
-									<div class="d-flex justify-content-between">
-										<label for="novaSenha" class="form-label">Senha</label>
+								<div class="row g-3">
+									<div class="col-sm-6">
+										<label for="primeiroNome" class="form-label">Nome</label> <input
+											th:field="*{primeiroNome}" id="primeiroNome"
+											class="form-control" disabled>
 									</div>
-									<input type="password" class="form-control" id="novaSenha"
-										placeholder="Nova senha" value="123123123" disabled required>
-								</div>
-							</div>
-						</form>
-						<br class="mb-0 mt-5" th:if="${info}==null">
 
-						<div th:if="${info}!=null">
-							<hr class="mb-0 mt-5">
-							<h4 class="mb-4 card-header">Informações Adicionais</h4>
-							<form>
-								<div class="container">
-									<div class="row g-3">
-										<div class="col-sm-6">
-											<div class="col-12">
-												<label for="altura" class="form-label">Altura</label>
-												<div class="row">
-													<div class="col-5 pe-0">
-														<input type="text" class="form-control"
-															th:value="${info.altura}" disabled>
-													</div>
-													<span class="col-7 mt-1 ps-1">m</span>
-												</div>
-											</div>
+									<div class="col-sm-6">
+										<label for="ultimoNome" class="form-label">Sobrenome</label> <input
+											th:field="*{ultimoNome}" type="text" id="ultimonome"
+											class="form-control" disabled>
+									</div>
 
-											<div class="col-12 mt-1">
-												<label for="peso" class="form-label">Peso</label>
-												<div class="row">
-													<div class="col-5 pe-0">
-														<input type="text" class="form-control"
-															th:value="${info.peso}" disabled>
-													</div>
-													<span class="col-7 mt-1 ps-1">kg</span>
-												</div>
-											</div>
+									<div class="col-sm-6">
+										<label for="email" class="form-label">Email</label> <input
+											th:field="*{email}" type="email" class="form-control"
+											id="email" disabled>
+									</div>
+
+									<div class="col-sm-6 ">
+										<div class="d-flex justify-content-between">
+											<label for="novaSenha" class="form-label">Senha</label>
 										</div>
-
-										<div class="col-sm-6 ">
-											<div class="col-12 mt-1">
-												<label for="sexo" class="form-label">Sexo</label>
-												<div class="row">
-													<div class="col-5 pe-0">
-														<input type="text" class="form-control"
-															th:value="${info.genero}" disabled>
-													</div>
-												</div>
-											</div>
-
-											<div class="col-12 mt-1">
-												<label for="ProblemaDeSaude" class="form-label">Problemas
-													de Saúde</label>
-												<div class="row">
-													<div class="col-5 pe-0">
-														<input type="text" class="form-control"
-															th:value="${info.problemaDeSaude}" disabled>
-													</div>
-												</div>
-											</div>
-
-											<br class="mb-0 mt-3">
-
-										</div>
+										<input type="password" class="form-control" id="novaSenha"
+											placeholder="Nova senha" value="123123123" disabled required>
 									</div>
 								</div>
 							</form>
-						</div>
-					</div>
-				</div>
-			</div>
+							<br class="mb-0 mt-5" th:if="${info}==null">
 
-			<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static"
-				data-bs-keyboard="false" tabindex="-1"
-				aria-labelledby="staticBackdropLabel" aria-hidden="true">
-				<div class="modal-dialog">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h5 class="modal-title" id="staticBackdropLabel">Adicionar
-								aula</h5>
-							<button type="button" class="btn-close" data-bs-dismiss="modal"
-								aria-label="Close"></button>
-						</div>
-						<div class="modal-body">
-							<div class="card-body cor-borda">
-								<form class="card-body" th:action="@{/alunos/adicionarAula}"
-									method="POST">
-									<div class="mb-3">
-										<h5>Selecione a aula:</h5>
-										<select class="form-select" name="titulo">
-											<option th:each="aulas : ${aulas}" th:value="${aulas.titulo}"
-												th:text="${aulas.titulo}"></option>
-										</select>
+							<div th:if="${info}!=null">
+								<hr class="mb-0 mt-5">
+								<h4 class="mb-4 card-header">Informações Adicionais</h4>
+								<form>
+									<div class="container">
+										<div class="row g-3">
+											<div class="col-sm-6">
+												<div class="col-12">
+													<label for="altura" class="form-label">Altura</label>
+													<div class="row">
+														<div class="col-5 pe-0">
+															<input type="text" class="form-control"
+																th:value="${info.altura}" disabled>
+														</div>
+														<span class="col-7 mt-1 ps-1">m</span>
+													</div>
+												</div>
+
+												<div class="col-12 mt-1">
+													<label for="peso" class="form-label">Peso</label>
+													<div class="row">
+														<div class="col-5 pe-0">
+															<input type="text" class="form-control"
+																th:value="${info.peso}" disabled>
+														</div>
+														<span class="col-7 mt-1 ps-1">kg</span>
+													</div>
+												</div>
+											</div>
+
+											<div class="col-sm-6 ">
+												<div class="col-12 mt-1">
+													<label for="sexo" class="form-label">Sexo</label>
+													<div class="row">
+														<div class="col-5 pe-0">
+															<input type="text" class="form-control"
+																th:value="${info.genero}" disabled>
+														</div>
+													</div>
+												</div>
+
+												<div class="col-12 mt-1">
+													<label for="ProblemaDeSaude" class="form-label">Problemas
+														de Saúde</label>
+													<div class="row">
+														<div class="col-5 pe-0">
+															<input type="text" class="form-control"
+																th:value="${info.problemaDeSaude}" disabled>
+														</div>
+													</div>
+												</div>
+
+												<br class="mb-0 mt-3">
+
+											</div>
+										</div>
 									</div>
-									<input type="hidden" name="email" th:value="${aluno.email}">
-									<script>
-										function add() {
-											alert("Adicionado com sucesso!");
-										}
-									</script>
-									<button type="submit" onclick="add();" class="btn cor-botao">Adicionar</button>
 								</form>
 							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-		</article>
+
+				<div class="modal fade" id="staticBackdrop"
+					data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+					aria-labelledby="staticBackdropLabel" aria-hidden="true">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="staticBackdropLabel">Adicionar
+									aula</h5>
+								<button type="button" class="btn-close" data-bs-dismiss="modal"
+									aria-label="Close"></button>
+							</div>
+							<div class="modal-body">
+								<div class="card-body cor-borda">
+									<span th:if="${aulas}==null" th:text="${SemAula}"></span>
+									<form th:if="${aulas}!=null" class="card-body" th:action="@{/alunos/adicionarAula}"
+										method="POST">
+										<div class="mb-3">
+											<h5>Selecione a aula:</h5>
+											<select class="form-select" name="titulo">
+												<option th:each="aulas : ${aulas}"
+													th:value="${aulas.titulo}" th:text="${aulas.titulo}"></option>
+											</select>
+										</div>
+										<input type="hidden" name="email" th:value="${aluno.email}">
+										<script>
+											function add() {
+												alert("Adicionado com sucesso!");
+											}
+										</script>
+										<button type="submit" onclick="add();" class="btn cor-botao">Adicionar</button>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</article>
 		</div>
 		<footer th:replace="~{base::footer}"></footer>
 		<script th:replace="~{base::script}"></script>
