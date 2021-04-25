@@ -16,11 +16,12 @@
 				<div class="container mt-3">
 					<div class="row">
 						<div class="col-4">
-							<div class="card text-white"
+							<div class="card text-cente p-6 text-white"
 								style="min-height:360px; background-color: rgba(236, 100, 75, 1)">
-								<div class="card-body d-flex justify-content-center align-content-center flex-wrap">
-									<p class="fs-1 fw-bold">40</p>
-									<p class="fs-5">Alunos</p>
+								<!-- <div class="card-body d-flex justify-content-center align-content-center flex-wrap"> -->
+								<div class="card-body">
+									<p th:text="${quandidadeDeAlunos}" class="fs-1 fw-bold"></p>
+									<p class="fs-5">Alunos Matrículados</p>
 								</div>
 							</div>
 							<div class="card mb-3 text-center text-white"
@@ -32,39 +33,46 @@
 							</div>
 						</div>
 						<div class="col-8 row">
-							<div class="card col-6 text-center text-white"
+							<div class="card col-4 text-center text-white"
 								style="min-height:180px; background-color: rgba(236, 100, 75, 1)">
 								<div class="card-body">
-									<p class="fs-1 fw-bold mb-0 mt-3">40</p>
-									<p class="fs-5 mb-0">Alunos</p>
+									<p th:text="${quantidadeDeHorasNoDia}+h" class="fs-1 fw-bold mb-0 mt-3"></p>
+									<p class="fs-5 mb-0">Horas hoje</p>
 								</div>
 							</div>
-							<div class="card col-6 text-center text-white"
+							<div class="card col-4 text-center text-white"
 								style="min-height:180px; background-color: rgba(236, 100, 75, 1);">
 								<div class="card-body">
-									<p class="fs-1 fw-bold mb-0 mt-3">6</p>
-									<p class="fs-5 mb-0">Aulas na Semana</p>
+									<p th:text="${quantidadeDeHorasNaSemana}+h" class="fs-1 fw-bold mb-0 mt-3">6</p>
+									<p class="fs-5 mb-0">Horas na Semana</p>
+								</div>
+							</div>
+							<div class="card col-4 text-center text-white"
+								style="min-height:180px; background-color: rgba(236, 100, 75, 1)">
+								<div class="card-body">
+									<p th:text="${quantidadeDeHorasNoMes}+h" class="fs-1 fw-bold mb-0 mt-3">15</p>
+									<p class="fs-5 mb-0">Horas no Mês</p>
 								</div>
 							</div>
 							<div class="card col-6 text-center text-white"
 								style="min-height:180px; background-color: rgba(236, 100, 75, 1)">
 								<div class="card-body">
-									<p class="fs-1 fw-bold mb-0 mt-3">15</p>
-									<p class="fs-5 mb-0">Aulas no Mês</p>
+									<p th:text="${quantidadeDeAulasOcupadas}" class="fs-1 fw-bold mb-0 mt-3"></p>
+									<p class="fs-5 mb-0">Agendamentos Reservados</p>
 								</div>
 							</div>
 							<div class="card col-6 text-center text-white"
 								style="min-height:180px; background-color: rgba(236, 100, 75, 1)">
 								<div class="card-body">
-									<p class="fs-1 fw-bold mb-0 mt-3">25</p>
-									<p class="fs-5 mb-0">Vídeoaulas</p>
+									<p th:text="${quantidadeDeAulasLivres}" class="fs-1 fw-bold mb-0 mt-3"></p>
+									<p class="fs-5 mb-0">Agendamentos Disponíveis</p>
 								</div>
 							</div>
 							<div class="card col-12 mb-3 me-2 text-center text-white"
 								style="min-height:180px; background-color: rgba(236, 100, 75, 1)">
 								<div class="card-body">
-									<p class="fs-1 fw-bold mb-0 mt-3">35h</p>
-									<p class="fs-5 mb-0">Horas Trabalhadas</p>
+									<p th:text="${quandidadeDeVideoaulas}" class="fs-1 fw-bold mb-0 mt-3">35h</p>
+									<p class="fs-5 mb-0">Aulas Dispovíeis Em Vídeo</p>
 								</div>
 							</div>
 						</div>
