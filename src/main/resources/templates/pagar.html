@@ -5,8 +5,8 @@
 <!-- Tópico 3.6 -->
 
 <head th:replace="~{base :: head(Pagamento)}"></head>
-<body>
-	<div class="geral">
+<body class="index">
+	<main class="geral">
 		<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
 		  <symbol id="check" viewBox="0 0 16 16">
 		    <title>Check</title>
@@ -26,7 +26,7 @@
 					com base nas opções a seguir.</p>
 			</div>
 
-			<main>
+			<article>
 				<div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
 					<div class="col">
 						<div class="card mb-4 rounded-3 shadow-sm cor-borda-pagamento">
@@ -43,9 +43,8 @@
 									<li>3 primeiras aulas do curso</li>
 									<li>1 e-book gratuito</li>
 								</ul>
-								<a type="button"
-									class="w-100 btn btn-lg borda-botao botao-test" href="/cadastro">Começe
-									o teste</a>
+								<a type="button" class="w-100 btn btn-lg borda-botao botao-test"
+									href="/cadastro">Começe o teste</a>
 							</div>
 						</div>
 					</div>
@@ -174,10 +173,10 @@
 						</tbody>
 					</table>
 				</div>
-			</main>
+			</article>
 		</div>
 		<footer th:replace="~{base::footer}"></footer>
 		<script th:replace="~{base:: script}"></script>
-	</div>
+	</main>
 </body>
 </html>
