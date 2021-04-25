@@ -51,7 +51,7 @@ public class DashboardController {
 	
 	@GetMapping("/personal")
 	public String personal() {
-		return "redirect:/alunos";
+		return "dashboard_personal";
 	}
 
 }

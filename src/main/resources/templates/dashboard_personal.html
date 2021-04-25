@@ -9,12 +9,68 @@
 <body class="background">
 	<main class="geral">
 		<div>
-		<nav th:replace="~{base::navbar}"></nav>
+			<nav th:replace="~{base::navbar}"></nav>
 
-		<article class="d-flex align-items-stretch">
-			<div th:replace="~{base::sidebar}"></div>
-
-		</article>
+			<article class="d-flex align-items-stretch">
+				<div th:replace="~{base::sidebar}"></div>
+				<div class="container mt-3">
+					<div class="row">
+						<div class="col-4">
+							<div class="card text-white"
+								style="min-height:360px; background-color: rgba(236, 100, 75, 1)">
+								<div class="card-body d-flex justify-content-center align-content-center flex-wrap">
+									<p class="fs-1 fw-bold">40</p>
+									<p class="fs-5">Alunos</p>
+								</div>
+							</div>
+							<div class="card mb-3 text-center text-white"
+								style="min-height:180px; background-color: rgba(236, 100, 75, 1)">
+								<div class="card-body">
+									<p class="fs-1 fw-bold mb-0 mt-3">R$1.685</p>
+									<p class="fs-5 mb-0">Renda do Mês</p>
+								</div>
+							</div>
+						</div>
+						<div class="col-8 row">
+							<div class="card col-6 text-center text-white"
+								style="min-height:180px; background-color: rgba(236, 100, 75, 1)">
+								<div class="card-body">
+									<p class="fs-1 fw-bold mb-0 mt-3">40</p>
+									<p class="fs-5 mb-0">Alunos</p>
+								</div>
+							</div>
+							<div class="card col-6 text-center text-white"
+								style="min-height:180px; background-color: rgba(236, 100, 75, 1);">
+								<div class="card-body">
+									<p class="fs-1 fw-bold mb-0 mt-3">6</p>
+									<p class="fs-5 mb-0">Aulas na Semana</p>
+								</div>
+							</div>
+							<div class="card col-6 text-center text-white"
+								style="min-height:180px; background-color: rgba(236, 100, 75, 1)">
+								<div class="card-body">
+									<p class="fs-1 fw-bold mb-0 mt-3">15</p>
+									<p class="fs-5 mb-0">Aulas no Mês</p>
+								</div>
+							</div>
+							<div class="card col-6 text-center text-white"
+								style="min-height:180px; background-color: rgba(236, 100, 75, 1)">
+								<div class="card-body">
+									<p class="fs-1 fw-bold mb-0 mt-3">R$1.685</p>
+									<p class="fs-5 mb-0">Renda do Mês</p>
+								</div>
+							</div>
+							<div class="card col-12 mb-3 me-2 text-center text-white"
+								style="min-height:180px; background-color: rgba(236, 100, 75, 1)">
+								<div class="card-body">
+									<p class="fs-1 fw-bold mb-0 mt-3">35h</p>
+									<p class="fs-5 mb-0">Horas Trabalhadas</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</article>
 		</div>
 		<footer th:replace="~{base::footer}"></footer>
 		<div th:replace="~{base::script}"></div>
