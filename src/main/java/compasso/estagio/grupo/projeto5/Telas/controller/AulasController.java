@@ -33,28 +33,37 @@ public class AulasController extends GestorDeMensagens {
 
 	@GetMapping
 	public String aulas(Model modelo, MensagemDto mensagemDto, Principal principal) {
-		try{
+		try {
 			List<Aula> aulas = aulaRepository.findByAlunos(perfilRepository.findByEmail(principal.getName()));
-			return "redirect:/aulas/" + aulas.get(0).getTitulo();
-		}catch(Exception e){
+
+			adiconarModelo(aulas.get(0).getTitulo(), modelo);
+			super.setRepositories(this.perfilRepository, this.mensagemRepository);
+			carregarMensagensDoChat(modelo, perfilRepository.findByEmail(principal.getName()));
+
+			return "aulas";
+		} catch (Exception e) {
 			return "redirect:/dashboard/aluno/erroAlunoSemAula";
 		}
 	}
-	
+
 	@GetMapping("/{titulo}")
 	public String AulaId(@PathVariable String titulo, Model modelo, MensagemDto mensagemDto, Principal principal) {
 
+		adiconarModelo(titulo, modelo);
+
+		super.setRepositories(this.perfilRepository, this.mensagemRepository);
+		carregarMensagensDoChat(modelo, perfilRepository.findByEmail(principal.getName()));
+
+		return "aulas";
+	}
+
+	private void adiconarModelo(String titulo, Model modelo) {
 		modelo.addAttribute("aula", aulaRepository.findByTitulo(titulo));
 		modelo.addAttribute("gluteo", aulaRepository.findByTipo(Tipo.GLUTEO));
 		modelo.addAttribute("abdomen", aulaRepository.findByTipo(Tipo.ABDOMEN));
 		modelo.addAttribute("perna", aulaRepository.findByTipo(Tipo.PERNAS));
 		modelo.addAttribute("braco", aulaRepository.findByTipo(Tipo.BRACOS));
 		modelo.addAttribute("peito", aulaRepository.findByTipo(Tipo.PEITO));
-		
-		super.setRepositories(this.perfilRepository, this.mensagemRepository);
-		carregarMensagensDoChat(modelo, perfilRepository.findByEmail(principal.getName()));
-
-		return "aulas";
 	}
 
 }

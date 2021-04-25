@@ -6,6 +6,7 @@
 	background-position: 0% -10%;
 	position: relative;
 	background-size: cover;
+	background-color: rgba(141, 141, 141, 0.6);
 }
 
 .background main {
@@ -13,6 +14,13 @@
     position: absolute;
     width: 100%;
     background-color: rgba(141, 141, 141, 0.6);
+}
+
+.index main {
+	min-height: 100%;
+    position: absolute;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.6);
 }
 
 .fonte-branca {

@@ -40,7 +40,6 @@ public class DashboardController {
 		if (aulas.size() > 10) {
 			aulas = aulas.subList(0, 10);
 		}
-
 		modelo.addAttribute("aulas", aulas);
 
 		return "dashboard_aluno";
