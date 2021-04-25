@@ -22,7 +22,7 @@ public class Seguranca extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests().antMatchers("/*.css", "/*.jpeg","/*.js").permitAll()
 				.antMatchers("/", "/recuperar/**","/cadastro", "/cadastro/*", "/planos").permitAll()
 				.antMatchers("/dashboard/aluno").hasAuthority("Usuario")
-				.antMatchers("/dashboard/personal","/inseriraula/**","/alunos").hasAuthority("Personal")
+				.antMatchers("/dashboard/personal","/inseriraula/**","/alunos","/mensagem/**").hasAuthority("Personal")
 				.anyRequest().authenticated()
 				.and()
 				.formLogin(form -> form.loginPage("/login").permitAll().defaultSuccessUrl("/", true))
