@@ -12,13 +12,7 @@
 	min-height: 100%;
     position: absolute;
     width: 100%;
-    background-color: rgba(43, 80, 142, 0.9);
-	opacity: 0.9;
-}
-
-div {
-    position: relative;
-    z-index: 2;
+    background-color: rgba(141, 141, 141, 0.6);
 }
 
 .fonte-branca {
