@@ -17,9 +17,6 @@ public class AulaDto {
 	private String descricao;
 
 	@NotBlank
-	private String pdf;
-
-	@NotBlank
 	private String tipo;
 
 	public String getTitulo() {
@@ -44,14 +41,6 @@ public class AulaDto {
 
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
-	}
-
-	public String getPdf() {
-		return pdf;
-	}
-
-	public void setPdf(String pdf) {
-		this.pdf = pdf;
 	}
 
 	public String getTipo() {

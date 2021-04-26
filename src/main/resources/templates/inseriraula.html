@@ -47,10 +47,11 @@
 						</div>
 						<div class="mb-2">
 							<label for="pdf" class="form-label">Arquivo PDF</label> <input
-								th:errorclass="is-invalid" id="pdf" th:field="*{pdf}"
-								class="form-control" type="text" placeholder="URL do pdf">
-							<div class="invalid-feedback" th:errors="*{pdf}">Errors do
-								pdf</div>
+								 id="file" name="file" class="form-control" 
+								 type="file" placeholder="URL do pdf">
+
+							<!-- <div class="invalid-feedback" th:errors="*{pdf}">Errors do
+								pdf</div> -->
 						</div>
 						<br> <label for="tipo" class="form-label">Escolha o tipo:</label>
 						<div class="form-check">
