@@ -4,7 +4,10 @@ import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,75 +27,87 @@ import compasso.estagio.grupo.projeto5.Telas.repository.PerfilRepository;
 public class AlunosController {
 
 	private int cont;
+	
+	private int numeroDePags;
 
 	@Autowired
 	private PerfilRepository perfilRepository;
-	
+
 	@Autowired
 	private AulaRepository aulaRepository;
 	
-	@GetMapping
-	public String alunosAll(Model modelo, Principal principal) {
-	
-		List<UsuarioDto> estudantes = getListaDeAlunos(principal);
+	@GetMapping("/{page}")
+	public String alunosAll(@PathVariable(name = "page")int pagina, Model modelo, Principal principal) {
+
+		Page<Perfil> estudantes = getListaDeAlunos(principal, pagina);
 		modelo.addAttribute("estudantes", estudantes);
-		
+		modelo.addAttribute("pagina", pagina);
+		modelo.addAttribute("numeroPagina", numeroDePags);
+
 		return "alunos";
 	}
-	
-    private List<UsuarioDto> getListaDeAlunos(Principal principal) {
+
+	private Page<Perfil> getListaDeAlunos(Principal principal, int pagina) {
+
 		List<Perfil> perfis = perfilRepository.findAll();
-		PageRequest paginacao = PageRequest.of(0, 5);
-		List<Perfil> personais = perfilRepository.findByPermissao(perfilRepository.findByEmail(principal.getName()).getPermissao(), paginacao);
+		List<Perfil> personais = perfilRepository
+				.findByPermissao(perfilRepository.findByEmail(principal.getName()).getPermissao());
 		perfis.removeAll(personais);
-		List<UsuarioDto> estudantes = UsuarioDto.converte(perfis);
-		return estudantes;
+		
+		numeroDePags = perfis.size()/4;
+		if(perfis.size()%4!=0) {
+			numeroDePags++;
+		}
+		
+		Pageable paginacao = PageRequest.of(pagina, 4, Sort.by("primeiroNome").ascending());
+		Page<Perfil> usuarios = perfilRepository.findByPermissaoPermissao("Usuario", paginacao);
+		return usuarios;
+
 	}
-	
-	
+
 	@GetMapping("/perfil/{email}")
 	public String uuniPerfil(@PathVariable("email") String email, Model modelo) {
-		
+
 		List<Aula> aulas = aulaRepository.findAll();
 		List<Aula> aulasCadastradas = aulaRepository.findByAlunos(perfilRepository.findByEmail(email));
 		aulas.removeAll(aulasCadastradas);
-		
+
 		UsuarioDto u = UsuarioDto.converte(perfilRepository.findByEmail(email));
-		
-		if(perfilRepository.findByEmail(email).getInformacao()!=null) {
+
+		if (perfilRepository.findByEmail(email).getInformacao() != null) {
 			InformacaoAdicionalDto info = new InformacaoAdicionalDto();
 			info.toInformacaoAdicionalDto(perfilRepository.findByEmail(email).getInformacao());
 			modelo.addAttribute("info", info);
 		} else {
 			modelo.addAttribute("info", null);
 		}
-		
-		if(aulas.isEmpty()) {
+
+		if (aulas.isEmpty()) {
 			modelo.addAttribute("SemAula", "Sem mais aulas!");
 			modelo.addAttribute("aulas", null);
-		}else {
+		} else {
 			modelo.addAttribute("aulas", aulas);
 		}
-		
+
 		modelo.addAttribute("aluno", u);
-		
-		if(cont > 0) {
+
+		if (cont > 0) {
 			modelo.addAttribute("cadastrado", "Aula foi adicionada com sucesso!");
 			cont = 0;
 		}
 		return "uniPerfil";
 	}
-	
+
 	@PostMapping("/adicionarAula")
 	public String adicionarAula(String titulo, String email, Model modelo) {
-		if(!(titulo == null)) {
+		if (!(titulo == null)) {
 			Perfil perfil = perfilRepository.findByEmail(email);
 			Aula aula = aulaRepository.findByTitulo(titulo);
 			perfil.setAulas(aula);
 			perfilRepository.save(perfil);
 			cont++;
 		}
-		return "redirect:/alunos/perfil/"+email;
+		return "redirect:/alunos/perfil/" + email;
 	}
 
 }
