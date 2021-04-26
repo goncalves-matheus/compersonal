@@ -3,6 +3,7 @@ package compasso.estagio.grupo.projeto5.Telas.model;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -10,13 +11,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.validation.Valid;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-
-import compasso.estagio.grupo.projeto5.Telas.dto.AlterarSenhaDto;
 
 @Entity
 public class Usuario implements UserDetails {
@@ -109,7 +107,7 @@ public class Usuario implements UserDetails {
 
 	public boolean compare(String senhaDto) {	
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-		return encoder.matches(senhaDto, senha);
+		return encoder.matches(senhaDto, this.senha);
 	}
 
 }

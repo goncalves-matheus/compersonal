@@ -86,13 +86,16 @@ public class PerfilController {
 	public String alterarSenha(@Valid AlterarSenhaDto senhaDto, BindingResult result, Principal principal) {
 
 		if (result.hasErrors()) {
-			return "perfil";
+			return "redirect:/perfil";
 		}
 
 		Optional<Usuario> usuario = usuarioRepository.findByEmail(principal.getName());
 		if (usuario.isPresent()) {
 			Usuario user = usuario.get();
+			System.out.println(user.getSenha());
+			System.out.println(user.compare(senhaDto.getSenha()));
 			if (user.compare(senhaDto.getSenha())) {
+				System.out.println(user.compare(senhaDto.getSenha()));
 				user.setSenha(senhaDto.getSenhaNova());
 				usuarioRepository.save(user);
 				up++;
