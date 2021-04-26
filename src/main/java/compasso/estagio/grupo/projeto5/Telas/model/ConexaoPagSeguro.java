@@ -35,28 +35,24 @@ public class ConexaoPagSeguro {
     public static boolean pagar() {
         String email = "gabriel-jeffersonscs@hotmail.com";
         String token = "e8006f5d-b0f1-4822-98b6-945982e14c9ae0dc2cfb4e0aaa9156c492d3c406e0c60806-2dc2-4089-9378-d67ad74ec2c9";
-        //final String URL = "https://ws.sandbox.pagseguro.uol.com.br/v2/checkout";
-        //final String URL = "https://pagseguro.uol.com.br/?_ga=2.186234926.667119345.1619439708-1657415295.1618505570";
-        final String URL = "https://ws.sandbox.pagseguro.uol.com.br/v2/checkout?email="+email+"&token="+token+"/checkout";
-        //final String URL = "https://ws.sandbox.pagseguro.uol.com.br/v2/checkout?email=gabriel-jeffersonscs@hotmail.com&token=e8006f5d-b0f1-4822-98b6-945982e14c9ae0dc2cfb4e0aaa9156c492d3c406e0c60806-2dc2-4089-9378-d67ad74ec2c9/checkout"
-
+        final String URL = "https://ws.sandbox.pagseguro.uol.com.br/v2/checkout";
         try {
             CloseableHttpClient client = HttpClients.createDefault();
             URIBuilder builder = new URIBuilder(URL);
-            builder.setParameter("email", "{{"+email+"}}");
-            builder.setParameter("token", "{{"+token+"}}");
+            builder.setParameter("email", email);
+            builder.setParameter("token", token);
             HttpPost postRequest = new HttpPost(builder.build());
             postRequest.setHeader("Content-Type", "application/x-www-form-urlencoded");
             List<NameValuePair> formParams = new ArrayList<>();
             
 
-            formParams.add(new BasicNameValuePair("email", "{{"+email+"}}"));
-            formParams.add(new BasicNameValuePair("token", "{{"+token+"}}"));
+            formParams.add(new BasicNameValuePair("email", email));
+            formParams.add(new BasicNameValuePair("token", token));
             formParams.add(new BasicNameValuePair("currency", "BRL"));
             formParams.add(new BasicNameValuePair("itemId1", "0001"));
             formParams.add(new BasicNameValuePair("itemDescription1", "Notebook Prata"));
             formParams.add(new BasicNameValuePair("itemAmount1", "000.01"));
-            formParams.add(new BasicNameValuePair("itemQuantity1", "1"));
+            formParams.add(new BasicNameValuePair("itemQuantity1", "2"));
             formParams.add(new BasicNameValuePair("itemWeight1", "1000"));
             formParams.add(new BasicNameValuePair("reference", "REF1234"));
             formParams.add(new BasicNameValuePair("senderName", "Jose Comprador"));
