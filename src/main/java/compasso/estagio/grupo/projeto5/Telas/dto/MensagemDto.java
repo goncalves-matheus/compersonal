@@ -2,8 +2,6 @@ package compasso.estagio.grupo.projeto5.Telas.dto;
 
 import java.time.LocalDateTime;
 
-import javax.validation.constraints.NotBlank;
-
 import compasso.estagio.grupo.projeto5.Telas.model.Mensagem;
 
 public class MensagemDto {

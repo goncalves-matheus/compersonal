@@ -99,7 +99,7 @@ public class UsuarioDto {
 		perfil.setUltimoNome(this.ultimoNome);
 		perfil.setEmail(this.email);
 		perfil.setTelefone(formatarTelefone(this.telefone));
-
+		
 		return perfil;
 	}
 	

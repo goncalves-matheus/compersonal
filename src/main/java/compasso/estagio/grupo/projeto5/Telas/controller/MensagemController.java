@@ -1,8 +1,6 @@
 package compasso.estagio.grupo.projeto5.Telas.controller;
 
 import java.security.Principal;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.validation.Valid;
 
