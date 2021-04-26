@@ -64,9 +64,10 @@
 
 								<div class="col-sm-6 ">
 									<div class="d-flex justify-content-between">
-										<label for="novaSenha" class="form-label">Senha</label> <a
+										<label for="novaSenha" class="form-label">Senha</label> 
+										<a
 											data-bs-toggle="modal" href=""
-											data-bs-target="#staticBackdrop" class="text-secondary ">Mudar
+											data-bs-target="#mudarSenha" class="text-secondary ">Mudar
 											Senha</a>
 									</div>
 									<input type="password" class="form-control" id="novaSenha"
@@ -180,7 +181,7 @@
 				</div>
 			</div>
 
-			<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static"
+			<div class="modal fade" id="mudarSenha" data-bs-backdrop="static"
 				data-bs-keyboard="false" tabindex="-1"
 				aria-labelledby="staticBackdropLabel" aria-hidden="true">
 				<div class="modal-dialog">
@@ -192,20 +193,21 @@
 						</div>
 						<div class="modal-body">
 							<div class="card-body cor-borda">
-								<form class="card-body">
+								<form class="card-body" th:object="${alterarSenhaDto}"
+										th:action="@{/perfil/alterarSenha}" method="POST">
 									<div class="mb-3">
-										<input type="text" class="form-control"
-											placeholder="Senha atual">
+										<input type="password" class="form-control"
+											placeholder="Senha atual" th:field="*{senha}">
 										<!--                         <div class="invalid-feedback" th:errors="*{codigo}">Errors do telefone</div> -->
 									</div>
 									<div class="mb-3">
 										<input type="password" class="form-control"
-											placeholder="Nova senha">
+											placeholder="Nova senha" th:field="*{senhaNova}">
 										<!--                         <div class="invalid-feedback" th:errors="*{senha}">Errors da senha</div> -->
 									</div>
 									<div class="mb-3">
 										<input type="password" class="form-control"
-											placeholder="Confirme a nova Senha">
+											placeholder="Confirme a nova Senha" th:field="*{confirmacaoSenha}">
 										<!--                         <div class="invalid-feedback" th:errors="*{confirmacaoSenha}">Errors da confirmacaoSenha -->
 										<!--                         </div> -->
 									</div>
