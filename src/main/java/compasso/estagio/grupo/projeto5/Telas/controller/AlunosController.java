@@ -4,6 +4,7 @@ import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -41,7 +42,8 @@ public class AlunosController {
 	
     private List<UsuarioDto> getListaDeAlunos(Principal principal) {
 		List<Perfil> perfis = perfilRepository.findAll();
-		List<Perfil> personais = perfilRepository.findByPermissao(perfilRepository.findByEmail(principal.getName()).getPermissao());
+		PageRequest paginacao = PageRequest.of(0, 5);
+		List<Perfil> personais = perfilRepository.findByPermissao(perfilRepository.findByEmail(principal.getName()).getPermissao(), paginacao);
 		perfis.removeAll(personais);
 		List<UsuarioDto> estudantes = UsuarioDto.converte(perfis);
 		return estudantes;
