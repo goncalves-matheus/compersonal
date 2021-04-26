@@ -9,8 +9,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
-import org.springframework.security.access.method.P;
-
 @Entity
 public class Aula implements Serializable{
 
@@ -66,7 +64,7 @@ public class Aula implements Serializable{
 	}
 
 	public String getPdf() {
-		return pdf;
+		return "https://compersonal-bucket.s3.amazonaws.com/"+pdf;
 	}
 
 	public void setPdf(String pdf) {

@@ -15,7 +15,7 @@
 			<div class="container">
 				<div class="card col-auto mx-auto mb-5 mt-2 ">
 					<form id="fo" class=" col-10 mb-4 mt-3 mx-auto" th:object="${aulaDto}"
-						th:action="@{/inseriraula}" method="POST">
+						th:action="@{/inseriraula}" method="POST" enctype="multipart/form-data">
 						<div class="container">
 							<div th:if="${cadastrado}!=null" class="mt-2 alert alert-success alert-dismissible fade show"
 								role="alert">

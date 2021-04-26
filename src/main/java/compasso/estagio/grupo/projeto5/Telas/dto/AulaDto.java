@@ -56,7 +56,6 @@ public class AulaDto {
 		aula.setTitulo(this.titulo);
 		aula.setVideo(this.video);
 		aula.setDescricao(this.descricao);
-		aula.setPdf(this.pdf);
 		return aula;
 	}
 

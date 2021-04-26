@@ -11,9 +11,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.PutObjectRequest;
-import com.amazonaws.services.s3.model.S3Object;
-import com.amazonaws.services.s3.model.S3ObjectInputStream;
-import com.amazonaws.util.IOUtils;
 
 @Service
 public class FileSaverService {
@@ -24,28 +21,10 @@ public class FileSaverService {
 	@Autowired
 	private AmazonS3 clienteS3;
 
-	public String uploadFile(MultipartFile MultiFile) {
+	public void uploadFile(MultipartFile MultiFile) {
 		File file = convertMultiPartFileToFile(MultiFile);
 		clienteS3.putObject(new PutObjectRequest(bucket, MultiFile.getOriginalFilename(), file));
 		file.delete();
-		return "Upload:" + MultiFile.getOriginalFilename();
-	}
-
-	public byte[] downloadFile(String fileName) {
-		S3Object s3Object = clienteS3.getObject(bucket, fileName);
-		S3ObjectInputStream inputStream = s3Object.getObjectContent();
-		try {
-			byte[] content = IOUtils.toByteArray(inputStream);
-			return content;
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
-
-	public String deleteFile(String fileName) {
-		clienteS3.deleteObject(bucket, fileName);
-		return fileName + " removed ...";
 	}
 
 	private File convertMultiPartFileToFile(MultipartFile file) {
