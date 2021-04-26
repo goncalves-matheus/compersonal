@@ -34,6 +34,8 @@ public class Perfil {
 	private String email;
 
 	private String telefone;
+	
+	private String foto;
 
 	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
 	private Informacoes informacao;
@@ -48,6 +50,14 @@ public class Perfil {
 
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
 	private Permissao permissao;
+	
+	public String getFoto() {
+		return foto;
+	}
+
+	public void setFoto(String foto) {
+		this.foto = foto;
+	}
 
 	public List<Aula> getAulas() {
 		return aulas;

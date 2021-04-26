@@ -27,15 +27,18 @@
 						<div class="card">
 							<h5 class="card-header">Seus dados pessoais</h5>
 							<form th:object="${perfilDto}" class="card-body mb-0 mt-3 pb-0"
-								th:action="@{/perfil/alterar}" method="POST">
+								th:action="@{/perfil/alterar}" method="POST"
+								enctype="multipart/form-data">
 
 								<div class="form-input-container">
 									<h4 for="foto" class="text-center">Foto</h4>
 								</div>
 								<div class="text-center">
-									<img width="200" height="200"
-										src="https://www.cursosabrafordes.com.br/webroot/img/cur_cursos/foto_1495509835.jpeg"
+									<img width="200" height="200" th:src="${perfilDto.foto}"
 										class="rounded-circle" alt="">
+									<div  class="d-flex justify-content-center">
+										<input style="width: 6rem;" type="file" name="file" class="my-2 form-control">
+									</div>
 								</div>
 
 								<div class="row g-3">
@@ -206,19 +209,24 @@
 										th:action="@{/perfil/alterarSenha}" method="POST">
 										<div class="mb-3">
 											<input type="password" class="form-control"
-												placeholder="Senha atual" th:field="*{senha}" th:errorclass="is-invalid">
-											<div class="invalid-feedback" th:errors="*{senha}">Errors da senha</div>
+												placeholder="Senha atual" th:field="*{senha}"
+												th:errorclass="is-invalid">
+											<div class="invalid-feedback" th:errors="*{senha}">Errors
+												da senha</div>
 										</div>
 										<div class="mb-3">
 											<input type="password" class="form-control"
-												placeholder="Nova senha" th:field="*{senhaNova}" th:errorclass="is-invalid">
-												<div class="invalid-feedback" th:errors="*{senhaNova}">Errors da senha</div>
+												placeholder="Nova senha" th:field="*{senhaNova}"
+												th:errorclass="is-invalid">
+											<div class="invalid-feedback" th:errors="*{senhaNova}">Errors
+												da senha</div>
 										</div>
 										<div class="mb-3">
 											<input type="password" class="form-control"
 												placeholder="Confirme a nova Senha"
 												th:field="*{confirmacaoSenha}" th:errorclass="is-invalid">
-												<div class="invalid-feedback" th:errors="*{confirmacaoSenha}">Errors da senha</div>
+											<div class="invalid-feedback" th:errors="*{confirmacaoSenha}">Errors
+												da senha</div>
 										</div>
 										<button type="submit" class="btn cor-botao">Registar</button>
 									</form>
