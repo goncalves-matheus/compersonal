@@ -19,8 +19,8 @@
 								th:each="usuarioDto : ${estudantes}">
 								<div class="row g-0">
 									<div class="col-md-3">
-										<a href="#"><img class="img-thumbnail"
-											th:src="${usuarioDto.foto}"></a>
+										<!-- 										<a href="#"><img class="img-thumbnail" -->
+										<!-- 											th:src="${usuarioDto.foto}"></a> -->
 									</div>
 									<div class="col-md-9">
 										<div class="card-body">
@@ -55,7 +55,26 @@
 					</div>
 				</div>
 			</article>
-
+			<div class="d-flex justify-content-center fixed-bottom mb-5">
+				<nav aria-label="Page navigation example">
+					<ul class="pagination cor-botao">
+						<li class="page-item "><a class="page-link"
+							th:if="${pagina-1}>=0" th:href="${pagina-1}"> <span
+								aria-hidden="true">&laquo;</span></a></li>
+						<li class="page-item "><a class="page-link"
+							th:if="${pagina-1}<0" th:href="${numeroPagina-1}"> <span
+								aria-hidden="true">&laquo;</span></a></li>
+						<li class="page-item"><a class="page-link"
+							th:text="${pagina+1}"></a></li>
+						<li class="page-item"><a class="page-link"
+							th:if="${pagina+1}!=${numeroPagina}" th:href="${pagina+1}"> <span
+								aria-hidden="true">&raquo;</span></a></li>
+						<li class="page-item"><a class="page-link"
+							th:if="${pagina+1}==${numeroPagina}" th:href="0"> <span
+								aria-hidden="true">&raquo;</span></a></li>
+					</ul>
+				</nav>
+			</div>
 			<footer th:replace="~{base::footer}"></footer>
 			<!-- JavaScript Bundle with Popper -->
 			<script
