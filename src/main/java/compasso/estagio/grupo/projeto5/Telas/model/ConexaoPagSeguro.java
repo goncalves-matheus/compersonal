@@ -46,27 +46,26 @@ public class ConexaoPagSeguro {
             formParams.add(new BasicNameValuePair("token", "{{token}}"));
             formParams.add(new BasicNameValuePair("currency", "BRL"));
 
-            /* formParams.add(new BasicNameValuePair("itemId1", String.valueOf(plano.getId())));
+            formParams.add(new BasicNameValuePair("itemId1", String.valueOf(plano.getId())));
             formParams.add(new BasicNameValuePair("itemDescription1", plano.getDescricao())); 
-            formParams.add(new BasicNameValuePair("itemAmount1", plano.getValor()));      */
-
+            formParams.add(new BasicNameValuePair("itemAmount1", plano.getValor()));
             formParams.add(new BasicNameValuePair("itemQuantity1", "1"));
             formParams.add(new BasicNameValuePair("itemWeight1", "0000"));              
             formParams.add(new BasicNameValuePair("reference", "001"));
-            formParams.add(new BasicNameValuePair("senderName", this.perfil.getPrimeiroNome()));
-            formParams.add(new BasicNameValuePair("senderAreaCode", "75"));
-            formParams.add(new BasicNameValuePair("senderPhone", "991578652"));
-            formParams.add(new BasicNameValuePair("senderCPF", this.perfil.getCpf()));
-            formParams.add(new BasicNameValuePair("senderBornDate", this.perfil.getDataDeNascimento())); 
-            formParams.add(new BasicNameValuePair("senderEmail", this.perfil.getEmail()));
-            // formParams.add(new BasicNameValuePair("shippingType", "1")); 
-            formParams.add(new BasicNameValuePair("shippingAddressStreet", this.perfil.getEndereco().getRua()));  // Endereco
-            formParams.add(new BasicNameValuePair("shippingAddressNumber", this.perfil.getEndereco().getNumero()));                // Endereco
-            formParams.add(new BasicNameValuePair("shippingAddressComplement", this.perfil.getEndereco().getComplemento()));        // Endereco
-            formParams.add(new BasicNameValuePair("shippingAddressDistrict", this.perfil.getEndereco().getBairro())); // Endereco
-            formParams.add(new BasicNameValuePair("shippingAddressPostalCode", this.perfil.getEndereco().getCep()));        // Endereco
-            formParams.add(new BasicNameValuePair("shippingAddressCity", this.perfil.getEndereco().getCidade()));             // Endereco
-            formParams.add(new BasicNameValuePair("shippingAddressState", this.perfil.getEndereco().getSiglaEstado()));                   // Endereco
+            formParams.add(new BasicNameValuePair("senderName", perfil.getPrimeiroNome()));
+            formParams.add(new BasicNameValuePair("senderAreaCode", ddd));
+            formParams.add(new BasicNameValuePair("senderPhone", telefoneSemDDD));
+            formParams.add(new BasicNameValuePair("senderCPF", perfil.getCpf()));
+            formParams.add(new BasicNameValuePair("senderBornDate", perfil.getDataDeNascimento())); 
+            formParams.add(new BasicNameValuePair("senderEmail", perfil.getEmail()));
+            // formParams.add(new BasicNameValuePair("shippingType", "1"));
+            formParams.add(new BasicNameValuePair("shippingAddressStreet", perfil.getEndereco().getRua()));
+            formParams.add(new BasicNameValuePair("shippingAddressNumber", perfil.getEndereco().getNumero()));       
+            formParams.add(new BasicNameValuePair("shippingAddressComplement", perfil.getEndereco().getComplemento()));
+            formParams.add(new BasicNameValuePair("shippingAddressDistrict", perfil.getEndereco().getBairro()));
+            formParams.add(new BasicNameValuePair("shippingAddressPostalCode", perfil.getEndereco().getCep()));  
+            formParams.add(new BasicNameValuePair("shippingAddressCity", perfil.getEndereco().getCidade()));
+            formParams.add(new BasicNameValuePair("shippingAddressState", perfil.getEndereco().getSiglaEstado())); 
             formParams.add(new BasicNameValuePair("shippingAddressCountry", "BRA"));
             // formParams.add(new BasicNameValuePair("extraAmount", "-0.01"));
             formParams.add(new BasicNameValuePair("redirectURL", "http://localhost:8080"));
