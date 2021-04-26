@@ -1,6 +1,5 @@
 package compasso.estagio.grupo.projeto5.Telas.repository;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.transaction.Transactional;

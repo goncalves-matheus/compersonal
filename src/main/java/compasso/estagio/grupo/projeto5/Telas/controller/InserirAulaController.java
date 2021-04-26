@@ -15,7 +15,7 @@ import compasso.estagio.grupo.projeto5.Telas.repository.AulaRepository;
 
 @Controller
 @RequestMapping("inseriraula")
-public class InserirAula {
+public class InserirAulaController {
 
 	private int cont;
 
