@@ -64,7 +64,7 @@ public class Aula implements Serializable{
 	}
 
 	public String getPdf() {
-		return pdf;
+		return "https://compersonal-bucket.s3.amazonaws.com/"+pdf;
 	}
 
 	public void setPdf(String pdf) {

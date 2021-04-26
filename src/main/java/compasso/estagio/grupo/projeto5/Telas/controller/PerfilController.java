@@ -12,7 +12,10 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
+import compasso.estagio.grupo.projeto5.Telas.AmazonS3.FileSaverService;
 import compasso.estagio.grupo.projeto5.Telas.dto.AlterarSenhaDto;
 import compasso.estagio.grupo.projeto5.Telas.dto.InformacaoAdicionalDto;
 import compasso.estagio.grupo.projeto5.Telas.dto.PerfilDto;
@@ -32,6 +35,9 @@ public class PerfilController {
 	PerfilRepository repository;
 
 	@Autowired
+	private FileSaverService bucket;
+
+	@Autowired
 	UsuarioRepository usuarioRepository;
 
 	@GetMapping
@@ -49,20 +55,24 @@ public class PerfilController {
 				up = 0;
 			}
 		}
+		
+		System.out.println(perfilDto.getFoto());
 
 		return "perfil";
 	}
 
 	@PostMapping("/alterar")
-	public String alterar(@Valid PerfilDto usuarioDto, BindingResult result, Principal principal) {
+	public String alterar(@Valid PerfilDto usuarioDto, BindingResult result, @RequestParam(value = "file") MultipartFile file, Principal principal) {
 
 		if (result.hasErrors()) {
 			return "perfil";
 		}
-
+		
+		bucket.uploadFile(file);
 		Perfil perfil = repository.findByEmail(principal.getName());
 		perfil.setPrimeiroNome(usuarioDto.getPrimeiroNome());
 		perfil.setUltimoNome(usuarioDto.getUltimoNome());
+		perfil.setFoto(file.getOriginalFilename());
 		repository.save(perfil);
 		up++;
 		return "redirect:/perfil";

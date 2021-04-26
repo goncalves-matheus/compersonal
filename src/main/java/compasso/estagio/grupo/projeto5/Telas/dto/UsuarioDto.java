@@ -22,20 +22,23 @@ public class UsuarioDto {
 	private String ultimoNome;
 
 	@NotNull
-    @Size(min = 8, max = 30, message = "A senha precisa ter no mínimo 8 caracteres")
+	@Size(min = 8, max = 30, message = "A senha precisa ter no mínimo 8 caracteres")
 	private String senha;
 
 	@NotNull
-    @Size(min = 8, max = 30, message = "A senha precisa ter no mínimo 8 caracteres") 
+	@Size(min = 8, max = 30, message = "A senha precisa ter no mínimo 8 caracteres")
 	private String confirmacaoSenha;
 
 	@NotBlank(message = "O email precisa ser preenchido")
-    @Email(message = "Email inválido")
+	@Email(message = "Email inválido")
 	private String email;
-	
+
 	private String telefone;
 
-	public UsuarioDto() {}
+	private String foto;
+
+	public UsuarioDto() {
+	}
 
 	public UsuarioDto(Perfil p) {
 		this.primeiroNome = p.getPrimeiroNome();
@@ -43,6 +46,15 @@ public class UsuarioDto {
 		this.senha = p.getSenha();
 		this.email = p.getEmail();
 		this.telefone = p.getTelefone();
+		this.foto=p.getFoto();
+	}
+
+	public String getFoto() {
+		return "https://compersonal-bucket.s3.amazonaws.com/"+foto;
+	}
+
+	public void setFoto(String foto) {
+		this.foto = foto;
 	}
 
 	public String getTelefone() {
@@ -99,10 +111,10 @@ public class UsuarioDto {
 		perfil.setUltimoNome(this.ultimoNome);
 		perfil.setEmail(this.email);
 		perfil.setTelefone(formatarTelefone(this.telefone));
-		
+
 		return perfil;
 	}
-	
+
 	public Usuario toUsuario() {
 		Usuario usuario = new Usuario();
 		usuario.setEmail(this.email);
@@ -110,11 +122,11 @@ public class UsuarioDto {
 		return usuario;
 	}
 
-    public static List<UsuarioDto> converte(List<Perfil> perfis) {
-        return perfis.stream().map(p -> new UsuarioDto(p)).collect(Collectors.toList());
-    }
+	public static List<UsuarioDto> converte(List<Perfil> perfis) {
+		return perfis.stream().map(p -> new UsuarioDto(p)).collect(Collectors.toList());
+	}
 
-	private String formatarTelefone(String telefone){
+	private String formatarTelefone(String telefone) {
 		telefone = telefone.replace("-", "");
 		telefone = telefone.replace("(", "");
 		telefone = telefone.replace(")", "");
@@ -122,7 +134,7 @@ public class UsuarioDto {
 		return telefone;
 	}
 
-    public static UsuarioDto converte(Perfil p) {
-        return new UsuarioDto(p);
-    }
+	public static UsuarioDto converte(Perfil p) {
+		return new UsuarioDto(p);
+	}
 }

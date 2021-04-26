@@ -15,7 +15,7 @@
 			<div class="container">
 				<div class="card col-auto mx-auto mb-5 mt-2 ">
 					<form id="fo" class=" col-10 mb-4 mt-3 mx-auto" th:object="${aulaDto}"
-						th:action="@{/inseriraula}" method="POST">
+						th:action="@{/inseriraula}" method="POST" enctype="multipart/form-data">
 						<div class="container">
 							<div th:if="${cadastrado}!=null" class="mt-2 alert alert-success alert-dismissible fade show"
 								role="alert">
@@ -47,10 +47,11 @@
 						</div>
 						<div class="mb-2">
 							<label for="pdf" class="form-label">Arquivo PDF</label> <input
-								th:errorclass="is-invalid" id="pdf" th:field="*{pdf}"
-								class="form-control" type="text" placeholder="URL do pdf">
-							<div class="invalid-feedback" th:errors="*{pdf}">Errors do
-								pdf</div>
+								 id="file" name="file" class="form-control" 
+								 type="file" placeholder="URL do pdf">
+
+							<!-- <div class="invalid-feedback" th:errors="*{pdf}">Errors do
+								pdf</div> -->
 						</div>
 						<br> <label for="tipo" class="form-label">Escolha o tipo:</label>
 						<div class="form-check">
