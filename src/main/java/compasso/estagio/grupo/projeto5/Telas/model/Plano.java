@@ -10,6 +10,15 @@ public class Plano {
     private String valor; // Decimal, com duas casas decimais separadas por ponto (p.e., 1234.56)
     private LocalDateTime finalDoPlano;
     private String descricao;
+    
+
+    public Plano(Long id, String nome, String valor, LocalDateTime finalDoPlano, String descricao) {
+        this.id = id;
+        this.nome = nome;
+        this.valor = valor;
+        this.finalDoPlano = finalDoPlano;
+        this.descricao = descricao;
+    }
 
     public Long getId() {
         return id;

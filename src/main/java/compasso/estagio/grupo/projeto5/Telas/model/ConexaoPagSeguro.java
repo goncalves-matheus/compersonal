@@ -30,22 +30,22 @@ public class ConexaoPagSeguro {
     private String ddd;
     private String telefoneSemDDD;
 
-    public ConexaoPagSeguro(){
-    }
-
     public ConexaoPagSeguro(Perfil perfil, Plano plano) {
         this.perfil = perfil;
         this.plano = plano;
-        this.ddd = perfil.getTelefone().substring(0, 3);
-        this.telefoneSemDDD = perfil.getTelefone().substring(3, 11);
+        this.ddd = perfil.getTelefone().substring(0, 2);
+        this.telefoneSemDDD = perfil.getTelefone().substring(2, 11);
     }
     //Link de Redirecionamento Checkout PagSeguro:
     //https://sandbox.pagseguro.uol.com.br/v2/checkout/payment.html?code=código de checkout
 
     public String gerarCodigoDeCompra() {
         String email = "gabriel-jeffersonscs@hotmail.com";
-        String token = "e8006f5d-b0f1-4822-98b6-945982e14c9ae0dc2cfb4e0aaa9156c492d3c406e0c60806-2dc2-4089-9378-d67ad74ec2c9";
-        final String URL = "https://ws.sandbox.pagseguro.uol.com.br/v2/checkout";
+        //String token = "e8006f5d-b0f1-4822-98b6-945982e14c9ae0dc2cfb4e0aaa9156c492d3c406e0c60806-2dc2-4089-9378-d67ad74ec2c9";
+        String token = "51dea1a1-cb05-45e3-adaf-9d04f073e2e84246b4cf4c86a49e0b3ae8a8b9aeca2b4a44-763a-4dfd-a669-1efd3ba56501";
+        //final String URL = "https://ws.sandbox.pagseguro.uol.com.br/v2/checkout";
+        //final String URL = "https://pagseguro.uol.com.br/?_ga=2.86277279.667119345.1619439708-1657415295.1618505570/checkout";
+        final String URL = "https://ws.pagseguro.uol.com.br/v2/checkout/";
         String codigoDaCompra = "";
         try {
             CloseableHttpClient client = HttpClients.createDefault();
@@ -70,11 +70,11 @@ public class ConexaoPagSeguro {
             formParams.add(new BasicNameValuePair("reference", "001"));
         
             //Dados do destinatário:
-            formParams.add(new BasicNameValuePair("senderName", perfil.getPrimeiroNome()));
+            formParams.add(new BasicNameValuePair("senderName", perfil.getPrimeiroNome()+" "+perfil.getUltimoNome()));
             formParams.add(new BasicNameValuePair("senderAreaCode", ddd));
             formParams.add(new BasicNameValuePair("senderPhone", telefoneSemDDD));
-            formParams.add(new BasicNameValuePair("senderCPF", perfil.getCpf()));
-            formParams.add(new BasicNameValuePair("senderBornDate", perfil.getDataDeNascimento()));
+            //formParams.add(new BasicNameValuePair("senderCPF", perfil.getCpf()));
+            //formParams.add(new BasicNameValuePair("senderBornDate", perfil.getDataDeNascimento()));
             formParams.add(new BasicNameValuePair("senderEmail", perfil.getEmail()));
 
             //Configurações da compra:
