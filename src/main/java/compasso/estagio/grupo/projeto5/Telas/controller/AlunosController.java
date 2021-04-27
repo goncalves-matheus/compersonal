@@ -98,10 +98,7 @@ public class AlunosController {
 
 	private Page<Perfil> getListaDeAlunos(Principal principal, int pagina) {
 
-		List<Perfil> perfis = perfilRepository.findAll();
-		List<Perfil> personais = perfilRepository
-				.findByPermissao(perfilRepository.findByEmail(principal.getName()).getPermissao());
-		perfis.removeAll(personais);
+		List<Perfil> perfis = perfilRepository.findByPermissao_Permissao("Usuario");
 
 		numeroDePags = perfis.size() / 4;
 		if (perfis.size() % 4 != 0) {
