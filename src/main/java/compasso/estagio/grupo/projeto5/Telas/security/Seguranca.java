@@ -22,7 +22,7 @@ public class Seguranca extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 
 		http.authorizeRequests().antMatchers("/*.css", "/*.jpeg","/*.js").permitAll()
-				.antMatchers("/", "/recuperar/**","/cadastro", "/cadastro/*", "/planos").permitAll()
+				.antMatchers("/", "/recuperar/**","/cadastro", "/cadastro/*", "/planos","/pagseguro-notificacao").permitAll()
 				.antMatchers("/dashboard/aluno").hasAuthority("Usuario")
 				.antMatchers("/dashboard/personal","/inseriraula/**","/alunos").hasAuthority("Personal")
 				.antMatchers(HttpMethod.GET,"/mensagem/**").hasAuthority("Personal")
