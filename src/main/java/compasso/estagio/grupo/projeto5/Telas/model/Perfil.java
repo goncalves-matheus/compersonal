@@ -2,6 +2,7 @@ package compasso.estagio.grupo.projeto5.Telas.model;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -33,9 +34,16 @@ public class Perfil {
 
 	private String email;
 
+	private String dataDeNascimento;
+	
+	private String cpf;
+
 	private String telefone;
 	
 	private String foto;
+
+	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+	private Endereco endereco;
 
 	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
 	private Informacoes informacao;
@@ -147,4 +155,27 @@ public class Perfil {
 		this.permissao = permissao;
 	}
 
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
+
+	public String getCpf() {
+		return cpf;
+	}
+
+	public String getDataDeNascimento() {
+		return dataDeNascimento;
+	}
+
+	public void setDataDeNascimento(String dataDeNascimento) {
+		this.dataDeNascimento = dataDeNascimento;
+	}
+
+	public Endereco getEndereco() {
+		return endereco;
+	}
+
+	public void setEndereco(Endereco endereco) {
+		this.endereco = endereco;
+	}
 }
