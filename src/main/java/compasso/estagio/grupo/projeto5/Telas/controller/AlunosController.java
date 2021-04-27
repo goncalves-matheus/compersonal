@@ -2,7 +2,6 @@ package compasso.estagio.grupo.projeto5.Telas.controller;
 
 import java.security.Principal;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -14,7 +13,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import compasso.estagio.grupo.projeto5.Telas.dto.InformacaoAdicionalDto;
 import compasso.estagio.grupo.projeto5.Telas.dto.UsuarioDto;
 import compasso.estagio.grupo.projeto5.Telas.model.Aula;
@@ -55,7 +53,8 @@ public class AlunosController {
 		modelo.addAttribute("perfil", perfilRepository.findByEmail(principal.getName()));
 
 		List<Aula> aulas = aulaRepository.findAll();
-		List<Aula> aulasCadastradas = aulaRepository.findByAlunos(perfilRepository.findByEmail(email));
+		//List<Aula> aulasCadastradas = aulaRepository.findByAlunos(perfilRepository.findByEmail(email));
+		List<Aula> aulasCadastradas = aulaRepository.getAulaCadastrada(email);
 		aulas.removeAll(aulasCadastradas);
 
 		UsuarioDto u = UsuarioDto.converte(perfilRepository.findByEmail(email));

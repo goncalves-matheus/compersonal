@@ -24,6 +24,9 @@ public interface AulaRepository extends JpaRepository<Aula, Long> {
 	@Query("select a from Aula a where tipo = :tipo and id = :id")
 	Aula findByAula(@Param("id") Long id, @Param("tipo") Tipo tipo);
 
+	@Query(value = "select * from aula a inner join perfil_aulas p on p.aulas_id = a.id inner join perfil pe on pe.id = p.perfil_id where email = :email", nativeQuery = true)
+	List<Aula> getAulaCadastrada(String email);
+
 	Aula findByTitulo(String titulo);
 
 	@Query("SELECT a FROM Aula a INNER JOIN a.alunos al WHERE al IN (:aluno) order by a.id desc")
