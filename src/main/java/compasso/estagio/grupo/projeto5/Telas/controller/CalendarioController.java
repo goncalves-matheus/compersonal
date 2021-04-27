@@ -34,7 +34,9 @@ public class CalendarioController {
 	private PerfilRepository perfilRepository;
 
 	@GetMapping
-	public String MontaAgenda(Model modelo) {
+	public String MontaAgenda(Model modelo, Principal principal) {
+		
+		modelo.addAttribute("perfil", perfilRepository.findByEmail(principal.getName()));
 
 		if (aux > 0) {
 			modelo.addAttribute("erro", "Horário indisponível");

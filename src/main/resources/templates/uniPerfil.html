@@ -35,12 +35,16 @@
 								th:action="@{/perfil/alterar}" method="POST">
 
 								<div class="form-input-container">
-									<h4 for="foto" class="text-center" th:text="*{primeiroNome}+' '+*{ultimoNome}"></h4>
+									<h4 for="foto" class="text-center"
+										th:text="*{primeiroNome}+' '+*{ultimoNome}"></h4>
 								</div>
 								<div class="text-center">
-									<img width="200" height="200"
-										th:src="*{foto}"
-										class="rounded-circle mb-2" alt="">
+									<img width="200" height="200" th:if="*{primeiroNome}!='Gabriel'" th:src="*{foto}"
+										class="rounded-circle mb-2" alt="foto de perfil"> <img
+										width="200" height="200" th:if="*{primeiroNome}=='Gabriel'"
+										class="rounded-circle mb-2"
+										th:style="'background-image: url('+*{foto}+'); background-size: cover;
+	background-position: 80% 50%;'">
 								</div>
 
 								<div class="row g-3">
@@ -150,8 +154,8 @@
 							<div class="modal-body">
 								<div class="card-body cor-borda">
 									<span th:if="${aulas}==null" th:text="${SemAula}"></span>
-									<form th:if="${aulas}!=null" class="card-body" th:action="@{/alunos/adicionarAula}"
-										method="POST">
+									<form th:if="${aulas}!=null" class="card-body"
+										th:action="@{/alunos/adicionarAula}" method="POST">
 										<div class="mb-3">
 											<h5>Selecione a aula:</h5>
 											<select class="form-select" name="titulo">

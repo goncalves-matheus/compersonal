@@ -18,9 +18,12 @@
 							<div class="card mb-3 row col-lg-6"
 								th:each="usuarioDto : ${estudantes}">
 								<div class="row g-0">
-									<div class="col-md-3">
-										<!-- 										<a href="#"><img class="img-thumbnail" -->
-										<!-- 											th:src="${usuarioDto.foto}"></a> -->
+									<div
+										class="col-md-3 d-flex justify-content-center align-items-center">
+										<a
+											th:href="@{/alunos/perfil/{email}(email=${usuarioDto.email})}"><img
+											class="img-thumbnail m-1" width="200"
+											th:src="'https://compersonal-bucket.s3.amazonaws.com/'+${usuarioDto.foto}"></a>
 									</div>
 									<div class="col-md-9">
 										<div class="card-body">

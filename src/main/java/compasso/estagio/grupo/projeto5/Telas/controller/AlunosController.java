@@ -27,7 +27,7 @@ import compasso.estagio.grupo.projeto5.Telas.repository.PerfilRepository;
 public class AlunosController {
 
 	private int cont;
-	
+
 	private int numeroDePags;
 
 	@Autowired
@@ -35,9 +35,11 @@ public class AlunosController {
 
 	@Autowired
 	private AulaRepository aulaRepository;
-	
+
 	@GetMapping("/{page}")
-	public String alunosAll(@PathVariable(name = "page")int pagina, Model modelo, Principal principal) {
+	public String alunosAll(@PathVariable(name = "page") int pagina, Model modelo, Principal principal) {
+		
+		modelo.addAttribute("perfil", perfilRepository.findByEmail(principal.getName()));
 
 		Page<Perfil> estudantes = getListaDeAlunos(principal, pagina);
 		modelo.addAttribute("estudantes", estudantes);
@@ -47,26 +49,10 @@ public class AlunosController {
 		return "alunos";
 	}
 
-	private Page<Perfil> getListaDeAlunos(Principal principal, int pagina) {
-
-		List<Perfil> perfis = perfilRepository.findAll();
-		List<Perfil> personais = perfilRepository
-				.findByPermissao(perfilRepository.findByEmail(principal.getName()).getPermissao());
-		perfis.removeAll(personais);
-		
-		numeroDePags = perfis.size()/4;
-		if(perfis.size()%4!=0) {
-			numeroDePags++;
-		}
-		
-		Pageable paginacao = PageRequest.of(pagina, 4, Sort.by("primeiroNome").ascending());
-		Page<Perfil> usuarios = perfilRepository.findByPermissaoPermissao("Usuario", paginacao);
-		return usuarios;
-
-	}
-
 	@GetMapping("/perfil/{email}")
-	public String uuniPerfil(@PathVariable("email") String email, Model modelo) {
+	public String uuniPerfil(@PathVariable("email") String email, Model modelo, Principal principal) {
+		
+		modelo.addAttribute("perfil", perfilRepository.findByEmail(principal.getName()));
 
 		List<Aula> aulas = aulaRepository.findAll();
 		List<Aula> aulasCadastradas = aulaRepository.findByAlunos(perfilRepository.findByEmail(email));
@@ -110,4 +96,22 @@ public class AlunosController {
 		return "redirect:/alunos/perfil/" + email;
 	}
 
+	private Page<Perfil> getListaDeAlunos(Principal principal, int pagina) {
+
+		List<Perfil> perfis = perfilRepository.findAll();
+		List<Perfil> personais = perfilRepository
+				.findByPermissao(perfilRepository.findByEmail(principal.getName()).getPermissao());
+		perfis.removeAll(personais);
+
+		numeroDePags = perfis.size() / 4;
+		if (perfis.size() % 4 != 0) {
+			numeroDePags++;
+		}
+
+		Pageable paginacao = PageRequest.of(pagina, 4, Sort.by("primeiroNome").ascending());
+		Page<Perfil> usuarios = perfilRepository.findByPermissaoPermissao("Usuario", paginacao);
+		return usuarios;
+
+	}
+	
 }

@@ -2,8 +2,6 @@ package compasso.estagio.grupo.projeto5.Telas.model;
 
 import java.time.LocalDateTime;
 
-import javax.print.attribute.standard.DateTimeAtCompleted;
-
 public class Plano {
     private Long id;
     private String nome;

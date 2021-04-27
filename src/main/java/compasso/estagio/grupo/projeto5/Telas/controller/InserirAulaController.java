@@ -1,5 +1,7 @@
 package compasso.estagio.grupo.projeto5.Telas.controller;
 
+import java.security.Principal;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,7 @@ import compasso.estagio.grupo.projeto5.Telas.dto.AulaDto;
 import compasso.estagio.grupo.projeto5.Telas.model.Aula;
 import compasso.estagio.grupo.projeto5.Telas.model.Tipo;
 import compasso.estagio.grupo.projeto5.Telas.repository.AulaRepository;
+import compasso.estagio.grupo.projeto5.Telas.repository.PerfilRepository;
 
 @Controller
 @RequestMapping("inseriraula")
@@ -25,11 +28,19 @@ public class InserirAulaController {
 	private int cont;
 
 	@Autowired
+	PerfilRepository perfilRepository;
+	
+	@Autowired
 	AulaRepository aulaRepository;
+	
 	@Autowired
 	private FileSaverService service;
+	
 	@GetMapping
-	public String inserir(Model modelo,AulaDto aulaDto) {
+	public String inserir(Model modelo,AulaDto aulaDto, Principal principal) {
+		
+		modelo.addAttribute("perfil", perfilRepository.findByEmail(principal.getName()));
+		
 		if(cont > 0) {
 			modelo.addAttribute("cadastrado", "Aula cadastrada com sucesso!");
 			cont = 0;

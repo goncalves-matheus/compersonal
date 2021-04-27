@@ -35,6 +35,8 @@ public class DashboardController {
 
 	@GetMapping("/aluno")
 	public String aluno(Model modelo, Principal principal) {
+		
+		modelo.addAttribute("perfil", perfilRepository.findByEmail(principal.getName()));
 
 		List<Aula> aulas = aulaRepository.findByAlunos(perfilRepository.findByEmail(principal.getName()));
 		if (aulas.size() > 10) {
@@ -60,6 +62,9 @@ public class DashboardController {
 
 	@GetMapping("/personal")
 	public String personal(Model modelo, Principal principal) {
+		
+		modelo.addAttribute("perfil", perfilRepository.findByEmail(principal.getName()));
+		
 		Long quandidadeDeAlunos = perfilRepository.count() - 1;
 		Long quandidadeDeVideoaulas = aulaRepository.count();
 		Long quantidadeDeAulasTotais = agendaRepository.count();

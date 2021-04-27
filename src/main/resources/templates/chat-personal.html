@@ -32,7 +32,7 @@
 								<a th:each="aluno : ${alunos}" th:href="${aluno.email}"
 									class="list-group-item list-group-item-action  rounded-0">
 									<div class="d-flex align-items-center justify-content-between mb-1">
-										<img src="https://www.cursosabrafordes.com.br/webroot/img/cur_cursos/foto_1495509835.jpeg"
+										<img th:src="${aluno.foto}"
 											alt="user" width="50" height="50" class="rounded-circle">
 										<div>
 											<h6 th:text="${aluno.primeiroNome}" class="mb-0"></h6>
@@ -53,8 +53,6 @@
 						<div th:each="mensagem: ${mensagens}" th:switch="${mensagem.destinatarioId}" class="card-body">
 							<!-- Mensagem do Aluno -->
 							<div th:case="${personal.id}" class="d-flex justify-content-start mb-0">
-								<img src="https://www.cursosabrafordes.com.br/webroot/img/cur_cursos/foto_1495509835.jpeg"
-									alt="aluno" width="35" height="35" class="rounded-circle">
 								<div class=" ml-3">
 									<div class="bg-light  form-control">
 										<label th:text="${mensagem.texto}" class="mb-0 text-muted"></label>

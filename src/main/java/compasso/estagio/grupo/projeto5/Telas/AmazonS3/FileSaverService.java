@@ -19,11 +19,11 @@ public class FileSaverService {
 	private String bucket;
 
 	@Autowired
-	private AmazonS3 clienteS3;
+	private AmazonS3 amazonS3;
 
 	public void uploadFile(MultipartFile MultiFile) {
 		File file = convertMultiPartFileToFile(MultiFile);
-		clienteS3.putObject(new PutObjectRequest(bucket, MultiFile.getOriginalFilename(), file));
+		amazonS3.putObject(new PutObjectRequest(bucket, MultiFile.getOriginalFilename(), file));
 		file.delete();
 	}
 
