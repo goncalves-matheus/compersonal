@@ -11,6 +11,7 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 //@Entity
+//@Table("vendas")
 public class Venda {
 
 	@Id

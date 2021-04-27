@@ -4,38 +4,49 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
+import org.apache.catalina.connector.Response;
 import org.apache.http.Consts;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
+import org.springframework.web.util.UriBuilder;
+
+import javassist.bytecode.stackmap.BasicBlock.Catch;
 
 public class ConexaoPagSeguro {
-    public static void main(String[] args) {
-        pagar();
-    }
+
     private Perfil perfil;
     private Plano plano;
     private String ddd;
     private String telefoneSemDDD;
 
+    public ConexaoPagSeguro(){
+    }
+
     public ConexaoPagSeguro(Perfil perfil, Plano plano) {
         this.perfil = perfil;
         this.plano = plano;
         this.ddd = perfil.getTelefone().substring(0, 3);
-        this.telefoneSemDDD = perfil.getTelefone().substring(3, 10);
+        this.telefoneSemDDD = perfil.getTelefone().substring(3, 11);
     }
+    //Link de Redirecionamento Checkout PagSeguro:
+    //https://sandbox.pagseguro.uol.com.br/v2/checkout/payment.html?code=código de checkout
 
-    public static boolean pagar() {
+    public String gerarCodigoDeCompra() {
         String email = "gabriel-jeffersonscs@hotmail.com";
         String token = "e8006f5d-b0f1-4822-98b6-945982e14c9ae0dc2cfb4e0aaa9156c492d3c406e0c60806-2dc2-4089-9378-d67ad74ec2c9";
         final String URL = "https://ws.sandbox.pagseguro.uol.com.br/v2/checkout";
+        String codigoDaCompra = "";
         try {
             CloseableHttpClient client = HttpClients.createDefault();
             URIBuilder builder = new URIBuilder(URL);
@@ -44,7 +55,70 @@ public class ConexaoPagSeguro {
             HttpPost postRequest = new HttpPost(builder.build());
             postRequest.setHeader("Content-Type", "application/x-www-form-urlencoded");
             List<NameValuePair> formParams = new ArrayList<>();
+
+            //Credenciais:
+            formParams.add(new BasicNameValuePair("email", email));
+            formParams.add(new BasicNameValuePair("token", token));
+
+            //Dados do item da compra:
+            formParams.add(new BasicNameValuePair("currency", "BRL"));
+            formParams.add(new BasicNameValuePair("itemId1", String.valueOf(plano.getId())));
+            formParams.add(new BasicNameValuePair("itemDescription1", plano.getDescricao()));
+            formParams.add(new BasicNameValuePair("itemAmount1", plano.getValor()));
+            formParams.add(new BasicNameValuePair("itemQuantity1", "1"));
+            formParams.add(new BasicNameValuePair("itemWeight1", "0000"));
+            formParams.add(new BasicNameValuePair("reference", "001"));
+        
+            //Dados do destinatário:
+            formParams.add(new BasicNameValuePair("senderName", perfil.getPrimeiroNome()));
+            formParams.add(new BasicNameValuePair("senderAreaCode", ddd));
+            formParams.add(new BasicNameValuePair("senderPhone", telefoneSemDDD));
+            formParams.add(new BasicNameValuePair("senderCPF", perfil.getCpf()));
+            formParams.add(new BasicNameValuePair("senderBornDate", perfil.getDataDeNascimento()));
+            formParams.add(new BasicNameValuePair("senderEmail", perfil.getEmail()));
+
+            //Configurações da compra:
+            formParams.add(new BasicNameValuePair("addressRequired", "false"));
+            formParams.add(new BasicNameValuePair("enableRecover", "false"));
+            formParams.add(new BasicNameValuePair("redirectURL", "http://localhost:8080/login"));
+            formParams.add(new BasicNameValuePair("notificationURL", "http://localhost:8080/login"));
+            formParams.add(new BasicNameValuePair("maxUses", "1"));
+            formParams.add(new BasicNameValuePair("maxAge", "3600"));
+
+            postRequest.setEntity(new UrlEncodedFormEntity(formParams, Consts.UTF_8));
+
+            CloseableHttpResponse response = client.execute(postRequest);
+            String result = EntityUtils.toString(response.getEntity());
+            System.out.println("Resposta: " + result);
+
+            Pattern pattern = Pattern.compile("<code>(.*?)</code>", Pattern.DOTALL);
+            Matcher matcher = pattern.matcher(result);
+            if (matcher.find()) {
+                codigoDaCompra = matcher.group(1);
+                System.out.println("Código: "+codigoDaCompra);    
+            }
             
+            client.close();
+
+        } catch (IOException | URISyntaxException e) {
+            e.printStackTrace();
+        }
+        return codigoDaCompra;
+    }
+
+    public String testar() {
+        String email = "gabriel-jeffersonscs@hotmail.com";
+        String token = "e8006f5d-b0f1-4822-98b6-945982e14c9ae0dc2cfb4e0aaa9156c492d3c406e0c60806-2dc2-4089-9378-d67ad74ec2c9";
+        final String URL = "https://ws.sandbox.pagseguro.uol.com.br/v2/checkout";
+        String codigoDaCompra = "";
+        try {
+            CloseableHttpClient client = HttpClients.createDefault();
+            URIBuilder builder = new URIBuilder(URL);
+            builder.setParameter("email", email);
+            builder.setParameter("token", token);
+            HttpPost postRequest = new HttpPost(builder.build());
+            postRequest.setHeader("Content-Type", "application/x-www-form-urlencoded");
+            List<NameValuePair> formParams = new ArrayList<>();
 
             formParams.add(new BasicNameValuePair("email", email));
             formParams.add(new BasicNameValuePair("token", token));
@@ -80,57 +154,20 @@ public class ConexaoPagSeguro {
             postRequest.setEntity(new UrlEncodedFormEntity(formParams, Consts.UTF_8));
             CloseableHttpResponse response = client.execute(postRequest);
             String result = EntityUtils.toString(response.getEntity());
+            System.out.println("Resposta: " + result);
 
-            System.out.println("Resposta: "+result);
+            Pattern pattern = Pattern.compile("<code>(.*?)</code>", Pattern.DOTALL);
+            Matcher matcher = pattern.matcher(result);
+            if (matcher.find()) {
+                codigoDaCompra = matcher.group(1);
+                System.out.println("Código: "+codigoDaCompra);    
+            }
+            
             client.close();
-            return true;
 
         } catch (IOException | URISyntaxException e) {
             e.printStackTrace();
-            return false;
         }
+        return codigoDaCompra;
     }
 }
-
-/*
- * formParams.add(new BasicNameValuePair("email", "{{email}}"));
- * formParams.add(new BasicNameValuePair("token", "{{token}}"));
- * formParams.add(new BasicNameValuePair("currency", "BRL"));
- * 
- * formParams.add(new BasicNameValuePair("itemId1",
- * String.valueOf(plano.getId()))); formParams.add(new
- * BasicNameValuePair("itemDescription1", plano.getDescricao()));
- * formParams.add(new BasicNameValuePair("itemAmount1", plano.getValor()));
- * formParams.add(new BasicNameValuePair("itemQuantity1", "1"));
- * formParams.add(new BasicNameValuePair("itemWeight1", "0000"));
- * formParams.add(new BasicNameValuePair("reference", "001"));
- * formParams.add(new BasicNameValuePair("senderName",
- * perfil.getPrimeiroNome())); formParams.add(new
- * BasicNameValuePair("senderAreaCode", ddd)); formParams.add(new
- * BasicNameValuePair("senderPhone", telefoneSemDDD)); formParams.add(new
- * BasicNameValuePair("senderCPF", perfil.getCpf())); formParams.add(new
- * BasicNameValuePair("senderBornDate", perfil.getDataDeNascimento()));
- * formParams.add(new BasicNameValuePair("senderEmail", perfil.getEmail())); //
- * formParams.add(new BasicNameValuePair("shippingType", "1"));
- * formParams.add(new BasicNameValuePair("shippingAddressStreet",
- * perfil.getEndereco().getRua())); formParams.add(new
- * BasicNameValuePair("shippingAddressNumber",
- * perfil.getEndereco().getNumero())); formParams.add(new
- * BasicNameValuePair("shippingAddressComplement",
- * perfil.getEndereco().getComplemento())); formParams.add(new
- * BasicNameValuePair("shippingAddressDistrict",
- * perfil.getEndereco().getBairro())); formParams.add(new
- * BasicNameValuePair("shippingAddressPostalCode",
- * perfil.getEndereco().getCep())); formParams.add(new
- * BasicNameValuePair("shippingAddressCity", perfil.getEndereco().getCidade()));
- * formParams.add(new BasicNameValuePair("shippingAddressState",
- * perfil.getEndereco().getSiglaEstado())); formParams.add(new
- * BasicNameValuePair("shippingAddressCountry", "BRA")); // formParams.add(new
- * BasicNameValuePair("extraAmount", "-0.01")); formParams.add(new
- * BasicNameValuePair("redirectURL", "http://localhost:8080"));
- * formParams.add(new BasicNameValuePair("notificationURL",
- * "https://yourserver.com/nas_ecommerce/277be731-3b7c-4dac-8c4e-4c3f4a1fdc46/")
- * ); //verificar formParams.add(new BasicNameValuePair("maxUses", "1"));
- * formParams.add(new BasicNameValuePair("maxAge", "3000")); //
- * formParams.add(new BasicNameValuePair("shippingCost", "0.00"));
- */
