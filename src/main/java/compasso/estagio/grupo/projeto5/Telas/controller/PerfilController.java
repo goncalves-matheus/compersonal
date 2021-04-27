@@ -2,9 +2,7 @@ package compasso.estagio.grupo.projeto5.Telas.controller;
 
 import java.security.Principal;
 import java.util.Optional;
-
 import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,7 +12,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-
 import compasso.estagio.grupo.projeto5.Telas.AmazonS3.FileSaverService;
 import compasso.estagio.grupo.projeto5.Telas.dto.AlterarSenhaDto;
 import compasso.estagio.grupo.projeto5.Telas.dto.InformacaoAdicionalDto;
@@ -44,11 +41,12 @@ public class PerfilController {
 	public String aulas(PerfilDto perfilDto, InformacaoAdicionalDto infoAdDto, AlterarSenhaDto senhaDto, Model modelo,
 			Principal principal) {
 
-		perfilDto = perfilDto.toPerfilDto(repository.findByEmail(principal.getName()));
+		Perfil p = repository.findByEmail(principal.getName());
+		perfilDto = perfilDto.toPerfilDto(p);
 		modelo.addAttribute("perfil", perfilDto);
 		modelo.addAttribute("email", principal.getName());
-		if (repository.findByEmail(principal.getName()).getInformacao() != null) {
-			infoAdDto = infoAdDto.toInformacaoAdicionalDto(repository.findByEmail(principal.getName()).getInformacao());
+		if (p.getInformacao() != null) {
+			infoAdDto = infoAdDto.toInformacaoAdicionalDto(p.getInformacao());
 			modelo.addAttribute("infoAd", infoAdDto);
 			if (up > 0) {
 				modelo.addAttribute("up", "Alterado com sucesso!");

@@ -34,8 +34,8 @@ public class AulasController extends GestorDeMensagens {
 	@GetMapping
 	public String aulas(Model modelo, MensagemDto mensagemDto, Principal principal) {
 		try {
-			List<Aula> aulas = aulaRepository.findByAlunos(perfilRepository.findByEmail(principal.getName()));
-
+			//List<Aula> aulas = aulaRepository.findByAlunos(perfilRepository.findByEmail(principal.getName()));
+			List<Aula> aulas = aulaRepository.getAulaCadastrada(principal.getName());
 			adiconarModelo(aulas.get(0).getTitulo(), modelo);
 			super.setRepositories(this.perfilRepository, this.mensagemRepository);
 			carregarMensagensDoChat(modelo, perfilRepository.findByEmail(principal.getName()));

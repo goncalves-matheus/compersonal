@@ -1,9 +1,7 @@
 package compasso.estagio.grupo.projeto5.Telas.controller;
 
 import java.security.Principal;
-
 import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,7 +11,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-
 import compasso.estagio.grupo.projeto5.Telas.AmazonS3.FileSaverService;
 import compasso.estagio.grupo.projeto5.Telas.dto.AulaDto;
 import compasso.estagio.grupo.projeto5.Telas.model.Aula;
