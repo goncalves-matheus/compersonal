@@ -22,8 +22,8 @@
 										class="col-md-3 d-flex justify-content-center align-items-center">
 										<a
 											th:href="@{/alunos/perfil/{email}(email=${usuarioDto.email})}"><img
-											class="img-thumbnail m-1" width="200"
-											th:src="'https://compersonal-bucket.s3.amazonaws.com/'+${usuarioDto.foto}"></a>
+											class="img-thumbnail m-1" width="150" style="max-height:150px !important;"
+											th:src="${usuarioDto.foto}"></a>
 									</div>
 									<div class="col-md-9">
 										<div class="card-body">

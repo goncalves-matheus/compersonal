@@ -72,7 +72,7 @@ public class PerfilController {
 		Perfil perfil = repository.findByEmail(principal.getName());
 		perfil.setPrimeiroNome(usuarioDto.getPrimeiroNome());
 		perfil.setUltimoNome(usuarioDto.getUltimoNome());
-		perfil.setFoto(file.getOriginalFilename());
+		perfil.setFoto("https://compersonal-bucket.s3.amazonaws.com/"+file.getOriginalFilename());
 		repository.save(perfil);
 		up++;
 		return "redirect:/perfil";

@@ -48,8 +48,9 @@ public class DashboardController {
 	}
 
 	@GetMapping("/aluno/erroAlunoSemAula")
-	public String alunoSemAulas(Model modelo) {
-
+	public String alunoSemAulas(Model modelo,Principal principal) {
+		
+		modelo.addAttribute("perfil", perfilRepository.findByEmail(principal.getName()));
 		modelo.addAttribute("erroAlunoSemAula", "Sem aulas cadastradas, procure o instrutor");
 
 		return "dashboard_aluno";

@@ -50,7 +50,7 @@ public class UsuarioDto {
 	}
 
 	public String getFoto() {
-		return "https://compersonal-bucket.s3.amazonaws.com/"+foto;
+		return foto;
 	}
 
 	public void setFoto(String foto) {

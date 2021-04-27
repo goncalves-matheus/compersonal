@@ -16,7 +16,7 @@ public class PerfilDto {
 	public PerfilDto toPerfilDto(Perfil p) {
 		this.primeiroNome = p.getPrimeiroNome();
 		this.ultimoNome = p.getUltimoNome();
-		this.foto = "https://compersonal-bucket.s3.amazonaws.com/"+ p.getFoto();
+		this.foto = p.getFoto();
 		return this;
 	}
 
