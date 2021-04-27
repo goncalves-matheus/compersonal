@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import compasso.estagio.grupo.projeto5.Telas.model.ConexaoPagSeguro;
 import compasso.estagio.grupo.projeto5.Telas.model.Perfil;
@@ -29,6 +30,7 @@ public class PlanosController {
         return "pagar";
     }
 
+    @ResponseBody
     @RequestMapping(value = "/pagseguro-notificacao", method = RequestMethod.POST)
     public String registrarNogificacao(){
         String codigo = "";
@@ -39,7 +41,9 @@ public class PlanosController {
             e.printStackTrace();
         }
         System.out.println();
-        return "redirect:/";
+        return
+        //return "redirect:/";
+
     }
     
    /*  @GetMapping("/1")
