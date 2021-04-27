@@ -3,6 +3,7 @@ package compasso.estagio.grupo.projeto5.Telas.controller;
 import java.security.Principal;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -51,7 +52,7 @@ public class AlunosController {
 	public String uuniPerfil(@PathVariable("email") String email, Model modelo, Principal principal) {
 		
 		modelo.addAttribute("perfil", perfilRepository.findByEmail(principal.getName()));
-
+		//pensar como fazer
 		List<Aula> aulas = aulaRepository.findAll();
 		//List<Aula> aulasCadastradas = aulaRepository.findByAlunos(perfilRepository.findByEmail(email));
 		List<Aula> aulasCadastradas = aulaRepository.getAulaCadastrada(email);
@@ -84,6 +85,7 @@ public class AlunosController {
 	}
 
 	@PostMapping("/adicionarAula")
+	@CacheEvict(value = "listaDeAulas", allEntries = true)
 	public String adicionarAula(String titulo, String email, Model modelo) {
 		if (!(titulo == null)) {
 			Perfil perfil = perfilRepository.findByEmail(email);
