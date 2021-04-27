@@ -1,5 +1,6 @@
 package compasso.estagio.grupo.projeto5.Telas.controller;
 
+import java.net.URISyntaxException;
 import java.security.Principal;
 import java.time.LocalDateTime;
 
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import compasso.estagio.grupo.projeto5.Telas.model.ConexaoPagSeguro;
 import compasso.estagio.grupo.projeto5.Telas.model.Perfil;
@@ -26,8 +28,34 @@ public class PlanosController {
     public String planos() {
         return "pagar";
     }
-    
 
+    @RequestMapping(value = "/pagseguro-notificacao", method = RequestMethod.POST)
+    public String registrarNogificacao(){
+        String codigo = "";
+        ConexaoPagSeguro pagSeguro = new ConexaoPagSeguro();
+        try {
+            System.out.println(pagSeguro.getStatus(codigo));
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
+        System.out.println();
+        return "redirect:/";
+    }
+    
+   /*  @GetMapping("/1")
+    public String nogificacao(){
+        String codigo = "67DE4C45-FE5C-4CA9-B495-F5DD77A877DF";
+        ConexaoPagSeguro pagSeguro = new ConexaoPagSeguro();
+        try {
+            System.out.println(pagSeguro.getStatus(codigo));
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
+        System.out.println();
+        return "redirect:/";
+    } */
+    
+    
     @GetMapping("pagamento/{escolha}")
     public String pagar(@PathVariable (name = "escolha")int escolha, Principal principal){
         if(escolha == 1){
@@ -47,6 +75,7 @@ public class PlanosController {
         }
         
         if(!codigoDePagamento.isEmpty()) {
+            System.out.println(codigoDePagamento);
             //return "redirect:https://sandbox.pagseguro.uol.com.br/v2/checkout/payment.html?code="+codigoDePagamento;
             return "redirect:https://pagseguro.uol.com.br/v2/checkout/payment.html?code="+codigoDePagamento;
         }
