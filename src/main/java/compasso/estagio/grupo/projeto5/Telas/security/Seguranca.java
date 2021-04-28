@@ -22,7 +22,7 @@ public class Seguranca extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 
 		http.authorizeRequests().antMatchers("/*.css", "/*.jpeg","/*.js").permitAll()
-				.antMatchers("/", "/recuperar/**","/cadastro", "/cadastro/*", "/planos","/pagseguro-notificacao").permitAll()
+				.antMatchers("/", "/recuperar/**","/cadastro", "/cadastro/*", "/planos/**").permitAll()
 				.antMatchers("/dashboard/aluno").hasAuthority("Usuario")
 				.antMatchers("/dashboard/personal","/inseriraula/**","/alunos").hasAuthority("Personal")
 				.antMatchers(HttpMethod.GET,"/mensagem/**").hasAuthority("Personal")
@@ -30,7 +30,7 @@ public class Seguranca extends WebSecurityConfigurerAdapter {
 				.antMatchers(HttpMethod.POST,"/mensagem/novaMensagemAluno").hasAuthority("Usuario")
 				.anyRequest().authenticated()
 				.and()
-				.formLogin(form -> form.loginPage("/login").permitAll().defaultSuccessUrl("/", true))
+				.formLogin(form -> form.loginPage("/login").permitAll().defaultSuccessUrl("/dashboard", true))
 				.logout(logout -> logout.logoutUrl("/logout").logoutSuccessUrl("/"));
 	}
 
