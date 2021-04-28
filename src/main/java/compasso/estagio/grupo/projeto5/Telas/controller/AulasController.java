@@ -42,7 +42,7 @@ public class AulasController extends GestorDeMensagens {
 				// List<Aula> aulas =
 				// aulaRepository.findByAlunos(perfilRepository.findByEmail(principal.getName()));
 				List<Aula> aulas = aulaRepository.getAulaCadastrada(principal.getName());
-				adiconarModelo(aulas.get(0).getTitulo(), modelo);
+				adiconarModelo(aulas.get(0).getTitulo(), modelo, principal);
 				super.setRepositories(this.perfilRepository, this.mensagemRepository);
 				carregarMensagensDoChat(modelo, perfil);
 
@@ -58,7 +58,7 @@ public class AulasController extends GestorDeMensagens {
 	@GetMapping("/{titulo}")
 	public String AulaId(@PathVariable String titulo, Model modelo, MensagemDto mensagemDto, Principal principal) {
 
-		adiconarModelo(titulo, modelo);
+		adiconarModelo(titulo, modelo, principal);
 
 		super.setRepositories(this.perfilRepository, this.mensagemRepository);
 		carregarMensagensDoChat(modelo, perfilRepository.findByEmail(principal.getName()));
@@ -66,13 +66,13 @@ public class AulasController extends GestorDeMensagens {
 		return "aulas";
 	}
 
-	private void adiconarModelo(String titulo, Model modelo) {
+	private void adiconarModelo(String titulo, Model modelo, Principal pricipal) {
 		modelo.addAttribute("aula", aulaRepository.findByTitulo(titulo));
-		modelo.addAttribute("gluteo", aulaRepository.findByTipo(Tipo.GLUTEO));
-		modelo.addAttribute("abdomen", aulaRepository.findByTipo(Tipo.ABDOMEN));
-		modelo.addAttribute("perna", aulaRepository.findByTipo(Tipo.PERNAS));
-		modelo.addAttribute("braco", aulaRepository.findByTipo(Tipo.BRACOS));
-		modelo.addAttribute("peito", aulaRepository.findByTipo(Tipo.PEITO));
+		modelo.addAttribute("gluteo", aulaRepository.findByTipo(0, pricipal.getName()));
+		modelo.addAttribute("abdomen", aulaRepository.findByTipo(1, pricipal.getName()));
+		modelo.addAttribute("perna", aulaRepository.findByTipo(2, pricipal.getName()));
+		modelo.addAttribute("braco", aulaRepository.findByTipo(3, pricipal.getName()));
+		modelo.addAttribute("peito", aulaRepository.findByTipo(4, pricipal.getName()));
 	}
 
 }

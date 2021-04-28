@@ -16,7 +16,8 @@ public interface AulaRepository extends JpaRepository<Aula, Long> {
 
 	Page<Aula> findAll(Pageable page);
 
-	List<Aula> findByTipo(Tipo tipo);
+	@Query(value = "select * from aula a inner join perfil_aulas p on p.aulas_id = a.id inner join perfil pe on pe.id = p.perfil_id where email = :email and a.tipo = :tipo", nativeQuery = true)
+	List<Aula> findByTipo(int tipo, String email);
 
 	@Query("SELECT a FROM Aula a INNER JOIN a.alunos al WHERE al IN (:aluno) and a.tipo = :tipo order by a.id desc")
 	List<Aula> findByAlunoAndTipo(@Param("aluno") Perfil perfil,@Param("tipo") Tipo tipo);
@@ -26,6 +27,9 @@ public interface AulaRepository extends JpaRepository<Aula, Long> {
 
 	@Query(value = "select * from aula a inner join perfil_aulas p on p.aulas_id = a.id inner join perfil pe on pe.id = p.perfil_id where email = :email", nativeQuery = true)
 	List<Aula> getAulaCadastrada(String email);
+
+	@Query(value = "select * from aula a inner join perfil_aulas p on p.aulas_id = a.id inner join perfil pe on pe.id = p.perfil_id where email = :email order by aulas_id desc", nativeQuery = true)
+	List<Aula> getAulaCadastradaa(String email);
 
 	Aula findByTitulo(String titulo);
 

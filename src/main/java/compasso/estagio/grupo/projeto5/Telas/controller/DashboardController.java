@@ -45,7 +45,7 @@ public class DashboardController {
 		modelo.addAttribute("perfil", perfilRepository.findByEmail(principal.getName()));
 		// List<Aula> aulas =
 		// aulaRepository.findByAlunos(perfilRepository.findByEmail(principal.getName()));
-		List<Aula> aulas = aulaRepository.getAulaCadastrada(principal.getName());
+		List<Aula> aulas = aulaRepository.getAulaCadastradaa(principal.getName());
 		if (aulas.size() > 10) {
 			aulas = aulas.subList(0, 10);
 		} else if (aulas.size() == 0) {
