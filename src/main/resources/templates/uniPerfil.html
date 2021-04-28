@@ -24,13 +24,37 @@
 							<button type="button" class="btn-close" data-bs-dismiss="alert"
 								aria-label="Close"></button>
 						</div>
+
+						<div th:if="${situacao}==3"
+							class="mt-2 alert alert-success alert-dismissible fade show"
+							role="alert">
+							<p>Aluna pagou o serviço!</p>
+							<button type="button" class="btn-close" data-bs-dismiss="alert"
+								aria-label="Close"></button>
+						</div>
+
+						<div th:if="${situacao}==1"
+							class="mt-2 alert alert-warning alert-dismissible fade show"
+							role="alert">
+							<p>Em analise!</p>
+							<button type="button" class="btn-close" data-bs-dismiss="alert"
+								aria-label="Close"></button>
+						</div>
+
 						<div class="card">
 							<h5 class="card-header">Dados pessoais do aluno(a)</h5>
-							<p class="d-flex justify-content-end m-0 p-0">
-								<a data-bs-toggle="modal" href data-bs-target="#staticBackdrop"
-									class="link-secondary d-flex justify-content-end p-0 mx-2"
-									max-width="10">Adicionar Aula</a>
-							</p>
+							<div class="d-flex justify-content-between">
+								<p class="m-0 p-0">
+									<a data-bs-toggle="modal" href data-bs-target="#transacao"
+										class="link-secondary d-flex justify-content-end p-0 mx-2"
+										max-width="10">Adicionar Transação</a>
+								</p>
+								<p class="m-0 p-0">
+									<a data-bs-toggle="modal" href data-bs-target="#staticBackdrop"
+										class="link-secondary d-flex justify-content-end p-0 mx-2"
+										max-width="10">Adicionar Aula</a>
+								</p>
+							</div>
 							<form th:object="${aluno}" class="card-body mb-0 mt-3 pb-0"
 								th:action="@{/perfil/alterar}" method="POST">
 
@@ -39,7 +63,8 @@
 										th:text="*{primeiroNome}+' '+*{ultimoNome}"></h4>
 								</div>
 								<div class="text-center">
-									<img width="200" height="200" th:if="*{primeiroNome}!='Gabriel'" th:src="*{foto}"
+									<img width="200" height="200"
+										th:if="*{primeiroNome}!='Gabriel'" th:src="*{foto}"
 										class="rounded-circle mb-2" alt="foto de perfil"> <img
 										width="200" height="200" th:if="*{primeiroNome}=='Gabriel'"
 										class="rounded-circle mb-2"
@@ -169,6 +194,35 @@
 												alert("Adicionado com sucesso!");
 											}
 										</script>
+										<button type="submit" onclick="add();" class="btn cor-botao">Adicionar</button>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="modal fade" id="transacao" data-bs-backdrop="static"
+					data-bs-keyboard="false" tabindex="-1"
+					aria-labelledby="staticBackdropLabel" aria-hidden="true">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="staticBackdropLabel">Adicionar
+									código da transação</h5>
+								<button type="button" class="btn-close" data-bs-dismiss="modal"
+									aria-label="Close"></button>
+							</div>
+							<div class="modal-body">
+								<div class="card-body cor-borda">
+									<form class="card-body"
+										th:action="@{/alunos/adicionarTransacao}" method="POST">
+										<div class="mb-3">
+											<h5>Código:</h5>
+											<input type="text" name="codigo"
+												placeholder="Código da transação">
+										</div>
+										<input type="hidden" name="email" th:value="${aluno.email}">
 										<button type="submit" onclick="add();" class="btn cor-botao">Adicionar</button>
 									</form>
 								</div>

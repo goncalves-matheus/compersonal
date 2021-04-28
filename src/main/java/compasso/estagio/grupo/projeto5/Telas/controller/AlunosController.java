@@ -2,6 +2,7 @@ package compasso.estagio.grupo.projeto5.Telas.controller;
 
 import java.security.Principal;
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -13,10 +14,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
 import compasso.estagio.grupo.projeto5.Telas.dto.InformacaoAdicionalDto;
 import compasso.estagio.grupo.projeto5.Telas.dto.UsuarioDto;
 import compasso.estagio.grupo.projeto5.Telas.model.Aula;
 import compasso.estagio.grupo.projeto5.Telas.model.Perfil;
+import compasso.estagio.grupo.projeto5.Telas.model.Plano;
 import compasso.estagio.grupo.projeto5.Telas.repository.AulaRepository;
 import compasso.estagio.grupo.projeto5.Telas.repository.PerfilRepository;
 
@@ -36,7 +39,7 @@ public class AlunosController {
 
 	@GetMapping("/{page}")
 	public String alunosAll(@PathVariable(name = "page") int pagina, Model modelo, Principal principal) {
-		
+
 		modelo.addAttribute("perfil", perfilRepository.findByEmail(principal.getName()));
 
 		Page<Perfil> estudantes = getListaDeAlunos(principal, pagina);
@@ -49,15 +52,17 @@ public class AlunosController {
 
 	@GetMapping("/perfil/{email}")
 	public String uuniPerfil(@PathVariable("email") String email, Model modelo, Principal principal) {
-		
+
 		modelo.addAttribute("perfil", perfilRepository.findByEmail(principal.getName()));
 
 		List<Aula> aulas = aulaRepository.findAll();
-		//List<Aula> aulasCadastradas = aulaRepository.findByAlunos(perfilRepository.findByEmail(email));
+		// List<Aula> aulasCadastradas =
+		// aulaRepository.findByAlunos(perfilRepository.findByEmail(email));
 		List<Aula> aulasCadastradas = aulaRepository.getAulaCadastrada(email);
 		aulas.removeAll(aulasCadastradas);
 
-		UsuarioDto u = UsuarioDto.converte(perfilRepository.findByEmail(email));
+		Perfil perfil = perfilRepository.findByEmail(email);
+		UsuarioDto u = UsuarioDto.converte(perfil);
 
 		if (perfilRepository.findByEmail(email).getInformacao() != null) {
 			InformacaoAdicionalDto info = new InformacaoAdicionalDto();
@@ -75,6 +80,9 @@ public class AlunosController {
 		}
 
 		modelo.addAttribute("aluno", u);
+		if (perfil.getPlano().getStatus() != null) {
+			modelo.addAttribute("situacao", perfil.getPlano().getStatus());
+		}
 
 		if (cont > 0) {
 			modelo.addAttribute("cadastrado", "Aula foi adicionada com sucesso!");
@@ -95,10 +103,23 @@ public class AlunosController {
 		return "redirect:/alunos/perfil/" + email;
 	}
 
+	@PostMapping("/adicionarTransacao")
+	public String adicionarTransacao(String codigo, String email, Model modelo) {
+
+		Plano plano = new Plano(codigo);
+		Perfil perfil = perfilRepository.findByEmail(email);
+
+		if (perfil.getPlano().getStatus() == null) {
+			perfil.setPlano(plano);
+			perfilRepository.save(perfil);
+		}
+
+		return "redirect:/alunos/perfil/" + email;
+	}
+
 	private Page<Perfil> getListaDeAlunos(Principal principal, int pagina) {
 
 		List<Perfil> perfis = perfilRepository.findByPermissao_Permissao("Usuario");
-
 		numeroDePags = perfis.size() / 4;
 		if (perfis.size() % 4 != 0) {
 			numeroDePags++;
@@ -109,5 +130,5 @@ public class AlunosController {
 		return usuarios;
 
 	}
-	
+
 }

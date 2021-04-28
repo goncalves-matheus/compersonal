@@ -31,16 +31,25 @@ public class DashboardController {
 	@Autowired
 	AgendaRepositoy agendaRepository;
 
+	@GetMapping
+	public String dashboard(Principal principal) {
+		if(perfilRepository.findByEmail(principal.getName()).getPermissao().getPermissao().toLowerCase().equals("usuario")) {
+			return "redirect:/dashboard/aluno";
+		}
+		return "redirect:/dashboard/personal";
+	}
+
 	@GetMapping("/aluno")
 	public String aluno(Model modelo, Principal principal) {
-		
+
 		modelo.addAttribute("perfil", perfilRepository.findByEmail(principal.getName()));
 
-		//List<Aula> aulas = aulaRepository.findByAlunos(perfilRepository.findByEmail(principal.getName()));
+		// List<Aula> aulas =
+		// aulaRepository.findByAlunos(perfilRepository.findByEmail(principal.getName()));
 		List<Aula> aulas = aulaRepository.getAulaCadastrada(principal.getName());
 		if (aulas.size() > 10) {
 			aulas = aulas.subList(0, 10);
-		} else if(aulas.size() == 0) {
+		} else if (aulas.size() == 0) {
 			modelo.addAttribute("perfil", perfilRepository.findByEmail(principal.getName()));
 			modelo.addAttribute("erroAlunoSemAula", "Sem aulas cadastradas, procure o instrutor");
 		}
@@ -50,8 +59,8 @@ public class DashboardController {
 	}
 
 	@GetMapping("/aluno/erroAlunoSemAula")
-	public String alunoSemAulas(Model modelo,Principal principal) {
-		
+	public String alunoSemAulas(Model modelo, Principal principal) {
+
 		modelo.addAttribute("perfil", perfilRepository.findByEmail(principal.getName()));
 		modelo.addAttribute("erroAlunoSemAula", "Sem aulas cadastradas, procure o instrutor");
 
@@ -65,9 +74,9 @@ public class DashboardController {
 
 	@GetMapping("/personal")
 	public String personal(Model modelo, Principal principal) {
-		
+
 		modelo.addAttribute("perfil", perfilRepository.findByEmail(principal.getName()));
-		
+
 		Long quandidadeDeAlunos = perfilRepository.count() - 1;
 		Long quandidadeDeVideoaulas = aulaRepository.count();
 		Long quantidadeDeAulasTotais = agendaRepository.count();
@@ -113,12 +122,12 @@ public class DashboardController {
 			}
 		}
 		switch (periodoDeTempo) {
-			case "dia":
-				return totalHorasNoDia;
-			case "semana":
-				return totalHorasNaSemana;
-			default:
-				return totalHorasNoMes;
+		case "dia":
+			return totalHorasNoDia;
+		case "semana":
+			return totalHorasNaSemana;
+		default:
+			return totalHorasNoMes;
 		}
 	}
 

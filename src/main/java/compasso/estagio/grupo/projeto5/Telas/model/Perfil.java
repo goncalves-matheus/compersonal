@@ -35,12 +35,15 @@ public class Perfil {
 	private String email;
 
 	private String dataDeNascimento;
-	
+
 	private String cpf;
 
 	private String telefone;
-	
+
 	private String foto;
+
+	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+	private Plano plano = new Plano();
 
 	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
 	private Endereco endereco;
@@ -58,7 +61,15 @@ public class Perfil {
 
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
 	private Permissao permissao;
-	
+
+	public Plano getPlano() {
+		return plano;
+	}
+
+	public void setPlano(Plano plano) {
+		this.plano = plano;
+	}
+
 	public String getFoto() {
 		return foto;
 	}
