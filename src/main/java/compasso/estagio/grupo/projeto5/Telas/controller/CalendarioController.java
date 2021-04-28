@@ -72,6 +72,15 @@ public class CalendarioController {
 
 		return "redirect:/calendario";
 	}
+	
+	@PostMapping("/deletar")
+	public String Deletar(String inicio, String fim, Principal principal) {
+
+		Agenda agenda = agendaRepository.findByStart(inicio);
+		agendaRepository.delete(agenda);
+
+		return "redirect:/calendario";
+	}
 
 	@PostMapping("/agendar")
 	public String Agendar(String inicio, String fim, Principal principal) {

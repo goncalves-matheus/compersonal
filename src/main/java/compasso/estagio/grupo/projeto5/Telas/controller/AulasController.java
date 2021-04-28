@@ -15,7 +15,6 @@ import compasso.estagio.grupo.projeto5.Telas.dto.MensagemDto;
 import compasso.estagio.grupo.projeto5.Telas.model.Aula;
 import compasso.estagio.grupo.projeto5.Telas.model.GestorDeMensagens;
 import compasso.estagio.grupo.projeto5.Telas.model.Perfil;
-import compasso.estagio.grupo.projeto5.Telas.model.Tipo;
 import compasso.estagio.grupo.projeto5.Telas.repository.AulaRepository;
 import compasso.estagio.grupo.projeto5.Telas.repository.MensagemRepository;
 import compasso.estagio.grupo.projeto5.Telas.repository.PerfilRepository;

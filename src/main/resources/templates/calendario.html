@@ -82,13 +82,19 @@
 						<div class="mb-3">
 							<label class="form-label">Email: </label> <span id="email"></span>
 						</div>
-						<div class="mb-3">
-							<label class="form-label">Inicio: </label> <span id="start"></span>
-						</div>
-						<div class="mb-3">
-							<label class="form-label">Fim: </label> <span id="end"></span>
-						</div>
-
+						<form th:action="@{/calendario/deletar}" method="POST">
+							<div class="mb-3">
+								<label for="aluno" class="form-label">Inicio: </label> <span
+									id="start"></span> <input type="hidden" name="inicio"
+									class="form-control" id="start">
+							</div>
+							<div class="mb-3">
+								<label for="aluno" class="form-label">Fim: </label> <span
+									id="end"></span> <input type="hidden" name="fim"
+									class="form-control" id="end">
+							</div>
+							<button type="submit" class="btn cor-botao">Deletar</button>
+						</form>
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary"
@@ -121,12 +127,7 @@
 									id="end"></span> <input type="hidden" name="fim"
 									class="form-control" id="end">
 							</div>
-							<script>
-								function agendar() {
-									alert("Agendamento em análise!");
-								}
-							</script>
-							<button type="submit" onclick="agendar();" class="btn cor-botao">Agendar</button>
+							<button type="submit" class="btn cor-botao">Agendar</button>
 						</form>
 					</div>
 					<div class="modal-footer">
