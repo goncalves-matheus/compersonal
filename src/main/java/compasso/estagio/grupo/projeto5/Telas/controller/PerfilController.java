@@ -54,8 +54,6 @@ public class PerfilController {
 				up = 0;
 			}
 		}
-		
-
 		return "perfil";
 	}
 
@@ -76,11 +74,15 @@ public class PerfilController {
 	
 	@PostMapping("/alterarFoto")
 	public String alterarFoto(@RequestParam(value = "file") MultipartFile file, Principal principal) {
-		bucket.uploadFile(file);
-		Perfil perfil = repository.findByEmail(principal.getName());
-		perfil.setFoto(file.getOriginalFilename());
-		repository.save(perfil);
-		up++;
+		try {
+			bucket.uploadFile(file);
+			Perfil perfil = repository.findByEmail(principal.getName());
+			perfil.setFoto(file.getOriginalFilename());
+			repository.save(perfil);
+			up++;
+		} catch (Exception e) {
+			//ignore
+		}
 		return "redirect:/perfil";
 	}
 
