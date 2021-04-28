@@ -20,7 +20,6 @@ import compasso.estagio.grupo.projeto5.Telas.dto.InformacaoAdicionalDto;
 import compasso.estagio.grupo.projeto5.Telas.dto.UsuarioDto;
 import compasso.estagio.grupo.projeto5.Telas.model.Aula;
 import compasso.estagio.grupo.projeto5.Telas.model.Perfil;
-import compasso.estagio.grupo.projeto5.Telas.model.Plano;
 import compasso.estagio.grupo.projeto5.Telas.repository.AulaRepository;
 import compasso.estagio.grupo.projeto5.Telas.repository.PerfilRepository;
 
@@ -41,9 +40,9 @@ public class AlunosController {
 	@GetMapping("/{page}")
 	public String alunosAll(@PathVariable(name = "page") int pagina, Model modelo, Principal principal) {
 
-		modelo.addAttribute("perfil", perfilRepository.findByEmail(principal.getName()));
-
 		Page<Perfil> estudantes = getListaDeAlunos(principal, pagina);
+		
+		modelo.addAttribute("perfil", perfilRepository.findByEmail(principal.getName()));
 		modelo.addAttribute("estudantes", estudantes);
 		modelo.addAttribute("pagina", pagina);
 		modelo.addAttribute("numeroPagina", numeroDePags);
@@ -65,7 +64,7 @@ public class AlunosController {
 		Perfil perfil = perfilRepository.findByEmail(email);
 		UsuarioDto u = UsuarioDto.converte(perfil);
 
-		if (perfilRepository.findByEmail(email).getInformacao() != null) {
+		if (perfil.getInformacao() != null) {
 			InformacaoAdicionalDto info = new InformacaoAdicionalDto();
 			info.toInformacaoAdicionalDto(perfilRepository.findByEmail(email).getInformacao());
 			modelo.addAttribute("info", info);
@@ -83,12 +82,17 @@ public class AlunosController {
 		modelo.addAttribute("aluno", u);
 		if (perfil.getPlano().getStatus() != null) {
 			modelo.addAttribute("situacao", perfil.getPlano().getStatus());
+		}else {
+			modelo.addAttribute("situacao", null);
 		}
 
-		if (cont > 0) {
+		if (cont == 1) {
 			modelo.addAttribute("cadastrado", "Aula foi adicionada com sucesso!");
 			cont = 0;
+		} else if(cont == 2) {
+			modelo.addAttribute("cadastrado", "Código foi adicionado com sucesso!");
 		}
+		
 		return "uniPerfil";
 	}
 
@@ -100,7 +104,7 @@ public class AlunosController {
 			Aula aula = aulaRepository.findByTitulo(titulo);
 			perfil.setAulas(aula);
 			perfilRepository.save(perfil);
-			cont++;
+			cont=1;
 		}
 		return "redirect:/alunos/perfil/" + email;
 	}
@@ -108,14 +112,11 @@ public class AlunosController {
 	@PostMapping("/adicionarTransacao")
 	public String adicionarTransacao(String codigo, String email, Model modelo) {
 
-		Plano plano = new Plano(codigo);
 		Perfil perfil = perfilRepository.findByEmail(email);
-
-		if (perfil.getPlano().getStatus() == null) {
-			perfil.setPlano(plano);
-			perfilRepository.save(perfil);
-		}
-
+		perfil.setPlano(perfil.getPlano().getPlanoPreenchido(codigo));
+		perfilRepository.save(perfil);
+		cont=2;
+		
 		return "redirect:/alunos/perfil/" + email;
 	}
 

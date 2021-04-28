@@ -28,7 +28,7 @@ public class ConexaoPagSeguro {
 	// final String URL = "https://ws.sandbox.pagseguro.uol.com.br/v2/checkout";
 	// final String URL =
 	// "https://pagseguro.uol.com.br/?_ga=2.86277279.667119345.1619439708-1657415295.1618505570/checkout";
-	private final String URL = "https://ws.pagseguro.uol.com.br/v2/checkout/";
+	private final String URL = "https://ws.sandbox.pagseguro.uol.com.br/v2/checkout/";
 
 	private Perfil perfil;
 	private Plano plano;

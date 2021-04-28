@@ -34,19 +34,12 @@ public class Perfil {
 
 	private String email;
 
-	private String dataDeNascimento;
-
-	private String cpf;
-
 	private String telefone;
 
 	private String foto;
 
 	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
 	private Plano plano = new Plano();
-
-	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
-	private Endereco endereco;
 
 	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
 	private Informacoes informacao;
@@ -63,7 +56,9 @@ public class Perfil {
 	private Permissao permissao;
 
 	public Plano getPlano() {
-		return plano;
+		if (plano.getStatus().equals("3")||plano.getStatus().equals("8"))
+			return plano;
+		return plano.getAtualizacao(plano.getCodigo());
 	}
 
 	public void setPlano(Plano plano) {
@@ -75,7 +70,7 @@ public class Perfil {
 	}
 
 	public void setFoto(String foto) {
-		this.foto = foto;
+		this.foto = "https://compersonal-bucket.s3.amazonaws.com/"+foto;
 	}
 
 	public List<Aula> getAulas() {
@@ -164,29 +159,5 @@ public class Perfil {
 
 	public void setPermissao(Permissao permissao) {
 		this.permissao = permissao;
-	}
-
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
-	}
-
-	public String getCpf() {
-		return cpf;
-	}
-
-	public String getDataDeNascimento() {
-		return dataDeNascimento;
-	}
-
-	public void setDataDeNascimento(String dataDeNascimento) {
-		this.dataDeNascimento = dataDeNascimento;
-	}
-
-	public Endereco getEndereco() {
-		return endereco;
-	}
-
-	public void setEndereco(Endereco endereco) {
-		this.endereco = endereco;
 	}
 }

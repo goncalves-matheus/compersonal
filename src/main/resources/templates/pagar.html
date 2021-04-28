@@ -22,13 +22,15 @@
 		<div class="container py-3">
 			<div class="pricing-header p-3 pb-md-4 mx-auto text-center">
 				<h1 class="display-4 fw-normal">Escolha seu plano:</h1>
-				<p class="fs-5 text-muted">Escolha o seu plano de treinamento
-					com base nas opções a seguir.</p>
+				<p sec:authorize="isAuthenticated()" class="fs-5 text-muted">Escolha
+					o seu plano de treinamento com base nas opções a seguir.</p>
+				<p sec:authorize="!isAuthenticated()" class="fs-5 text-muted">Faça login para escolher
+					o seu plano de treinamento com base nas opções a seguir.</p>
 			</div>
 
 			<article>
 				<div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
-					<div class="col">
+					<div class="col" th:if="${plano.nome}!='Plano Teste'">
 						<div class="card mb-4 rounded-3 shadow-sm cor-borda-pagamento">
 							<div class="card-header py-3 cor-borda-pagamento">
 								<h4 class="my-0 fw-normal">Teste</h4>
@@ -43,7 +45,8 @@
 									<li>3 primeiras aulas do curso</li>
 									<li>1 e-book gratuito</li>
 								</ul>
-								<a type="button" class="w-100 btn btn-lg borda-botao botao-test"
+								<a sec:authorize="isAuthenticated()" type="button"
+									class="w-100 btn btn-lg borda-botao botao-test"
 									href="/planos/pagamento/1">Começe o teste</a>
 							</div>
 						</div>
@@ -63,8 +66,8 @@
 									<li>Chat de mensagens com nosso personal</li>
 									<li>1 e-book sobre alimentação saudável</li>
 								</ul>
-								<a type="button" class="w-100 btn btn-lg cor-botao"
-									href="/planos/pagamento/2">Iniciar</a>
+								<a sec:authorize="isAuthenticated()" type="button"
+									class="w-100 btn btn-lg cor-botao" href="/planos/pagamento/2">Iniciar</a>
 							</div>
 						</div>
 					</div>
@@ -84,8 +87,8 @@
 									<li>Chat de mensagens com nosso personal</li>
 									<li>2 e-book sobre alimentação saudável e yoga</li>
 								</ul>
-								<a type="button" class="w-100 btn btn-lg cor-botao"
-									href="/planos/pagamento/3">Iniciar</a>
+								<a sec:authorize="isAuthenticated()" type="button"
+									class="w-100 btn btn-lg cor-botao" href="/planos/pagamento/3">Iniciar</a>
 							</div>
 						</div>
 					</div>

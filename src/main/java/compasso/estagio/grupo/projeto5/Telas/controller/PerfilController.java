@@ -38,12 +38,13 @@ public class PerfilController {
 	UsuarioRepository usuarioRepository;
 
 	@GetMapping
-	public String aulas(PerfilDto perfilDto, InformacaoAdicionalDto infoAdDto, AlterarSenhaDto senhaDto, Model modelo,
+	public String perfil(PerfilDto perfilDto, InformacaoAdicionalDto infoAdDto, AlterarSenhaDto senhaDto, Model modelo,
 			Principal principal) {
 
 		Perfil p = repository.findByEmail(principal.getName());
 		perfilDto = perfilDto.toPerfilDto(p);
-		modelo.addAttribute("perfil", perfilDto);
+		modelo.addAttribute("perfilDto", perfilDto);
+		modelo.addAttribute("perfil", p);
 		modelo.addAttribute("email", principal.getName());
 		if (p.getInformacao() != null) {
 			infoAdDto = infoAdDto.toInformacaoAdicionalDto(p.getInformacao());
@@ -54,23 +55,30 @@ public class PerfilController {
 			}
 		}
 		
-		System.out.println(perfilDto.getFoto());
 
 		return "perfil";
 	}
 
 	@PostMapping("/alterar")
-	public String alterar(@Valid PerfilDto usuarioDto, BindingResult result, @RequestParam(value = "file") MultipartFile file, Principal principal) {
+	public String alterar(@Valid PerfilDto usuarioDto, BindingResult result, Principal principal) {
 
 		if (result.hasErrors()) {
 			return "perfil";
 		}
 		
-		bucket.uploadFile(file);
 		Perfil perfil = repository.findByEmail(principal.getName());
 		perfil.setPrimeiroNome(usuarioDto.getPrimeiroNome());
 		perfil.setUltimoNome(usuarioDto.getUltimoNome());
-		perfil.setFoto("https://compersonal-bucket.s3.amazonaws.com/"+file.getOriginalFilename());
+		repository.save(perfil);
+		up++;
+		return "redirect:/perfil";
+	}
+	
+	@PostMapping("/alterarFoto")
+	public String alterarFoto(@RequestParam(value = "file") MultipartFile file, Principal principal) {
+		bucket.uploadFile(file);
+		Perfil perfil = repository.findByEmail(principal.getName());
+		perfil.setFoto(file.getOriginalFilename());
 		repository.save(perfil);
 		up++;
 		return "redirect:/perfil";

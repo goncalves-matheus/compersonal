@@ -26,26 +26,37 @@
 						</div>
 						<div class="card">
 							<h5 class="card-header">Seus dados pessoais</h5>
-							<form th:object="${perfilDto}" class="card-body mb-0 mt-3 pb-0"
-								th:action="@{/perfil/alterar}" method="POST"
+							<form class="card-body mb-0 mt-3 pb-0"
+								th:action="@{/perfil/alterarFoto}" method="POST"
 								enctype="multipart/form-data">
 
 								<div class="form-input-container">
 									<h4 for="foto" class="text-center">Foto</h4>
 								</div>
 								<div class="text-center">
-									<img width="200" height="200" th:src="*{foto}"
+									<img width="200" height="200" th:src="${perfil.foto}"
 										class="rounded-circle" alt="">
-									<div  class="d-flex justify-content-center">
-										<input style="width: 6rem;" th:value="${perfilDto.foto}" type="file" name="file" class="my-2 form-control">
+									<div class="d-flex justify-content-center">
+										<input style="width: 18rem;" type="file" name="file"
+											class="my-2 form-control">
 									</div>
 								</div>
+								<div class="row g-3">
+									<div class="d-flex justify-content-center">
+										<button class="w-20 btn btn-md cor-botao" type="submit">Salvar
+											Foto</button>
+									</div>
+								</div>
+							</form>
+							<form th:object="${perfilDto}" class="card-body mb-0 mt-3 pb-0"
+								th:action="@{/perfil/alterar}" method="POST"
+								enctype="multipart/form-data">
 
 								<div class="row g-3">
 									<div class="col-sm-6">
 										<label for="primeiroNome" class="form-label">Nome</label> <input
 											th:field="*{primeiroNome}" class="form-control"
-											th:errorclass="is-invalid" th:value="${perfil.primeiroNome}"
+											th:errorclass="is-invalid" th:value="*{primeiroNome}"
 											required>
 										<div class="invalid-feedback" th:errors="*{primeiroNome}">Errors
 											do primeiro nome</div>
@@ -54,8 +65,7 @@
 									<div class="col-sm-6">
 										<label for="ultimoNome" class="form-label">Sobrenome</label> <input
 											th:field="*{ultimoNome}" type="text" class="form-control"
-											th:errorclass="is-invalid" th:value="${perfil.ultimoNome}"
-											required>
+											th:errorclass="is-invalid" th:value="*{ultimoNome}" required>
 										<div class="invalid-feedback" th:errors="*{ultimoNome}">Sobrenome
 											inválido!</div>
 									</div>
@@ -81,8 +91,8 @@
 
 									<hr class="my-4">
 									<div class="d-flex justify-content-center">
-										<button onclick="salvar();" class="w-25 btn btn-md cor-botao"
-											type="submit">Salvar dados pessoais</button>
+										<button class="w-25 btn btn-md cor-botao" type="submit">Salvar
+											dados pessoais</button>
 									</div>
 								</div>
 							</form>
@@ -176,13 +186,7 @@
 										</div>
 										<hr class="my-4">
 										<div class="d-flex justify-content-center">
-											<script>
-												function salvar() {
-													alert("As informações foram salvas!");
-												}
-											</script>
-											<button onclick="salvar();"
-												class="w-25 btn btn-md cor-botao mb-5" type="submit">Salvar
+											<button class="w-25 btn btn-md cor-botao mb-5" type="submit">Salvar
 												informações pessoais</button>
 										</div>
 									</div>

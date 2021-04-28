@@ -50,7 +50,7 @@
 						href="/dashboard/personal"><i class="fas fa-chart-line fa-lg"></i></a></li>
 					<li class="nav-item"><a class="nav-link text-light"
 						sec:authorize="!isAuthenticated()" href="/planos">Planos</a></li>
-					<li class="nav-item"><a aria-label="Meu Plano"
+					<li class="nav-item"><a aria-label="Planos de Treino"
 						data-balloon-pos="down" class="nav-link text-light mx-2"
 						sec:authorize="hasAnyAuthority('Usuario')" href="/planos"><i
 							class="far fa-credit-card fa-lg"></i></a></li>
@@ -109,7 +109,7 @@
 						sec:authorize="hasAnyAuthority('Personal')"
 						class="nav-link text-white"><svg class="bi me-2" width="16"
 								height="16"></svg><i class="fas fa-address-card"></i> Meus Alunos</a></li>
-					<li><a href="/calendario"
+					<li><a href="/calendario" th:if="${perfil.plano.status}==3"
 						sec:authorize="hasAnyAuthority('Usuario')"
 						class="nav-link text-white"><svg class="bi me-2" width="16"
 								height="16"></svg><i class="far fa-calendar-alt"></i> Agendar
@@ -118,16 +118,16 @@
 						sec:authorize="hasAnyAuthority('Personal')"
 						class="nav-link text-white"><svg class="bi me-2" width="16"
 								height="16"></svg><i class="far fa-calendar-alt"></i> Calendário</a></li>
-					<li><a href="#" sec:authorize="hasAnyAuthority('Usuario')"
+					<li><a href="/planos/meuPlano" sec:authorize="hasAnyAuthority('Usuario')"
 						class="nav-link text-white"><svg class="bi me-2" width="16"
 								height="16"></svg><i class="far fa-credit-card"></i> Meu Plano</a></li>
 					<li><a href="/inseriraula"
 						sec:authorize="hasAnyAuthority('Personal')"
 						class="nav-link text-white"><svg class="bi me-2" width="16"
 								height="16"></svg><i class="far fa-edit"></i> Criar Aula</a></li>
-					<hr sec:authorize="hasAnyAuthority('Usuario')">
+					<hr th:if="${perfil.plano.status}==3" sec:authorize="hasAnyAuthority('Usuario')">
 					<li><a href="/aulas/"
-						sec:authorize="hasAnyAuthority('Usuario')"
+						sec:authorize="hasAnyAuthority('Usuario')" th:if="${perfil.plano.status}==3"
 						class=" btn text-white text-decoration-none"><i
 							class="fas fa-book"></i> Minhas Aulas</a></li>
 					<hr>

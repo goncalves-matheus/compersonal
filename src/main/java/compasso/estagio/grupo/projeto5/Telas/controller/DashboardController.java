@@ -43,7 +43,6 @@ public class DashboardController {
 	public String aluno(Model modelo, Principal principal) {
 
 		modelo.addAttribute("perfil", perfilRepository.findByEmail(principal.getName()));
-
 		// List<Aula> aulas =
 		// aulaRepository.findByAlunos(perfilRepository.findByEmail(principal.getName()));
 		List<Aula> aulas = aulaRepository.getAulaCadastrada(principal.getName());

@@ -38,8 +38,6 @@ public class CadastroController {
 		}
 
 		Perfil perfil = usuarioDto.toPerfil();
-		perfil.setFoto(
-				"default-perfil.png");
 		Usuario usuario = usuarioDto.toUsuario();
 
 		Permissao permissao = new Permissao();
@@ -49,13 +47,16 @@ public class CadastroController {
 			permissao.setPermissao("Usuario");
 		}
 
-		usuario.setPermissao(permissao);
+		perfil.setFoto("default-perfil.png");
 		perfil.setPermissao(permissao);
 		perfil.setPlano(new Plano());
+		usuario.setPermissao(permissao);
+		usuario.setPerfil(perfil);
 
 		perfilRepository.save(perfil);
 		usuarioRepository.save(usuario);
-		return "redirect:/";
+		
+		return "redirect:/login";
 	}
 
 }

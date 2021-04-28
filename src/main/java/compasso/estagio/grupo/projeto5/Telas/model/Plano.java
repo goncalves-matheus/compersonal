@@ -28,22 +28,8 @@ public class Plano {
 	private String status;
 
 	public Plano() {
-		this.status=null;
-	}
-
-	public Plano(String codigo) {
-		String situacao = "";
-		ConexaoPagSeguro pagSeguro = new ConexaoPagSeguro();
-		try {
-			situacao = pagSeguro.getTransacao(codigo);
-		} catch (URISyntaxException e) {
-			e.printStackTrace();
-		}
-		this.codigo = codigo;
-		this.nome = getNome(situacao);
-		this.valor = getValor(situacao);
-		this.status = getStatus(situacao);
-		this.finalDoPlano = getFinalDoPlano(situacao);
+		this.status = "8";
+		this.finalDoPlano = LocalDateTime.now();
 	}
 
 	public Plano(String valor, String nome) {
@@ -99,6 +85,46 @@ public class Plano {
 		this.status = status;
 	}
 
+	public Plano getPlanoPreenchido(String codigo) {
+		String situacao = "";
+		ConexaoPagSeguro pagSeguro = new ConexaoPagSeguro();
+		try {
+			situacao = pagSeguro.getTransacao(codigo);
+		} catch (URISyntaxException e) {
+			e.printStackTrace();
+		}
+		this.codigo = codigo;
+		this.nome = getNome(situacao);
+		this.valor = getValor(situacao);
+		this.status = getStatus(situacao);
+		this.finalDoPlano = getFinalDoPlano(situacao);
+		return this;
+	}
+
+	public Plano Teste7Dias() {
+		this.nome = "Plano Teste";
+		this.status = "3";
+		this.valor = "0.00";
+		this.finalDoPlano = LocalDateTime.now().plusDays(7);
+		return this;
+	}
+
+	public Plano getAtualizacao(String codigo) {
+		String situacao = "";
+		ConexaoPagSeguro pagSeguro = new ConexaoPagSeguro();
+		try {
+			situacao = pagSeguro.getTransacao(codigo);
+		} catch (URISyntaxException e) {
+			e.printStackTrace();
+		}
+		this.codigo = codigo;
+		this.nome = getNome(situacao);
+		this.valor = getValor(situacao);
+		this.status = getStatus(situacao);
+		this.finalDoPlano = getFinalDoPlano(situacao);
+		return this;
+	}
+
 	private String getValor(String result) {
 		Pattern pattern = Pattern.compile("<grossAmount>(.*?)</grossAmount>", Pattern.DOTALL);
 		Matcher matcher = pattern.matcher(result);
@@ -146,5 +172,4 @@ public class Plano {
 
 		return null;
 	}
-
 }

@@ -28,7 +28,7 @@
 						<div th:if="${situacao}==3"
 							class="mt-2 alert alert-success alert-dismissible fade show"
 							role="alert">
-							<p>Aluna pagou o serviço!</p>
+							<p>Aluno(a) pagou o serviço!</p>
 							<button type="button" class="btn-close" data-bs-dismiss="alert"
 								aria-label="Close"></button>
 						</div>
@@ -36,7 +36,15 @@
 						<div th:if="${situacao}==1"
 							class="mt-2 alert alert-warning alert-dismissible fade show"
 							role="alert">
-							<p>Em analise!</p>
+							<p>Aguardando pagamento!</p>
+							<button type="button" class="btn-close" data-bs-dismiss="alert"
+								aria-label="Close"></button>
+						</div>
+
+						<div th:if="${situacao}==7"
+							class="mt-2 alert alert-danger alert-dismissible fade show"
+							role="alert">
+							<p>Pagamento Cancelado!</p>
 							<button type="button" class="btn-close" data-bs-dismiss="alert"
 								aria-label="Close"></button>
 						</div>
@@ -45,7 +53,8 @@
 							<h5 class="card-header">Dados pessoais do aluno(a)</h5>
 							<div class="d-flex justify-content-between">
 								<p class="m-0 p-0">
-									<a data-bs-toggle="modal" href data-bs-target="#transacao"
+									<a th:if="${situacao}!=null" data-bs-toggle="modal" href
+										data-bs-target="#transacao"
 										class="link-secondary d-flex justify-content-end p-0 mx-2"
 										max-width="10">Adicionar Transação</a>
 								</p>
