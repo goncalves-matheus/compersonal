@@ -28,19 +28,32 @@
 						<div class="messages-box">
 							<!-- campo com a lista de alunos -->
 							<div class="list-group rounded-0" style="background-color: white;">
-
-								<a th:each="aluno : ${alunos}" th:href="${aluno.email}"
-									class="list-group-item list-group-item-action  rounded-0">
-									<div class="d-flex align-items-center justify-content-between mb-1">
-										<img th:src="${aluno.foto}"
-											alt="user" width="50" height="50" class="rounded-circle">
-										<div>
-											<h6 th:text="${aluno.primeiroNome}" class="mb-0"></h6>
-											<!-- <small th:text="${hora}" class="small font-weight-bold"></small> -->
-										</div>
-									</div>
-								</a>
-
+								<div th:each="aluno : ${alunos}">
+									<a th:if="${aluno.email}==${perfil.email}" th:href="${aluno.email}"
+										class="cor-botao list-group-item list-group-item-action rounded-0">
+										<span
+											class="d-flex align-items-center justify-content-between mb-1">
+											<img th:src="${aluno.foto}" alt="user" width="50" height="50"
+												class="rounded-circle">
+											<span>
+												<h6 th:text="${aluno.primeiroNome}" class="mb-0"></h6>
+												<!-- <small th:text="${hora}" class="small font-weight-bold"></small> -->
+											</span>
+										</span>
+									</a>
+									<a th:if="${aluno.email}!=${perfil.email}" th:href="${aluno.email}"
+										class="list-group-item list-group-item-action rounded-0">
+										<span
+											class="d-flex align-items-center justify-content-between mb-1">
+											<img th:src="${aluno.foto}" alt="user" width="50" height="50"
+												class="rounded-circle">
+											<span>
+												<h6 th:text="${aluno.primeiroNome}" class="mb-0"></h6>
+												<!-- <small th:text="${hora}" class="small font-weight-bold"></small> -->
+											</span>
+										</span>
+									</a>
+								</div>
 							</div>
 						</div>
 
