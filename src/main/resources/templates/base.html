@@ -108,7 +108,13 @@
 					<li><a href="/alunos/0"
 						sec:authorize="hasAnyAuthority('Personal')"
 						class="nav-link text-white"><svg class="bi me-2" width="16"
-								height="16"></svg><i class="fas fa-address-card"></i> Meus Alunos</a></li>
+								height="16"></svg><i class="fas fa-address-card"></i> Meus
+							Alunos</a></li>
+					<li><a href="/aulas/minhasAulas"
+						sec:authorize="hasAnyAuthority('Personal')"
+						class="nav-link text-white"><svg class="bi me-2" width="16"
+								height="16"></svg><i class="fas fa-th-list"></i> Minhas
+							Aulas</a></li>
 					<li><a href="/calendario" th:if="${perfil.plano.status}==3"
 						sec:authorize="hasAnyAuthority('Usuario')"
 						class="nav-link text-white"><svg class="bi me-2" width="16"
@@ -118,16 +124,19 @@
 						sec:authorize="hasAnyAuthority('Personal')"
 						class="nav-link text-white"><svg class="bi me-2" width="16"
 								height="16"></svg><i class="far fa-calendar-alt"></i> Calendário</a></li>
-					<li><a href="/planos/meuPlano" sec:authorize="hasAnyAuthority('Usuario')"
+					<li><a href="/planos/meuPlano"
+						sec:authorize="hasAnyAuthority('Usuario')"
 						class="nav-link text-white"><svg class="bi me-2" width="16"
 								height="16"></svg><i class="far fa-credit-card"></i> Meu Plano</a></li>
 					<li><a href="/inseriraula"
 						sec:authorize="hasAnyAuthority('Personal')"
 						class="nav-link text-white"><svg class="bi me-2" width="16"
 								height="16"></svg><i class="far fa-edit"></i> Criar Aula</a></li>
-					<hr th:if="${perfil.plano.status}==3" sec:authorize="hasAnyAuthority('Usuario')">
+					<hr th:if="${perfil.plano.status}==3"
+						sec:authorize="hasAnyAuthority('Usuario')">
 					<li><a href="/aulas/"
-						sec:authorize="hasAnyAuthority('Usuario')" th:if="${perfil.plano.status}==3"
+						sec:authorize="hasAnyAuthority('Usuario')"
+						th:if="${perfil.plano.status}==3"
 						class=" btn text-white text-decoration-none"><i
 							class="fas fa-book"></i> Minhas Aulas</a></li>
 					<hr>

@@ -6,9 +6,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import compasso.estagio.grupo.projeto5.Telas.dto.MensagemDto;
@@ -55,7 +57,8 @@ public class AulasController extends GestorDeMensagens {
 	}
 
 	@GetMapping("/{titulo}")
-	public String AulaId(@PathVariable String titulo, Model modelo, MensagemDto mensagemDto, Principal principal) {
+	public String AulaId(@PathVariable("titulo") String titulo, Model modelo, MensagemDto mensagemDto,
+			Principal principal) {
 
 		adiconarModelo(titulo, modelo, principal);
 
@@ -63,6 +66,34 @@ public class AulasController extends GestorDeMensagens {
 		carregarMensagensDoChat(modelo, perfilRepository.findByEmail(principal.getName()));
 
 		return "aulas";
+	}
+
+	@GetMapping("/minhasAulas")
+	public String minhasAulas(Model modelo, Principal principal) {
+
+		modelo.addAttribute("perfil", perfilRepository.findByEmail(principal.getName()));
+		List<Aula> aulas = aulaRepository.findAll();
+		modelo.addAttribute("aulas", aulas);
+		modelo.addAttribute("erro", null);
+
+		return "minhasAulas";
+	}
+
+	@PostMapping("/minhasAulas/delete")
+	@Transactional
+	public String minhasAulas(String titulo, Model modelo, Principal principal) {
+
+		if (aulaRepository.getAulaCadastradaTitulo(titulo)!=null) {
+			modelo.addAttribute("perfil", perfilRepository.findByEmail(principal.getName()));
+			List<Aula> aulas = aulaRepository.findAll();
+			modelo.addAttribute("aulas", aulas);
+			modelo.addAttribute("erro", "Essa aula está associada a algum aluno!");
+			return "minhasAulas";
+		}
+
+		aulaRepository.deleteByTitulo(titulo);
+		return "redirect:/aulas/minhasAulas";
+
 	}
 
 	private void adiconarModelo(String titulo, Model modelo, Principal pricipal) {
