@@ -5,6 +5,10 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -34,14 +38,14 @@ public class AulasController extends GestorDeMensagens {
 	@Autowired
 	PerfilRepository perfilRepository;
 
+	private int numeroDePags;
+
 	@GetMapping
 	@Cacheable(value = "listaDeAulas")
 	public String aulas(Model modelo, MensagemDto mensagemDto, Principal principal) {
 		Perfil perfil = perfilRepository.findByEmail(principal.getName());
 		if (perfil.getPlano().getStatus().equals("3")) {
 			try {
-				// List<Aula> aulas =
-				// aulaRepository.findByAlunos(perfilRepository.findByEmail(principal.getName()));
 				List<Aula> aulas = aulaRepository.getAulaCadastrada(principal.getName());
 				adiconarModelo(aulas.get(0).getTitulo(), modelo, principal);
 				super.setRepositories(this.perfilRepository, this.mensagemRepository);
@@ -68,13 +72,16 @@ public class AulasController extends GestorDeMensagens {
 		return "aulas";
 	}
 
-	@GetMapping("/minhasAulas")
-	public String minhasAulas(Model modelo, Principal principal) {
+	@GetMapping("/minhasAulas/{page}")
+	public String minhasAulas(@PathVariable(name = "page") int pagina, Model modelo, Principal principal) {
+
+		Page<Aula> aulas = getListaDeAulas(principal, pagina);
 
 		modelo.addAttribute("perfil", perfilRepository.findByEmail(principal.getName()));
-		List<Aula> aulas = aulaRepository.findAll();
 		modelo.addAttribute("aulas", aulas);
 		modelo.addAttribute("erro", null);
+		modelo.addAttribute("pagina", pagina);
+		modelo.addAttribute("numeroPagina", numeroDePags);
 
 		return "minhasAulas";
 	}
@@ -83,7 +90,7 @@ public class AulasController extends GestorDeMensagens {
 	@Transactional
 	public String minhasAulas(String titulo, Model modelo, Principal principal) {
 
-		if (aulaRepository.getAulaCadastradaTitulo(titulo)!=null) {
+		if (aulaRepository.getAulaCadastradaTitulo(titulo) != null) {
 			modelo.addAttribute("perfil", perfilRepository.findByEmail(principal.getName()));
 			List<Aula> aulas = aulaRepository.findAll();
 			modelo.addAttribute("aulas", aulas);
@@ -103,6 +110,20 @@ public class AulasController extends GestorDeMensagens {
 		modelo.addAttribute("perna", aulaRepository.findByTipo(2, pricipal.getName()));
 		modelo.addAttribute("braco", aulaRepository.findByTipo(3, pricipal.getName()));
 		modelo.addAttribute("peito", aulaRepository.findByTipo(4, pricipal.getName()));
+	}
+
+	private Page<Aula> getListaDeAulas(Principal principal, int pagina) {
+
+		List<Aula> aulas = aulaRepository.findAll();
+
+		numeroDePags = aulas.size() / 8;
+		if (aulas.size() % 8 != 0) {
+			numeroDePags++;
+		}
+
+		Pageable paginacao = PageRequest.of(pagina, 8, Sort.by("Id").ascending());
+		Page<Aula> aulasPaginadas = aulaRepository.findAll(paginacao);
+		return aulasPaginadas;
 	}
 
 }

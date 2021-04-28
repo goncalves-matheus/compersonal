@@ -52,10 +52,7 @@ public class AlunosController {
 	public String uuniPerfil(@PathVariable("email") String email, Model modelo, Principal principal) {
 
 		modelo.addAttribute("perfil", perfilRepository.findByEmail(principal.getName()));
-		//pensar como fazer
 		List<Aula> aulas = aulaRepository.findAll();
-		// List<Aula> aulasCadastradas =
-		// aulaRepository.findByAlunos(perfilRepository.findByEmail(email));
 		List<Aula> aulasCadastradas = aulaRepository.getAulaCadastrada(email);
 		aulas.removeAll(aulasCadastradas);
 
@@ -129,7 +126,6 @@ public class AlunosController {
 		Pageable paginacao = PageRequest.of(pagina, 4, Sort.by("primeiroNome").ascending());
 		Page<Perfil> usuarios = perfilRepository.findByPermissaoPermissao("Usuario", paginacao);
 		return usuarios;
-
 	}
 
 }

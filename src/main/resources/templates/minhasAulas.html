@@ -58,6 +58,26 @@
 					</div>
 				</div>
 			</article>
+			<div class="d-flex justify-content-center fixed-bottom mb-5">
+				<nav aria-label="Page navigation example">
+					<ul class="pagination cor-botao">
+						<li class="page-item "><a class="page-link"
+							th:if="${pagina-1}>=0" th:href="${pagina-1}"> <span
+								aria-hidden="true">&laquo;</span></a></li>
+						<li class="page-item "><a class="page-link"
+							th:if="${pagina-1}<0" th:href="${numeroPagina-1}"> <span
+								aria-hidden="true">&laquo;</span></a></li>
+						<li class="page-item"><a class="page-link"
+							th:text="${pagina+1}"></a></li>
+						<li class="page-item"><a class="page-link"
+							th:if="${pagina+1}!=${numeroPagina}" th:href="${pagina+1}"> <span
+								aria-hidden="true">&raquo;</span></a></li>
+						<li class="page-item"><a class="page-link"
+							th:if="${pagina+1}==${numeroPagina}" th:href="0"> <span
+								aria-hidden="true">&raquo;</span></a></li>
+					</ul>
+				</nav>
+			</div>
 		</div>
 		<footer th:replace="~{base::footer}"></footer>
 		<script th:replace="~{base::script}"></script>
