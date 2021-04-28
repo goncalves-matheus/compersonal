@@ -23,10 +23,14 @@ public class PlanosController {
 	PerfilRepository repository;
 
 	@GetMapping
-	public String planos(Model modelo, Principal principal) {
+	public String planos() {		
+		return "pagar";
+	}
+	
+	@GetMapping("/pagamento")
+	public String plano(Model modelo, Principal principal) {	
 		
 		modelo.addAttribute("plano", repository.findByEmail(principal.getName()).getPlano());
-		
 		return "pagar";
 	}
 
