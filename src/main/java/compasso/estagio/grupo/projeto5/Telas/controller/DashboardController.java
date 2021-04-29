@@ -43,9 +43,8 @@ public class DashboardController {
 	public String aluno(Model modelo, Principal principal) {
 
 		modelo.addAttribute("perfil", perfilRepository.findByEmail(principal.getName()));
-		// List<Aula> aulas =
-		// aulaRepository.findByAlunos(perfilRepository.findByEmail(principal.getName()));
-		List<Aula> aulas = aulaRepository.getAulaCadastradaa(principal.getName());
+		List<Aula> aulas = aulaRepository.getAulaCadastrada(principal.getName());
+		aulas = listaContraia(aulas);
 		if (aulas.size() > 10) {
 			aulas = aulas.subList(0, 10);
 		} else if (aulas.size() == 0) {
@@ -55,6 +54,14 @@ public class DashboardController {
 		modelo.addAttribute("aulas", aulas);
 
 		return "dashboard_aluno";
+	}
+
+	private List<Aula> listaContraia(List<Aula> aulas) {
+		List<Aula> lista = new ArrayList<Aula>();
+		for (int i=aulas.size()-1;i>=0;i--) {
+			lista.add(aulas.get(i));
+		}
+		return lista;
 	}
 
 	@GetMapping("/aluno/erroAlunoSemAula")
