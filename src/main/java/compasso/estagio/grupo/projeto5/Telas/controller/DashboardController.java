@@ -43,8 +43,6 @@ public class DashboardController {
 	public String aluno(Model modelo, Principal principal) {
 
 		modelo.addAttribute("perfil", perfilRepository.findByEmail(principal.getName()));
-		// List<Aula> aulas =
-		// aulaRepository.findByAlunos(perfilRepository.findByEmail(principal.getName()));
 		List<Aula> aulas = aulaRepository.getAulaCadastradaa(principal.getName());
 		if (aulas.size() > 10) {
 			aulas = aulas.subList(0, 10);
@@ -84,7 +82,7 @@ public class DashboardController {
 		int quantidadeDeHorasNoMes = calcularHoras("mes");
 		int quantidadeDeHorasNaSemana = calcularHoras("semana");
 		int quantidadeDeHorasNoDia = calcularHoras("dia");
-
+		
 		modelo.addAttribute("quandidadeDeAlunos", quandidadeDeAlunos);
 		modelo.addAttribute("quandidadeDeVideoaulas", quandidadeDeVideoaulas);
 		modelo.addAttribute("quantidadeDeAulasTotais", quantidadeDeAulasTotais);

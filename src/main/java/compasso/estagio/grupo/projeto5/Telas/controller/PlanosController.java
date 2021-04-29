@@ -72,7 +72,7 @@ public class PlanosController {
 		Perfil perfil = repository.findByEmail(principal.getName());
 		
 		if(perfil.getPlano().getNome()==null) {
-			return "redirect:/planos";
+			return "redirect:/planos/pagamento";
 		}
 		
 		perfil.setPlano(perfil.getPlano());
