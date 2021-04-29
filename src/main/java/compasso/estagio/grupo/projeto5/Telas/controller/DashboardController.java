@@ -1,6 +1,5 @@
 package compasso.estagio.grupo.projeto5.Telas.controller;
 
-import java.math.BigDecimal;
 import java.security.Principal;
 import java.time.Duration;
 import java.time.LocalDateTime;
@@ -117,9 +116,10 @@ public class DashboardController {
 
 	private Long getSalarioTotal() {
 		ArrayList<Plano> planos = planosRepository.findAll();
+		planos.remove(0);
 		Long valorTotal = Long.valueOf(0);
 		for (Plano plano : planos) {
-			valorTotal += Long.valueOf(plano.getValor());
+			valorTotal += Long.valueOf(plano.getValor().replaceAll(".00", ""));
 		}
 		return valorTotal;
 	}
