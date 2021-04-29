@@ -1,22 +1,27 @@
 package compasso.estagio.grupo.projeto5.Telas.controller;
 
+import java.math.BigDecimal;
 import java.security.Principal;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+
 import compasso.estagio.grupo.projeto5.Telas.model.Agenda;
 import compasso.estagio.grupo.projeto5.Telas.model.Aula;
+import compasso.estagio.grupo.projeto5.Telas.model.Plano;
 import compasso.estagio.grupo.projeto5.Telas.repository.AgendaRepositoy;
 import compasso.estagio.grupo.projeto5.Telas.repository.AulaRepository;
 import compasso.estagio.grupo.projeto5.Telas.repository.PerfilRepository;
+import compasso.estagio.grupo.projeto5.Telas.repository.PlanosRepository;
 
 @Controller
 @RequestMapping("dashboard")
@@ -24,6 +29,9 @@ public class DashboardController {
 
 	@Autowired
 	AulaRepository aulaRepository;
+
+	@Autowired
+	PlanosRepository planosRepository;
 
 	@Autowired
 	PerfilRepository perfilRepository;
@@ -92,6 +100,8 @@ public class DashboardController {
 		int quantidadeDeHorasNaSemana = calcularHoras("semana");
 		int quantidadeDeHorasNoDia = calcularHoras("dia");
 
+		Long salarioTotal = getSalarioTotal();
+		
 		modelo.addAttribute("quandidadeDeAlunos", quandidadeDeAlunos);
 		modelo.addAttribute("quandidadeDeVideoaulas", quandidadeDeVideoaulas);
 		modelo.addAttribute("quantidadeDeAulasTotais", quantidadeDeAulasTotais);
@@ -100,8 +110,18 @@ public class DashboardController {
 		modelo.addAttribute("quantidadeDeHorasNoMes", quantidadeDeHorasNoMes);
 		modelo.addAttribute("quantidadeDeHorasNaSemana", quantidadeDeHorasNaSemana);
 		modelo.addAttribute("quantidadeDeHorasNoDia", quantidadeDeHorasNoDia);
+		modelo.addAttribute("quantidadeDeSalario", salarioTotal);
 
 		return "dashboard_personal";
+	}
+
+	private Long getSalarioTotal() {
+		ArrayList<Plano> planos = planosRepository.findAll();
+		Long valorTotal = Long.valueOf(0);
+		for (Plano plano : planos) {
+			valorTotal += Long.valueOf(plano.getValor());
+		}
+		return valorTotal;
 	}
 
 	private int calcularHoras(String periodoDeTempo) {
@@ -121,7 +141,7 @@ public class DashboardController {
 				totalHorasNoMes += duracao.getSeconds() / segundosNumaHora;
 				if (ValorSemanal(inicioDaAula) == ValorSemanal(LocalDateTime.now())) {
 					totalHorasNaSemana += ((duracao.getSeconds()) / segundosNumaHora);
-					if (inicioDaAula.getDayOfMonth() == LocalDateTime.now().getDayOfMonth()) {
+					if (inicioDaAula.getDayOfMonth() == LocalDateTime.now().getDayOfMonth()){
 						totalHorasNoDia += duracao.getSeconds() / segundosNumaHora;
 					}
 				}
