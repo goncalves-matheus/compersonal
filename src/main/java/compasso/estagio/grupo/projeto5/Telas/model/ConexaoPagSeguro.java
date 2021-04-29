@@ -94,13 +94,11 @@ public class ConexaoPagSeguro {
 
 			CloseableHttpResponse response = client.execute(postRequest);
 			String result = EntityUtils.toString(response.getEntity());
-			System.out.println("Resposta: " + result);
 
 			Pattern pattern = Pattern.compile("<code>(.*?)</code>", Pattern.DOTALL);
 			Matcher matcher = pattern.matcher(result);
 			if (matcher.find()) {
 				codigoDaCompra = matcher.group(1);
-				System.out.println("Código: " + codigoDaCompra);
 			}
 
 			client.close();

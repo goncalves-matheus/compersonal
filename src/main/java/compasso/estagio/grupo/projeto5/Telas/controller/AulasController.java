@@ -47,7 +47,8 @@ public class AulasController extends GestorDeMensagens {
 		if (perfil.getPlano().getStatus().equals("3")) {
 			try {
 				List<Aula> aulas = aulaRepository.getAulaCadastrada(principal.getName());
-				adiconarModelo(aulas.get(0).getTitulo(), modelo, principal);
+				adiconarModelo(aulas.get(aulas.size() - 1).getTitulo(), modelo, principal);
+				modelo.addAttribute("proximo", 1);
 				super.setRepositories(this.perfilRepository, this.mensagemRepository);
 				carregarMensagensDoChat(modelo, perfil);
 
@@ -60,16 +61,38 @@ public class AulasController extends GestorDeMensagens {
 
 	}
 
+	@GetMapping("/pagina/{page}")
+	public String proxima(@PathVariable("page") int page, Model modelo, MensagemDto mensagemDto, Principal principal) {
+		Perfil perfil = perfilRepository.findByEmail(principal.getName());
+		if (perfil.getPlano().getStatus().equals("3")) {
+			try {
+				List<Aula> aulas = aulaRepository.getAulaCadastrada(principal.getName());
+				adiconarModelo(aulas.get(aulas.size() - 1 - page).getTitulo(), modelo, principal);
+				modelo.addAttribute("proximo", page + 1);
+				super.setRepositories(this.perfilRepository, this.mensagemRepository);
+				carregarMensagensDoChat(modelo, perfil);
+
+				return "aulas";
+			} catch (Exception e) {
+				if (e.getMessage().equals("Index -1 out of bounds for length 4")) {
+					return "redirect:/aulas";
+				}
+				return "redirect:/dashboard/aluno/erroAlunoSemAula";
+			}
+		}
+		return "redirect:/dashboard/aluno";
+
+	}
+
 	@GetMapping("/{titulo}")
 	public String AulaId(@PathVariable("titulo") String titulo, Model modelo, MensagemDto mensagemDto,
 			Principal principal) {
-
-		adiconarModelo(titulo, modelo, principal);
-
-		super.setRepositories(this.perfilRepository, this.mensagemRepository);
-		carregarMensagensDoChat(modelo, perfilRepository.findByEmail(principal.getName()));
-
-		return "aulas";
+		
+			adiconarModelo(titulo, modelo, principal);
+			modelo.addAttribute("proximo", 0);
+			super.setRepositories(this.perfilRepository, this.mensagemRepository);
+			carregarMensagensDoChat(modelo, perfilRepository.findByEmail(principal.getName()));
+			return "aulas";
 	}
 
 	@GetMapping("/minhasAulas/{page}")
@@ -104,12 +127,44 @@ public class AulasController extends GestorDeMensagens {
 	}
 
 	private void adiconarModelo(String titulo, Model modelo, Principal pricipal) {
+
+		List<Aula> gluteo = aulaRepository.findByTipo(0, pricipal.getName());
+		List<Aula> abdomen = aulaRepository.findByTipo(1, pricipal.getName());
+		List<Aula> perna = aulaRepository.findByTipo(2, pricipal.getName());
+		List<Aula> braco = aulaRepository.findByTipo(3, pricipal.getName());
+		List<Aula> peito = aulaRepository.findByTipo(4, pricipal.getName());
+
 		modelo.addAttribute("aula", aulaRepository.findByTitulo(titulo));
-		modelo.addAttribute("gluteo", aulaRepository.findByTipo(0, pricipal.getName()));
-		modelo.addAttribute("abdomen", aulaRepository.findByTipo(1, pricipal.getName()));
-		modelo.addAttribute("perna", aulaRepository.findByTipo(2, pricipal.getName()));
-		modelo.addAttribute("braco", aulaRepository.findByTipo(3, pricipal.getName()));
-		modelo.addAttribute("peito", aulaRepository.findByTipo(4, pricipal.getName()));
+		verificarAulas(gluteo, abdomen, perna, braco, peito, modelo);
+		modelo.addAttribute("gluteo", gluteo);
+		modelo.addAttribute("abdomen", abdomen);
+		modelo.addAttribute("perna", perna);
+		modelo.addAttribute("braco", braco);
+		modelo.addAttribute("peito", peito);
+	}
+
+	private void verificarAulas(List<Aula> gluteo, List<Aula> abdomen, List<Aula> perna, List<Aula> braco,
+			List<Aula> peito, Model modelo) {
+		if (gluteo.isEmpty())
+			modelo.addAttribute("vazioG", "Sem aulas cadastradas");
+		else
+			modelo.addAttribute("vazioG", null);
+		if (abdomen.isEmpty())
+			modelo.addAttribute("vazioA", "Sem aulas cadastradas");
+		else
+			modelo.addAttribute("vazioA", null);
+		if (perna.isEmpty())
+			modelo.addAttribute("vazioPA", "Sem aulas cadastradas");
+		else
+			modelo.addAttribute("vazioPA", null);
+		if (braco.isEmpty())
+			modelo.addAttribute("vazioB", "Sem aulas cadastradas");
+		else
+			modelo.addAttribute("vazioB", null);
+		if (peito.isEmpty())
+			modelo.addAttribute("vazioPO", "Sem aulas cadastradas");
+		else
+			modelo.addAttribute("vazioPO", null);
 	}
 
 	private Page<Aula> getListaDeAulas(Principal principal, int pagina) {

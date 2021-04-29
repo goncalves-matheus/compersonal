@@ -31,8 +31,10 @@
 								aria-expanded="false">Glúteo</a>
 							<ul class="dropdown-menu shadow" aria-labelledby="dropdownUser1">
 								<li th:each="gluteo : ${gluteo}"><a class="dropdown-item"
-									th:text="${gluteo.titulo}" th:href="${gluteo.titulo}">Título
+									th:text="${gluteo.titulo}" th:href="'/aulas/'+${gluteo.titulo}">Título
 										Gluteo</a></li>
+								<li><a th:if="${vazioG}!=null" class="dropdown-item"
+									th:text="${vazioG}"></a></li>
 							</ul>
 						</div>
 					</li>
@@ -44,9 +46,12 @@
 								id="dropdownUser1" data-bs-toggle="dropdown"
 								aria-expanded="false">Perna</a>
 							<ul class="dropdown-menu dropdown-menu text-small shadow"
-								 aria-labelledby="dropdownUser1">
-								<li th:each="perna : ${perna}"><a class="dropdown-item" th:text="${perna.titulo}"
-									th:href="${perna.titulo}">Título Perna</a></li>
+								aria-labelledby="dropdownUser1">
+								<li th:each="perna : ${perna}"><a class="dropdown-item"
+									th:text="${perna.titulo}" th:href="'/aulas/'+${perna.titulo}">Título
+										Perna</a></li>
+								<li><a th:if="${vazioPA}!=null" class="dropdown-item"
+									th:text="${vazioPA}"></a></li>
 							</ul>
 						</div>
 					</li>
@@ -58,9 +63,12 @@
 								id="dropdownUser1" data-bs-toggle="dropdown"
 								aria-expanded="false">Abdomen</a>
 							<ul class="dropdown-menu dropdown-menu text-small shadow"
-								 aria-labelledby="dropdownUser1">
-								<li th:each="abdomen : ${abdomen}"><a class="dropdown-item" th:text="${abdomen.titulo}"
-									th:href="${abdomen.titulo}">Título Abdomen</a></li>
+								aria-labelledby="dropdownUser1">
+								<li th:each="abdomen : ${abdomen}"><a class="dropdown-item"
+									th:text="${abdomen.titulo}"
+									th:href="'/aulas/'+${abdomen.titulo}">Título Abdomen</a></li>
+								<li><a th:if="${vazioA}!=null" class="dropdown-item"
+									th:text="${vazioA}"></a></li>
 							</ul>
 						</div>
 					</li>
@@ -73,8 +81,11 @@
 								aria-expanded="false">Braços</a>
 							<ul class="dropdown-menu dropdown-menu text-small shadow"
 								aria-labelledby="dropdownUser1">
-								<li th:each="braco : ${braco}" ><a class="dropdown-item" th:text="${braco.titulo}"
-									th:href="${braco.titulo}">Título Braços</a></li>
+								<li th:each="braco : ${braco}"><a class="dropdown-item"
+									th:text="${braco.titulo}" th:href="'/aulas/'+${braco.titulo}">Título
+										Braços</a></li>
+								<li><a th:if="${vazioB}!=null" class="dropdown-item"
+									th:text="${vazioB}"></a></li>
 							</ul>
 						</div>
 					</li>
@@ -86,9 +97,12 @@
 								id="dropdownUser1" data-bs-toggle="dropdown"
 								aria-expanded="false">Peito</a>
 							<ul class="dropdown-menu dropdown-menu text-small shadow"
-								 aria-labelledby="dropdownUser1">
-								<li th:each="peito : ${peito}"><a class="dropdown-item" th:text="${peito.titulo}"
-									th:href="${peito.titulo}">Título Peito</a></li>
+								aria-labelledby="dropdownUser1">
+								<li th:each="peito : ${peito}"><a class="dropdown-item"
+									th:text="${peito.titulo}" th:href="'/aulas/'+${peito.titulo}">Título
+										Peito</a></li>
+								<li><a th:if="${vazioPO}!=null" class="dropdown-item"
+									th:text="${vazioPO}"></a></li>
 							</ul>
 						</div>
 					</li>
@@ -103,7 +117,8 @@
 								<span th:text="${aula.titulo}"></span>
 							</h2>
 							<div th:replace="~{chat-aluno::chat}"></div>
-							<a href="#" class="btn cor-botao nav-link ms-1">Próxima Aula</a>
+							<a th:href="'/aulas/pagina/'+${proximo}"
+								class="btn cor-botao nav-link ms-1">Próxima Aula</a>
 						</header>
 					</div>
 
@@ -125,11 +140,11 @@
 					</div>
 				</div>
 			</div>
-		<footer th:replace="~{base::footer}"></footer>
-		<script th:replace="~{base::script}"></script>
-	</article>
-</main>
-		
+			<footer th:replace="~{base::footer}"></footer>
+			<script th:replace="~{base::script}"></script>
+		</article>
+	</main>
+
 </body>
 
 </html>
