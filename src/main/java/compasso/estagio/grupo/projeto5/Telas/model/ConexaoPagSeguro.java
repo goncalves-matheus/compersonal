@@ -22,13 +22,13 @@ import org.apache.http.util.EntityUtils;
 public class ConexaoPagSeguro {
 
 	private String email = "gabriel-jeffersonscs@hotmail.com";
-	private String token = "e8006f5d-b0f1-4822-98b6-945982e14c9ae0dc2cfb4e0aaa9156c492d3c406e0c60806-2dc2-4089-9378-d67ad74ec2c9";
-	// private String token =
-	// "51dea1a1-cb05-45e3-adaf-9d04f073e2e84246b4cf4c86a49e0b3ae8a8b9aeca2b4a44-763a-4dfd-a669-1efd3ba56501";
+//	private String token = "e8006f5d-b0f1-4822-98b6-945982e14c9ae0dc2cfb4e0aaa9156c492d3c406e0c60806-2dc2-4089-9378-d67ad74ec2c9";
+	 private String token =
+	 "51dea1a1-cb05-45e3-adaf-9d04f073e2e84246b4cf4c86a49e0b3ae8a8b9aeca2b4a44-763a-4dfd-a669-1efd3ba56501";
 	// final String URL = "https://ws.sandbox.pagseguro.uol.com.br/v2/checkout";
 	// final String URL =
 	// "https://pagseguro.uol.com.br/?_ga=2.86277279.667119345.1619439708-1657415295.1618505570/checkout";
-	private final String URL = "https://ws.sandbox.pagseguro.uol.com.br/v2/checkout/";
+	private final String URL = "https://ws.pagseguro.uol.com.br/v2/checkout/";
 
 	private Perfil perfil;
 	private Plano plano;

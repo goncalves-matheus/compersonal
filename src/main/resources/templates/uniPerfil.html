@@ -25,30 +25,6 @@
 								aria-label="Close"></button>
 						</div>
 
-						<div th:if="${situacao}==3"
-							class="mt-2 alert alert-success alert-dismissible fade show"
-							role="alert">
-							<p>Aluno(a) pagou o serviço!</p>
-							<button type="button" class="btn-close" data-bs-dismiss="alert"
-								aria-label="Close"></button>
-						</div>
-
-						<div th:if="${situacao}==1"
-							class="mt-2 alert alert-warning alert-dismissible fade show"
-							role="alert">
-							<p>Aguardando pagamento!</p>
-							<button type="button" class="btn-close" data-bs-dismiss="alert"
-								aria-label="Close"></button>
-						</div>
-
-						<div th:if="${situacao}==7"
-							class="mt-2 alert alert-danger alert-dismissible fade show"
-							role="alert">
-							<p>Pagamento Cancelado!</p>
-							<button type="button" class="btn-close" data-bs-dismiss="alert"
-								aria-label="Close"></button>
-						</div>
-
 						<div class="card">
 							<h5 class="card-header">Dados pessoais do aluno(a)</h5>
 							<div class="d-flex justify-content-between">

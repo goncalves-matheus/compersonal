@@ -60,8 +60,8 @@ public class PlanosController {
 		codigoDePagamento = pagSeguro.gerarCodigoDeCompra();
 		
 		if (!codigoDePagamento.isEmpty()) {
-			return "redirect:https://sandbox.pagseguro.uol.com.br/v2/checkout/payment.html?code="+codigoDePagamento;
-			//return "redirect:https://pagseguro.uol.com.br/v2/checkout/payment.html?code=" + codigoDePagamento;
+			//return "redirect:https://sandbox.pagseguro.uol.com.br/v2/checkout/payment.html?code="+codigoDePagamento;
+			return "redirect:https://pagseguro.uol.com.br/v2/checkout/payment.html?code=" + codigoDePagamento;
 		}
 		return "pagar";
 	}

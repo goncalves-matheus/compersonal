@@ -70,15 +70,29 @@
 										da confirmacaoSenha</div>
 								</div>
 								<div class="mb-3 form-check">
-									<input type="checkbox" class="form-check-input"
-										id="exampleCheck1"> <label class="form-check-label"
-										for="exampleCheck1">Para mais informaçoes sobre os<a
+									<label class="form-check-label" for="exampleCheck1"><input
+										type="checkbox" class="form-check-input"
+										onClick="habilitacao()" onLoad="des()" id="aceito"
+										value="aceito"> Li e aceito os<a
 										data-bs-toggle="modal" href="" data-bs-target="#exampleModal">
-											Termos de Aceitação e Políticas</a>
-									</label>
-
+											Termos de Aceitação e Políticas</a> </label>
 								</div>
-								<button type="submit" class="btn cor-botao">Registar</button>
+
+								<script>
+									function habilitacao() {
+										if (document.getElementById('aceito').checked) {
+											var x = document
+													.getElementById('registro');
+											x.style.display = "block";
+										} else {
+											var x = document
+													.getElementById('registro');
+											x.style.display = "none";
+										}
+									}
+								</script>
+								<button id="registro" style="display: none;" type="submit"
+									class="btn cor-botao">Registrar</button>
 							</form>
 						</article>
 					</div>
@@ -96,7 +110,7 @@
 						<div class="modal-body">
 							<p>A presente Política de Privacidade contém informações
 								sobre coleta, uso, armazenamento, tratamento e proteção dos
-								dados pessoais dos usuários e visitantes do OU site Compersonal,
+								dados pessoais dos usuários e visitantes do site Compersonal,
 								com a finalidade de demonstrar absoluta transparência quanto ao
 								assunto e esclarecer a todos interessados sobre os tipos de
 								dados que são coletados, os motivos da coleta e a forma como os
@@ -134,7 +148,7 @@
 										suas necessidade. Ficam cientes os usuários e visitantes de
 										que seu perfil na plataforma estará acessível a todos demais
 										usuários e visitantes da plataforma Compersonal.</p></li>
-								<li><p>Quando um usuário e visitante acessa OU páginas
+								<li><p>Quando um usuário e visitante acessa páginas
 										do site: as informações sobre interação e acesso são coletadas
 										pela empresa para garantir uma melhor experiência ao usuário e
 										visitante. Estes dados podem tratar sobre as palavras-chaves
