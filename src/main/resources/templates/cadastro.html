@@ -10,73 +10,154 @@
 <body class="background">
 	<main class="geral">
 		<div>
-		<nav th:replace="~{base::navbar}"></nav>
+			<nav th:replace="~{base::navbar}"></nav>
 
-		<article class="container ">
-			<div class="row align-items-baseline fonte">
-				<div class="col-6">
-					<article class="card mt-5 background-card2">
-						<div class="card-body ">
-							<h1>Seja bem-vindo!</h1>
-							<p>Já tem uma conta conosco?</p>
-							<a href="/login" class="btn borda-botao botao-test">Faça Login</a>
-						</div>
-					</article>
+			<article class="container ">
+				<div class="row align-items-baseline fonte">
+					<div class="col-6">
+						<article class="card mt-5 background-card2">
+							<div class="card-body ">
+								<h1>Seja bem-vindo!</h1>
+								<p>Já tem uma conta conosco?</p>
+								<a href="/login" class="btn borda-botao botao-test">Faça
+									Login</a>
+							</div>
+						</article>
+					</div>
+					<div class=" col-6">
+						<article class="card cor-borda mt-5 background-card">
+							<form th:object="${usuarioDto}" class="card-body"
+								th:action="@{/cadastro/novo}" method="POST">
+								<legend>Faça seu cadastro</legend>
+								<div class="row g-3 mb-3">
+									<div class="col">
+										<input th:field="*{primeiroNome}" class="form-control"
+											th:errorclass="is-invalid" placeholder="Primeiro Nome">
+										<div class="invalid-feedback" th:errors="*{primeiroNome}">Errors
+											do primeiro nome</div>
+									</div>
+									<div class="col">
+										<input th:field="*{ultimoNome}" class="form-control"
+											th:errorclass="is-invalid" placeholder="Último nome">
+										<div class="invalid-feedback" th:errors="*{ultimoNome}">Errors
+											do último nome</div>
+									</div>
+								</div>
+
+								<div class="mb-3">
+									<input th:field="*{email}" type="email" class="form-control"
+										th:errorclass="is-invalid" placeholder="Email">
+									<div class="invalid-feedback" th:errors="*{email}">Errors
+										do email</div>
+								</div>
+								<div class="mb-3">
+									<input th:field="*{telefone}" type="tel" class="form-control"
+										th:errorclass="is-invalid" placeholder="Telefone">
+									<div class="invalid-feedback" th:errors="*{telefone}">Errors
+										do telefone</div>
+								</div>
+								<div class="mb-3">
+									<input th:field="*{senha}" type="password" class="form-control"
+										th:errorclass="is-invalid" placeholder="Senha">
+									<div class="invalid-feedback" th:errors="*{senha}">Errors
+										da senha</div>
+								</div>
+								<div class="mb-3">
+									<input th:field="*{confirmacaoSenha}" type="password"
+										class="form-control" th:errorclass="is-invalid"
+										placeholder="Confirme a Senha">
+									<div class="invalid-feedback" th:errors="*{confirmacaoSenha}">Errors
+										da confirmacaoSenha</div>
+								</div>
+								<div class="mb-3 form-check">
+									<input type="checkbox" class="form-check-input"
+										id="exampleCheck1"> <label class="form-check-label"
+										for="exampleCheck1">Para mais informaçoes sobre os<a
+										data-bs-toggle="modal" href="" data-bs-target="#exampleModal">
+											Termos de Aceitação e Políticas</a>
+									</label>
+
+								</div>
+								<button type="submit" class="btn cor-botao">Registar</button>
+							</form>
+						</article>
+					</div>
 				</div>
-				<div class=" col-6">
-					<article class="card cor-borda mt-5 background-card">
-						<form th:object="${usuarioDto}" class="card-body"
-							th:action="@{/cadastro/novo}" method="POST">
-							<legend>Faça seu cadastro</legend>
-							<div class="row g-3 mb-3">
-								<div class="col">
-									<input th:field="*{primeiroNome}" class="form-control"
-										th:errorclass="is-invalid" placeholder="Primeiro Nome">
-									<div class="invalid-feedback" th:errors="*{primeiroNome}">Errors
-										do primeiro nome</div>
-								</div>
-								<div class="col">
-									<input th:field="*{ultimoNome}" class="form-control"
-										th:errorclass="is-invalid" placeholder="Último nome">
-									<div class="invalid-feedback" th:errors="*{ultimoNome}">Errors
-										do último nome</div>
-								</div>
-							</div>
+			</article>
 
-							<div class="mb-3">
-								<input th:field="*{email}" type="email" class="form-control"
-									th:errorclass="is-invalid" placeholder="Email">
-								<div class="invalid-feedback" th:errors="*{email}">Errors
-									do email</div>
-							</div>
-							<div class="mb-3">
-								<input th:field="*{telefone}" type="tel" class="form-control"
-									th:errorclass="is-invalid" placeholder="Telefone">
-								<div class="invalid-feedback" th:errors="*{telefone}">Errors
-									do telefone</div>
-							</div>
-							<div class="mb-3">
-								<input th:field="*{senha}" type="password" class="form-control"
-									th:errorclass="is-invalid" placeholder="Senha">
-								<div class="invalid-feedback" th:errors="*{senha}">Errors
-									da senha</div>
-							</div>
-							<div class="mb-3">
-								<input th:field="*{confirmacaoSenha}" type="password"
-									class="form-control" th:errorclass="is-invalid"
-									placeholder="Confirme a Senha">
-								<div class="invalid-feedback" th:errors="*{confirmacaoSenha}">Errors
-									da confirmacaoSenha</div>
-							</div>
-							<button type="submit" class="btn cor-botao">Registar</button>
-						</form>
-					</article>
+			<div id="exampleModal" class="modal" tabindex="-1">
+				<div class="modal-dialog modal-dialog-scrollable">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title">Termos de Aceitação e Políticas</h5>
+							<button type="button" class="btn-close" data-bs-dismiss="modal"
+								aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							<p>A presente Política de Privacidade contém informações
+								sobre coleta, uso, armazenamento, tratamento e proteção dos
+								dados pessoais dos usuários e visitantes do OU site Compersonal,
+								com a finalidade de demonstrar absoluta transparência quanto ao
+								assunto e esclarecer a todos interessados sobre os tipos de
+								dados que são coletados, os motivos da coleta e a forma como os
+								usuários podem gerenciar ou excluir as suas informações
+								pessoais.</p>
+							<p>Esta Política de Privacidade aplica-se a todos os usuários
+								e visitantes do site Compersonal e integra os Termos e Condições
+								Gerais de Uso do site Compersonal, devidamente inscrita no CNPJ
+								sob o nº 27.215.137/0001-10, situado em Salvador-BA.</p>
+							<p>
+								O presente documento foi elaborado em conformidade com a Lei
+								Geral de Proteção de Dados Pessoais (Lei <a
+									href="https://www.jusbrasil.com.br/legislacao/612902269/lei-13709-18"
+									class="cite" rel="200399658"
+									title="LEI Nº 13.709, DE 14 DE AGOSTO DE 2018.">13.709</a>/18),
+								o <a
+									href="https://www.jusbrasil.com.br/legislacao/117197216/lei-12965-14"
+									class="cite" rel="27363947"
+									title="LEI Nº 12.965, DE 23 ABRIL DE 2014.">Marco Civil da
+									Internet</a> (Lei <a
+									href="https://www.jusbrasil.com.br/legislacao/117197216/lei-12965-14"
+									class="cite" rel="27363947"
+									title="LEI Nº 12.965, DE 23 ABRIL DE 2014.">12.965</a>/14) (e o
+								Regulamento da UE n. 2016/6790). Ainda, o documento poderá ser
+								atualizado em decorrência de eventual atualização normativa,
+								razão pela qual se convida o usuário a consultar periodicamente
+								esta seção.
+							</p>
+							<ul>
+								<li><p>Quando o usuário cria uma conta/perfil na
+										plataforma Compersonal: esses dados são os dados de
+										identificação básicos, como nome, sobrenome, e-mail e
+										telefone. A partir deles, podemos identificar o usuário e o
+										visitante, além de garantir uma maior segurança e bem-estar às
+										suas necessidade. Ficam cientes os usuários e visitantes de
+										que seu perfil na plataforma estará acessível a todos demais
+										usuários e visitantes da plataforma Compersonal.</p></li>
+								<li><p>Quando um usuário e visitante acessa OU páginas
+										do site: as informações sobre interação e acesso são coletadas
+										pela empresa para garantir uma melhor experiência ao usuário e
+										visitante. Estes dados podem tratar sobre as palavras-chaves
+										utilizadas em uma busca, o compartilhamento de um documento
+										específico, comentários, visualizações de páginas, perfis, a
+										URL de onde o usuário e visitante provêm, o navegador que
+										utilizam e seus IPs de acesso, dentre outras que poderão ser
+										armazenadas e retidas.</p></li>
+								<li><p>Por intermédio de terceiro: a plataforma recebe
+										dados de terceiros, como Amazon, PegSeguros, Hotmail, Gmail,
+										quando um usuário faz login com o seu perfil de um desses
+										sites. A utilização desses dados é autorizada previamente
+										pelos usuários junto ao terceiro em questão.</p></li>
+							</ul>
+						</div>
+					</div>
 				</div>
 			</div>
-		</article>
-	</div>
+
+
+		</div>
 		<footer th:replace="~{base::footer}"></footer>
 		<script th:replace="~{base::script}"></script>
-</main>
+	</main>
 </body>
 </html>

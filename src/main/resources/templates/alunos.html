@@ -2,7 +2,7 @@
 <html lang="pt-br">
 <meta charset="UTF-8">
 
-<head th:replace="~{base::head(Login)}"></head>
+<head th:replace="~{base::head(Alunos)}"></head>
 
 <body class="background">
 	<main class="geral">
@@ -22,7 +22,8 @@
 										class="col-md-3 d-flex justify-content-center align-items-center">
 										<a
 											th:href="@{/alunos/perfil/{email}(email=${usuarioDto.email})}"><img
-											class="img-thumbnail m-1" width="150" style="max-height:150px !important;"
+											class="img-thumbnail m-1" width="150"
+											style="max-height: 150px !important;"
 											th:src="${usuarioDto.foto}"></a>
 									</div>
 									<div class="col-md-9">
@@ -60,19 +61,21 @@
 			</article>
 			<div class="d-flex justify-content-center fixed-bottom mb-5">
 				<nav aria-label="Page navigation example">
-					<ul class="pagination cor-botao">
-						<li class="page-item "><a class="page-link"
-							th:if="${pagina-1}>=0" th:href="${pagina-1}"> <span
-								aria-hidden="true">&laquo;</span></a></li>
-						<li class="page-item "><a class="page-link"
-							th:if="${pagina-1}<0" th:href="${numeroPagina-1}"> <span
-								aria-hidden="true">&laquo;</span></a></li>
-						<li class="page-item"><a class="page-link"
-							th:text="${pagina+1}"></a></li>
-						<li class="page-item"><a class="page-link"
+					<ul class="pagination">
+						<li class="page-item"><a
+							class="page-link borda-page botao-test" th:if="${pagina-1}>=0"
+							th:href="${pagina-1}"> <span aria-hidden="true">&laquo;</span></a></li>
+						<li class="page-item"><a
+							class="page-link borda-page botao-test" th:if="${pagina-1}<0"
+							th:href="${numeroPagina-1}"> <span aria-hidden="true">&laquo;</span></a></li>
+						<li class="page-item"><a
+							class="page-link borda-page botao-test" th:text="${pagina+1}"></a></li>
+						<li class="page-item"><a
+							class="page-link borda-page botao-test"
 							th:if="${pagina+1}!=${numeroPagina}" th:href="${pagina+1}"> <span
 								aria-hidden="true">&raquo;</span></a></li>
-						<li class="page-item"><a class="page-link"
+						<li class="page-item"><a
+							class="page-link borda-page botao-test"
 							th:if="${pagina+1}==${numeroPagina}" th:href="0"> <span
 								aria-hidden="true">&raquo;</span></a></li>
 					</ul>

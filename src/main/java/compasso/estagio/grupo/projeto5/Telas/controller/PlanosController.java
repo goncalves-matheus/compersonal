@@ -88,6 +88,9 @@ public class PlanosController {
 		case "7":
 			modelo.addAttribute("situacao", "Pagamento cancelado");
 			break;
+		case "8":
+			modelo.addAttribute("situacao", "Sem plano");
+			break;
 		}
 		
 		String data = perfil.getPlano().getFinalDoPlano().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")).toString();

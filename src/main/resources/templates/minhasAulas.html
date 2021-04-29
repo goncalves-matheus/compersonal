@@ -4,20 +4,19 @@
 
 <!-- Tópico 3, preview 3.1, 3.4 -->
 
-<head th:replace="~{base::head(Login)}"></head>
+<head th:replace="~{base::head(Aulas)}"></head>
 
 <body class="background">
 	<main class="geral">
-		<div>
+
 			<nav th:replace="~{base::navbar}"></nav>
 
 			<article class="d-flex align-items-stretch">
 				<div th:replace="~{base::sidebar}"></div>
-				<div class="container">
-					<div th:if="${erro}!=null"
-						class="mt-2 alert alert-danger alert-dismissible fade show"
-						role="alert">
-						<span th:text="${erro}"></span>
+				<div class="container mt-3 mb-5 p-2">
+					<div class="mt-2 alert alert-danger alert-dismissible fade show pb-0"
+						role="alert" th:if="${erro}=='1'">
+						<p>Essa aula está associada a algum aluno!</p>
 						<button type="button" class="btn-close" data-bs-dismiss="alert"
 							aria-label="Close"></button>
 					</div>
@@ -39,7 +38,7 @@
 										frameborder="0"
 										allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
 										allowfullscreen></iframe>
-									<div class="card-body col-lg-5">
+									<div class="card-body col-lg-12">
 
 										<h5 class="card-title" th:text="${aula.titulo}"></h5>
 
@@ -47,8 +46,6 @@
 											da Aula</p>
 										<form th:action="@{/aulas/minhasAulas/delete}" method="POST">
 											<input type="hidden" th:value="${aula.titulo}" name="titulo">
-											<a th:href="'/aulas/minhasAulas/alterar/'+${aula.titulo}"
-												class="btn cor-botao">Editar</a>
 											<button type="submit" class="btn cor-botao">Apagar</button>
 										</form>
 									</div>
@@ -58,27 +55,29 @@
 					</div>
 				</div>
 			</article>
-			<div class="d-flex justify-content-center fixed-bottom mb-5">
+			<div class="d-flex justify-content-center mb-5">
 				<nav aria-label="Page navigation example">
-					<ul class="pagination cor-botao">
-						<li class="page-item "><a class="page-link"
-							th:if="${pagina-1}>=0" th:href="${pagina-1}"> <span
-								aria-hidden="true">&laquo;</span></a></li>
-						<li class="page-item "><a class="page-link"
-							th:if="${pagina-1}<0" th:href="${numeroPagina-1}"> <span
-								aria-hidden="true">&laquo;</span></a></li>
-						<li class="page-item"><a class="page-link"
-							th:text="${pagina+1}"></a></li>
-						<li class="page-item"><a class="page-link"
+					<ul class="pagination">
+						<li class="page-item"><a
+							class="page-link borda-page botao-test" th:if="${pagina-1}>=0"
+							th:href="${pagina-1}"> <span aria-hidden="true">&laquo;</span></a></li>
+						<li class="page-item"><a
+							class="page-link borda-page botao-test" th:if="${pagina-1}<0"
+							th:href="${numeroPagina-1}"> <span aria-hidden="true">&laquo;</span></a></li>
+						<li class="page-item"><a
+							class="page-link borda-page botao-test" th:text="${pagina+1}"></a></li>
+						<li class="page-item"><a
+							class="page-link borda-page botao-test"
 							th:if="${pagina+1}!=${numeroPagina}" th:href="${pagina+1}"> <span
 								aria-hidden="true">&raquo;</span></a></li>
-						<li class="page-item"><a class="page-link"
+						<li class="page-item"><a
+							class="page-link borda-page botao-test"
 							th:if="${pagina+1}==${numeroPagina}" th:href="0"> <span
 								aria-hidden="true">&raquo;</span></a></li>
 					</ul>
 				</nav>
 			</div>
-		</div>
+
 		<footer th:replace="~{base::footer}"></footer>
 		<script th:replace="~{base::script}"></script>
 	</main>

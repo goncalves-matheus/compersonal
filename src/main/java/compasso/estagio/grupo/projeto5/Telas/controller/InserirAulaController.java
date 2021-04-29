@@ -26,19 +26,19 @@ public class InserirAulaController {
 
 	@Autowired
 	PerfilRepository perfilRepository;
-	
+
 	@Autowired
 	AulaRepository aulaRepository;
-	
+
 	@Autowired
 	private FileSaverService service;
-	
+
 	@GetMapping
-	public String inserir(Model modelo,AulaDto aulaDto, Principal principal) {
-		
+	public String inserir(Model modelo, AulaDto aulaDto, Principal principal) {
+
 		modelo.addAttribute("perfil", perfilRepository.findByEmail(principal.getName()));
-		
-		if(cont > 0) {
+
+		if (cont > 0) {
 			modelo.addAttribute("cadastrado", "Aula cadastrada com sucesso!");
 			cont = 0;
 		}
@@ -46,8 +46,10 @@ public class InserirAulaController {
 	}
 
 	@PostMapping
-	public String novaAula(@Valid AulaDto aulaDto, BindingResult result, @RequestParam(value = "file")MultipartFile file) {
+	public String novaAula(@Valid AulaDto aulaDto, BindingResult result,
+			@RequestParam(value = "file") MultipartFile file, Model modelo, Principal principal) {
 		if (result.hasErrors()) {
+			modelo.addAttribute("perfil", perfilRepository.findByEmail(principal.getName()));
 			return "inseriraula";
 		}
 
@@ -55,24 +57,23 @@ public class InserirAulaController {
 		aula.setPdf(file.getOriginalFilename());
 		aula.setVideo(aula.getVideo().replace("watch?v=", "embed/"));
 		service.uploadFile(file);
-		
 
 		switch (aulaDto.getTipo()) {
-			case "Glúteo":
-				aula.setTipo(Tipo.GLUTEO);
-				break;
-			case "Abdômen":
-				aula.setTipo(Tipo.ABDOMEN);
-				break;
-			case "Pernas":
-				aula.setTipo(Tipo.PERNAS);
-				break;
-			case "Braços":
-				aula.setTipo(Tipo.BRACOS);
-				break;
-			case "Peito":
-				aula.setTipo(Tipo.PEITO);
-				break;
+		case "Glúteo":
+			aula.setTipo(Tipo.GLUTEO);
+			break;
+		case "Abdômen":
+			aula.setTipo(Tipo.ABDOMEN);
+			break;
+		case "Pernas":
+			aula.setTipo(Tipo.PERNAS);
+			break;
+		case "Braços":
+			aula.setTipo(Tipo.BRACOS);
+			break;
+		case "Peito":
+			aula.setTipo(Tipo.PEITO);
+			break;
 		}
 
 		aulaRepository.save(aula);

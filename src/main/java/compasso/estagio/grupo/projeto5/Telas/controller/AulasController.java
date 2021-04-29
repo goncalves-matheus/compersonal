@@ -28,6 +28,8 @@ import compasso.estagio.grupo.projeto5.Telas.repository.PerfilRepository;
 @Controller
 @RequestMapping("aulas")
 public class AulasController extends GestorDeMensagens {
+	
+	private int cont;
 
 	@Autowired
 	AulaRepository aulaRepository;
@@ -105,6 +107,11 @@ public class AulasController extends GestorDeMensagens {
 		modelo.addAttribute("erro", null);
 		modelo.addAttribute("pagina", pagina);
 		modelo.addAttribute("numeroPagina", numeroDePags);
+		
+		if(cont==1) {
+			modelo.addAttribute("erro", "1");
+			cont=0;
+		}
 
 		return "minhasAulas";
 	}
@@ -114,11 +121,8 @@ public class AulasController extends GestorDeMensagens {
 	public String minhasAulas(String titulo, Model modelo, Principal principal) {
 
 		if (aulaRepository.getAulaCadastradaTitulo(titulo) != null) {
-			modelo.addAttribute("perfil", perfilRepository.findByEmail(principal.getName()));
-			List<Aula> aulas = aulaRepository.findAll();
-			modelo.addAttribute("aulas", aulas);
-			modelo.addAttribute("erro", "Essa aula está associada a algum aluno!");
-			return "minhasAulas";
+			cont=1;
+			return "redirect:/aulas/minhasAulas/0";
 		}
 
 		aulaRepository.deleteByTitulo(titulo);

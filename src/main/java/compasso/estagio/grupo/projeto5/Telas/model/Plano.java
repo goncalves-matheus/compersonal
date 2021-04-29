@@ -29,7 +29,9 @@ public class Plano {
 
 	public Plano() {
 		this.status = "8";
+		this.nome = "Sem Plano";
 		this.finalDoPlano = LocalDateTime.now();
+		this.valor="0.00";
 	}
 
 	public Plano(String valor, String nome) {

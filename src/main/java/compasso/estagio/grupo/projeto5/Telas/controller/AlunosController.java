@@ -75,7 +75,7 @@ public class AlunosController {
 		}
 
 		modelo.addAttribute("aluno", u);
-		if (perfil.getPlano().getStatus() != null) {
+		if (!(perfil.getPlano().getStatus().equals("8"))) {
 			modelo.addAttribute("situacao", perfil.getPlano().getStatus());
 		}else {
 			modelo.addAttribute("situacao", null);
@@ -86,6 +86,7 @@ public class AlunosController {
 			cont = 0;
 		} else if(cont == 2) {
 			modelo.addAttribute("cadastrado", "Código foi adicionado com sucesso!");
+			cont=0;
 		}
 		
 		return "uniPerfil";
@@ -118,12 +119,12 @@ public class AlunosController {
 	private Page<Perfil> getListaDeAlunos(Principal principal, int pagina) {
 
 		List<Perfil> perfis = perfilRepository.findByPermissao_Permissao("Usuario");
-		numeroDePags = perfis.size() / 4;
-		if (perfis.size() % 4 != 0) {
+		numeroDePags = perfis.size() / 6;
+		if (perfis.size() % 6 != 0) {
 			numeroDePags++;
 		}
 
-		Pageable paginacao = PageRequest.of(pagina, 4, Sort.by("primeiroNome").ascending());
+		Pageable paginacao = PageRequest.of(pagina, 6, Sort.by("primeiroNome").ascending());
 		Page<Perfil> usuarios = perfilRepository.findByPermissaoPermissao("Usuario", paginacao);
 		return usuarios;
 	}

@@ -41,8 +41,12 @@ html, body {
 	color: white !important;
 }
 
-.borda-botao {
+.borda-page {
 	border-color: rgb(214, 68, 0) !important;
+	color: rgb(214, 68, 0) !important;
+}
+
+.borda-botao {
 	border-color: rgb(214, 68, 0) !important;
 	width: 8rem !important;
 }
