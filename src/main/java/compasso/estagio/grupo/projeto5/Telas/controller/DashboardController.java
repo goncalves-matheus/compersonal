@@ -163,7 +163,7 @@ public class DashboardController {
 		int diaDoAno = data.getDayOfYear();
 		int diaDaSemana = data.getDayOfWeek().ordinal();
 		int primeiroDiaDaSemanaDeJaneiro = primeiraSemanaDeJaneiro.getDayOfWeek().ordinal();
-		int numeroDaSemana = ((diaDoAno) / 7);
+		int numeroDaSemana = ((diaDoAno + 6) / 7);
 		if (diaDaSemana < primeiroDiaDaSemanaDeJaneiro) {
 			numeroDaSemana++;
 		}
